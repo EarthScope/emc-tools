@@ -1,0 +1,18 @@
+
+Incorporated Research Institutions for Seismology (IRIS)
+Data Management Center (DMC)
+Data Products Team
+IRIS Earth Model Collaboration (EMC) - Tools
+
+COMMENTS/QUESTIONS:
+
+    Please contact manoch@iris.washington.edu
+
+---------------------------------------------------------
+
+=========================================================
+2018-10-22
+=========================================================
+
+Version 0.5 Public release R.0.5.2018.295
+

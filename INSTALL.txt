@@ -1,0 +1,63 @@
+ 
+Incorporated Research Institutions for Seismology (IRIS)
+Data Management Center (DMC)
+Data Products Team
+IRIS Earth Model Collaboration (EMC) - ParaView support bundle
+
+COMMENTS/QUESTIONS:
+
+    Please contact manoch@iris.washington.edu
+
+
+ 2018-10-22
+======================================================================================================================================================================
+
+ DESCRIPTION:
+
+ EMC Tools contains a set of Python scripts for working with EMC's netCDF Earth model files (netCDF 3 format):
+    - netCDF_2_GeoCSV_3D.py - a Python script to read a 3D netCDF Earth model file and convert it to GeoCSV format.
+    - GeoCSV_2_netCDF_3D.py - a Python script to read a 3D GeoCSV Earth model file and convert it to netCDF format.
+
+ For information on EMC (IRIS Earth Model Collaboration) visit: http://ds.iris.edu/ds/products/emc/
+ For information on netCDF (Network Common Data Form) visit https://www.unidata.ucar.edu/software/netcdf/
+ For information on GeoCSV (tabular text formatting for geoscience data)
+                            visit: http://geows.ds.iris.edu/documents/GeoCSV.pdf
+
+ REQUIREMENTS:
+    - Python: These scripts were created and tested under:
+
+        Linux:
+            python version : 3.7.0.final.0
+            conda version : 4.5.11
+            platform : linux-64
+            user-agent : conda/4.5.11 requests/2.19.1 CPython/3.7.0 Linux/3.10.0-693.21.1.el7.x86_64 centos/7 glibc/2.17
+
+        Mac:
+            python version : 3.6.5.final.0
+            conda version : 4.5.10
+            platform : osx-64
+            user-agent : conda/4.5.10 requests/2.13.0 CPython/3.6.5 Darwin/17.7.0 OSX/10.13.6
+
+         Packages required:
+            netCDF4 Python library
+            numpy
+
+ BUNDLE INSTALLATION:
+    - The scripts are independent and no installation is required. An optional "data" directory with relative path:
+      "../data/" with respect to the script directory may be used to store and work with model files.
+
+      NOTE: These scripts will NOT create directories
+
+ USAGE:
+
+ See the README.md 
+
+ HISTORY
+    - 2018-10-22: initial release R.0.5.2018.295
+ 
+ COMMENTS/QUESTIONS:
+
+    Please contact manoch@iris.washington.edu
+
+
+
