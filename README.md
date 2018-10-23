@@ -28,7 +28,7 @@ You can work with each script directly and independently. To view the usage mess
 * netCDF_2_GeoCSV_3D.py -h
 * GeoCSV_2_netCDF_3D.py -h
 
-**How to run netCDF_2_GeoCSV_3D.py:**
+**How to run netCDF\_2\_GeoCSV\_3D.py:**
 
     - use the sample netCDF file under the "samples" directory or download a 3D netCDF Earth model file from the EMC repository (http://ds.iris.edu/ds/products/emc-earthmodels/)
     - [optional] create a "data" directory with a path relative to script as "../data/" and place the netCDF file there
@@ -46,7 +46,7 @@ You can work with each script directly and independently. To view the usage mess
                  
             NOTE: only a .csv files converted with single (-m) option can be converted back to netCDF using the GeoCSV_2_netCDF_3D.py script
 
-**How to run create a netCDF file:**
+**How to run GeoCSV\_2\_netCDF\_3D.py:**
 
     - use the sample GeoCSV file under the "samples" directory as a template to create your own GeoCSV file with proper header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV_3D.py script above
     - run the script to convert the GeoCSV file to netCDF. The converted file will have the same name as the GeoCSV file but with extension ".nc"
