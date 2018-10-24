@@ -1,0 +1,68 @@
+# dataset: GeoCSV2.0
+# created: 2018-10-23 21:23:32 UTC (netCDF_2_GeoCSV_3D.py)
+# netCDF_file: SAW642ANB_kmps.nc
+# delimiter: |
+# global_title: A radially anisotropic whole mantle model with improved crustal corrections
+# global_id: SAW642ANb_kmps
+# global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2). 
+# global_reference: Panning, Lekic and Romanowicz (2010)
+# global_references: http://ds.iris.edu/ds/products/emc-references
+# global_keywords: seismic, tomography, shear wave, s wave, elastic waveform 
+# global_Conventions: CF-1.0
+# global_Metadata_Conventions: Unidata Dataset Discovery v1.0
+# global_creator_name: IRIS EMC
+# global_creator_url: http://ds.iris.edu/ds/products/emc/
+# global_creator_email: product@iris.edu
+# global_institution: IRIS DMC
+# global_acknowledgment: Model was provided by Professor Mark Panning,  Department of Geological SciencesUniversity of Florida 
+# global_history: 2011-06-21 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
+# global_comment: model converted to netCDF by IRIS EMC
+# global_geospatial_lat_min: -90.00
+# global_geospatial_lat_max: 90.00
+# global_geospatial_lat_units: degrees_north
+# global_geospatial_lat_resolution: 2
+# global_geospatial_lon_min: -180.00
+# global_geospatial_lon_max: 178.0
+# global_geospatial_lon_units: degrees_east
+# global_geospatial_lon_resolution: 2
+# global_geospatial_vertical_min: 50
+# global_geospatial_vertical_max: 2850
+# global_geospatial_vertical_units: km
+# global_geospatial_vertical_positive: down
+# latitude_column: latitude
+# latitude_long_name: Latitude; positive north
+# latitude_units: degrees_north
+# latitude_standard_name: latitude
+# longitude_column: longitude
+# longitude_long_name: Longitude; positive east
+# longitude_units: degrees_east
+# longitude_standard_name: longitude
+# depth_column: depth
+# depth_long_name: depth below earth surface
+# depth_units: km
+# depth_positive: down
+# vs_column: vs
+# vs_long_name: Shear Velocity
+# vs_display_name: S Velocity (km/s)
+# vs_units: km.s-1
+# vs_missing_value: 99999.0
+# vs__FillValue: 99999.0
+# vp_column: vp
+# vp_long_name: P Velocity
+# vp_display_name: P Velocity (km/s)
+# vp_units: km.s-1
+# vp_missing_value: 99999.0
+# vp__FillValue: 99999.0
+# rho_column: rho
+# rho_long_name: Density
+# rho_display_name: Density (kg/m^3)
+# rho_units: kg.m-3
+# rho_missing_value: 99999.0
+# rho__FillValue: 99999.0
+# Qs_column: Qs
+# Qs_long_name: Shear Q
+# Qs_display_name: Shear Q (dimensionless)
+# Qs_units: count
+# Qs_missing_value: 99999.0
+# Qs__FillValue: 99999.0
+latitude|longitude|depth|vs|vp|rho|Qs
