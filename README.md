@@ -14,7 +14,7 @@ COMMENTS/QUESTIONS:
 
  DESCRIPTION:
 
- EMC Tools contains a set of Python scripts for working with EMC's netCDF Earth model files (netCDF 3 format):
+ EMC Tools contains a set of Python scripts for converting the EMC's netCDF Earth model files (netCDF 3 format) to and from GeoCSV format:
  
     - netCDF_2_GeoCSV_3D.py - a Python script to read a 3D netCDF Earth model file and display its header information or convert it to GeoCSV format.
     - GeoCSV_2_netCDF_3D.py - a Python script to read a 3D GeoCSV Earth model file and display its header information or convert it to netCDF format.
@@ -80,6 +80,26 @@ You can work with each script directly and independently. To view the usage mess
             GeoCSV_2_netCDF_3D.py -H -i SAW642ANB_kmps.csv
             
 
+**Creating EMC GeoCSV Earth Model Files**
+
+   The following highlights the steps you need to follow in order to create an EMC Earth model file in GeoCSV format:
+       
+       Note: The GeoCSV Earth model files in general should follow "EMC's guidelines" (http://ds.iris.edu/ds/products/emc-contributionguide/).
+       Note: Familiarize yourself with the "GeoCSV format" (http://geows.ds.iris.edu/documents/GeoCSV.pdf).
+       
+     - download the "SAW642ANB_kmps.csv" from the samples folder the file has three parts:
+          * metadata header - starts at the begining of the file with a "#" at the begining of the line
+          * data header - a single line follwoing metadata header that identifies columns
+          * data - lines following the header
+          
+     - download and edit the header.csv file from the samples directory to include information about your model (do not change the first line: # dataset: GeoCSV2.0). This file contains the metadata and data headers of "SAW642ANB_kmps.csv" file. Also edit the data header (last line with no starting # to include all your variables as you have defined under the emtadata header.
+     - create the data section by writing data to a file using delimiter identified in the metadata header section and in the same order as the defined in the data header line.
+     **NOTE:** For the EMC models with a 3D grid, each point is defined by a set of (depth,latitude,longitude) values. Your data must be sorted in the same order (depth column first, latitude column second and longitude column third.
+     - add the data section under the "data header line"
+     - test your GeoCSV file by extracting its header using the "GeoCSV_2_netCDF_3D.py" script:
+               GeoCSV_2_netCDF_3D.py -H -i {YOUR_FILE_NAME}.csv
+          
+     
 **HEADER EXAMPLE:**
 
 netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
@@ -151,93 +171,79 @@ netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
 			geospatial_vertical_max = 2850
 			geospatial_vertical_units = km
 			geospatial_vertical_positive = down
-
-
+			
 **GeoCSV header information:**
 
+	    # dataset: GeoCSV2.0
+        # created: 2018-10-23 21:23:32 UTC (netCDF_2_GeoCSV_3D.py)
+        # netCDF_file: SAW642ANB_kmps.nc
+        # delimiter: |
+        # global_title: A radially anisotropic whole mantle model with improved crustal corrections
+        # global_id: SAW642ANb_kmps
+        # global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).
+        # global_reference: Panning, Lekic and Romanowicz (2010)
+        # global_references: http://ds.iris.edu/ds/products/emc-references
+        # global_keywords: seismic, tomography, shear wave, s wave, elastic waveform
+        # global_Conventions: CF-1.0
+        # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
+        # global_creator_name: IRIS EMC
+        # global_creator_url: http://ds.iris.edu/ds/products/emc/
+        # global_creator_email: product@iris.edu
+        # global_institution: IRIS DMC
+        # global_acknowledgment: Model was provided by Professor Mark Panning,  Department of Geological SciencesUniversity of Florida
+        # global_history: 2011-06-21 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
+        # global_comment: model converted to netCDF by IRIS EMC
+        # global_geospatial_lat_min: -90.00
+        # global_geospatial_lat_max: 90.00
+        # global_geospatial_lat_units: degrees_north
+        # global_geospatial_lat_resolution: 2
+        # global_geospatial_lon_min: -180.00
+        # global_geospatial_lon_max: 178.0
+        # global_geospatial_lon_units: degrees_east
+        # global_geospatial_lon_resolution: 2
+        # global_geospatial_vertical_min: 50
+        # global_geospatial_vertical_max: 2850
+        # global_geospatial_vertical_units: km
+        # global_geospatial_vertical_positive: down
+        # latitude_column: latitude
+        # latitude_long_name: Latitude; positive north
+        # latitude_units: degrees_north
+        # latitude_standard_name: latitude
+        # longitude_column: longitude
+        # longitude_long_name: Longitude; positive east
+        # longitude_units: degrees_east
+        # longitude_standard_name: longitude
+        # depth_column: depth
+        # depth_long_name: depth below earth surface
+        # depth_units: km
+        # depth_positive: down
+        # vs_column: vs
+        # vs_long_name: Shear Velocity
+        # vs_display_name: S Velocity (km/s)
+        # vs_units: km.s-1
+        # vs_missing_value: 99999.0
+        # vs__FillValue: 99999.0
+        # vp_column: vp
+        # vp_long_name: P Velocity
+        # vp_display_name: P Velocity (km/s)
+        # vp_units: km.s-1
+        # vp_missing_value: 99999.0
+        # vp__FillValue: 99999.0
+        # rho_column: rho
+        # rho_long_name: Density
+        # rho_display_name: Density (kg/m^3)
+        # rho_units: kg.m-3
+        # rho_missing_value: 99999.0
+        # rho__FillValue: 99999.0
+        # Qs_column: Qs
+        # Qs_long_name: Shear Q
+        # Qs_display_name: Shear Q (dimensionless)
+        # Qs_units: count
+        # Qs_missing_value: 99999.0
+        # Qs__FillValue: 99999.0
+			
 
-\# dataset: GeoCSV2.0
 
-\# created: 2018-10-23 21:06:07 UTC (netCDF_2_GeoCSV_3D.py)
 
-\# netCDF_file: SAW642ANB_kmps.
 
-\# delimiter: |
 
-\# global_title: A radially anisotropic whole mantle model with improved crustal corrections
-
-\# global_id: SAW642ANb_kmps
-
-\# global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2). 
-
-\# global_reference: Panning, Lekic and Romanowicz (2010)
-
-\# global_references: http://ds.iris.edu/ds/products/emc-references
-
-\# global_keywords: seismic, tomography, shear wave, s wave, elastic waveform 
-
-\# global_Conventions: CF-1.0
-
-\# global_Metadata_Conventions: Unidata Dataset Discovery v1.0
-
-\# global_creator_name: IRIS EMC
-
-\# global_creator_url: http://ds.iris.edu/ds/products/emc/
-
-\# global_creator_email: product@iris.edu
-
-\# global_institution: IRIS DMC
-
-\# global_acknowledgment: Model was provided by Professor Mark Panning,  Department of Geological SciencesUniversity of Florida 
-
-\# global_history: 2011-06-21 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
-
-\# global_comment: model converted to netCDF by IRIS EMC
-
-\# global_geospatial_lat_min: -90.00
-
-\# global_geospatial_lat_max: 90.00
-
-\# global_geospatial_lat_units: degrees_north
-
-\# global_geospatial_lat_resolution: 2
-
-\# global_geospatial_lon_min: -180.00
-
-\# global_geospatial_lon_max: 178.0
-
-\# global_geospatial_lon_units: degrees_east
-
-\# global_geospatial_lon_resolution: 2
-
-\# global_geospatial_vertical_min: 50
-
-\# global_geospatial_vertical_max: 2850
-
-\# global_geospatial_vertical_units: km
-
-\# global_geospatial_vertical_positive: down
-
-\# latitude_column: latitude
-
-\# latitude_long_name: Latitude; positive north
-
-\# latitude_units: degrees_north
-
-\# latitude_standard_name: latitude
-
-\# longitude_column: longitude
-
-\# longitude_long_name: Longitude; positive east
-
-\# longitude_units: degrees_east
-
-\# longitude_standard_name: longitude
-
-\# depth_column: depth
-
-\# depth_long_name: depth below earth surface
-
-\# depth_units: km
-
-\# depth_positive: down
