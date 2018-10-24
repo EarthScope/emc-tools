@@ -14,28 +14,39 @@ COMMENTS/QUESTIONS:
 
  DESCRIPTION:
 
- EMC Tools contains a set of Python scripts for converting the EMC's netCDF Earth model files (netCDF 3 format) to and from GeoCSV format:
+ EMC Tools contains a set of Python scripts for converting the EMC's netCDF Earth model files (netCDF 3 format) to and 
+ from GeoCSV format:
  
-    - netCDF_2_GeoCSV_3D.py - a Python script to read a 3D netCDF Earth model file and display its header information or convert it to GeoCSV format.
-    - GeoCSV_2_netCDF_3D.py - a Python script to read a 3D GeoCSV Earth model file and display its header information or convert it to netCDF format.
+    - netCDF_2_GeoCSV_3D.py - a Python script to read a 3D netCDF Earth model file and display its header information or
+      convert it to GeoCSV format.
+    - GeoCSV_2_netCDF_3D.py - a Python script to read a 3D GeoCSV Earth model file and display its header information or
+      convert it to netCDF format.
 
  * For information on EMC (IRIS Earth Model Collaboration) visit: http://ds.iris.edu/ds/products/emc/
  * For information on netCDF (Network Common Data Form) visit https://www.unidata.ucar.edu/software/netcdf/
- * For information on GeoCSV (tabular text formatting for geoscience data) visit: http://geows.ds.iris.edu/documents/GeoCSV.pdf
+ * For information on GeoCSV (tabular text formatting for geoscience data) visit: 
+       http://geows.ds.iris.edu/documents/GeoCSV.pdf
 
  **USAGE:**
-You can work with each script directly and independently. To view the usage message, run the script with the help **-h** option:
+You can work with each script directly and independently. To view the usage message, run the script with the 
+help **-h** option:
+
 * netCDF_2_GeoCSV_3D.py -h
 * GeoCSV_2_netCDF_3D.py -h
 
 **How to run netCDF\_2\_GeoCSV\_3D.py:**
 
-    - use the sample netCDF file under the "samples" directory or download a 3D netCDF Earth model file from the EMC repository (http://ds.iris.edu/ds/products/emc-earthmodels/)
+    - use the sample netCDF file under the "samples" directory or download a 3D netCDF Earth model file from the EMC 
+      repository:
+   http://ds.iris.edu/ds/products/emc-earthmodels/
+   
     - [optional] create a "data" directory with a path relative to script as "../data/" and place the netCDF file there
-    - run the script to convert the netCDF file. The converted file will have the same name as the netCDF file but with extension ".csv"
+    - run the script to convert the netCDF file. The converted file will have the same name as the netCDF file but with 
+      extension ".csv"
             and will be placed under the same directory where the netCDF file was found.
             
-            netCDF_2_GeoCSV_3D.py -i SAW642ANB_kmps.nc (will look for the file under the script directory and data directory)
+            netCDF_2_GeoCSV_3D.py -i SAW642ANB_kmps.nc (will look for the file under the script directory and data 
+            directory)
 
             The following options are also available:
                 -d debug mode with verbose execution
@@ -44,15 +55,19 @@ You can work with each script directly and independently. To view the usage mess
                     depth will create one ".csv" file per depth
                 -H display file header information for both netCDF and GeoCSV (no output file created)
                  
-            NOTE: only a .csv files converted with single (-m) option can be converted back to netCDF using the GeoCSV_2_netCDF_3D.py script
+            NOTE: only a .csv files converted with single (-m) option can be converted back to netCDF using the 
+                  GeoCSV_2_netCDF_3D.py script
 
 **How to run GeoCSV\_2\_netCDF\_3D.py:**
 
-    - use the sample GeoCSV file under the "samples" directory as a template to create your own GeoCSV file with proper header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV_3D.py script above
-    - run the script to convert the GeoCSV file to netCDF. The converted file will have the same name as the GeoCSV file but with extension ".nc"
+    - use the sample GeoCSV file under the "samples" directory as a template to create your own GeoCSV file with proper 
+      header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV_3D.py script above
+    - run the script to convert the GeoCSV file to netCDF. The converted file will have the same name as the GeoCSV file
+      but with extension ".nc"
             and will be placed under the same directory where the GeoCSV file was found.
 
-            GeoCSV_2_netCDF_3D.py -i SAW642ANB_kmps.csv (will look for the file under the script directory and data directory)
+            GeoCSV_2_netCDF_3D.py -i SAW642ANB_kmps.csv (will look for the file under the script directory and data 
+            directory)
 
             The following options are also available:
                 -d debug mode with verbose execution
@@ -73,7 +88,8 @@ You can work with each script directly and independently. To view the usage mess
          - The global attributes in netCDF header start with a ":", like    :geospatial_lat_min = "-90.00" ; 
            while the same global attribute under GeoCSV starts with global_, like # global_geospatial_lat_min: -90.00
 
-    EMC Earth models netCDF header follow the EMC netCDF 3 guidelines (see http://ds.iris.edu/ds/products/emc-contributionguide/)
+    EMC Earth models netCDF header follow the EMC netCDF 3 guidelines see: 
+   http://ds.iris.edu/ds/products/emc-contributionguide/
 
      to view the file header information for both netCDF and GeoCSV, run the above scripts with -H option:
             netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
@@ -84,7 +100,9 @@ You can work with each script directly and independently. To view the usage mess
 
    The following highlights the steps you need to follow in order to create an EMC Earth model file in GeoCSV format:
        
-       Note: The GeoCSV Earth model files in general should follow "EMC's guidelines" (http://ds.iris.edu/ds/products/emc-contributionguide/).
+       Note: The GeoCSV Earth model files in general should follow "EMC's guidelines" at
+   http://ds.iris.edu/ds/products/emc-contributionguide/
+   
        Note: Familiarize yourself with the "GeoCSV format" (http://geows.ds.iris.edu/documents/GeoCSV.pdf).
        
      - download the "SAW642ANB_kmps.csv" from the samples folder the file has three parts:
@@ -92,9 +110,15 @@ You can work with each script directly and independently. To view the usage mess
           * data header - a single line follwoing metadata header that identifies columns
           * data - lines following the header
           
-     - download and edit the header.csv file from the samples directory to include information about your model (do not change the first line: # dataset: GeoCSV2.0). This file contains the metadata and data headers of "SAW642ANB_kmps.csv" file. Also edit the data header (last line with no starting # to include all your variables as you have defined under the emtadata header.
-     - create the data section by writing data to a file using delimiter identified in the metadata header section and in the same order as the defined in the data header line.
-     **NOTE:** For the EMC models with a 3D grid, each point is defined by a set of (depth,latitude,longitude) values. Your data must be sorted in the same order (depth column first, latitude column second and longitude column third.
+     - download and edit the header.csv file from the samples directory to include information about your model (do not 
+       change the first line: # dataset: GeoCSV2.0). This file contains the metadata and data headers of 
+       "SAW642ANB_kmps.csv" file. Also edit the data header (last line with no starting # to include all your variables 
+       as you have defined under the emtadata header.
+     - create the data section by writing data to a file using delimiter identified in the metadata header section and 
+       in the same order as the defined in the data header line.
+       **NOTE:** For the EMC models with a 3D grid, each point is defined by a set of (depth,latitude,longitude) values. 
+                 Your data must be sorted in the same order (depth column first, latitude column second and longitude 
+                 column third.
      - add the data section under the "data header line"
      - test your GeoCSV file by extracting its header using the "GeoCSV_2_netCDF_3D.py" script:
                GeoCSV_2_netCDF_3D.py -H -i {YOUR_FILE_NAME}.csv
