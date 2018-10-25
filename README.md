@@ -10,18 +10,20 @@ COMMENTS/QUESTIONS:
     Please contact manoch@iris.washington.edu
 
 
- 2018-10-24
+ 2018-10-25
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  DESCRIPTION:
 
- EMC Tools contains a set of Python scripts for converting the EMC's netCDF Earth model files (in netCDF 3 format) to and 
- from GeoCSV format:
+ EMC Tools contains a set of Python scripts for converting the EMC's netCDF Earth model files (in netCDF 3 format) to 
+ and from GeoCSV format:
  
     - netCDF_2_GeoCSV_3D.py - a Python script to read a 3D netCDF Earth model file and display its header information or
       convert it to GeoCSV format.
     - GeoCSV_2_netCDF_3D.py - a Python script to read a 3D GeoCSV Earth model file and display its header information or
       convert it to netCDF format.
+    - netCDF_2_GeoCSV_2D.py - a Python script to read a 2D netCDF Earth model file and convert it to GeoCSV format.
+    - GeoCSV_2_netCDF_2D.py - a Python script to read a 2D GeoCSV Earth model file and convert it to netCDF format.
 
  * For information on EMC (IRIS Earth Model Collaboration) visit: http://ds.iris.edu/ds/products/emc/
  * For information on netCDF (Network Common Data Form) visit: https://www.unidata.ucar.edu/software/netcdf/
@@ -34,10 +36,12 @@ help (**-h**) option:
 
 * netCDF_2_GeoCSV_3D.py -h
 * GeoCSV_2_netCDF_3D.py -h
+* netCDF_2_GeoCSV_2D.py -h
+* GeoCSV_2_netCDF_2D.py -h
 
 **How to run netCDF\_2\_GeoCSV\_3D.py:**
 
-    - use the sample netCDF file under the "samples" directory or download a 3D netCDF Earth model file from the EMC 
+    - use the sample 3D netCDF file under the "samples" directory or download a 3D netCDF Earth model file from the EMC 
       repository:
    http://ds.iris.edu/ds/products/emc-earthmodels/
    
@@ -75,6 +79,38 @@ help (**-h**) option:
 
             NOTE: only a single ".csv" files can be converted back to netCDF using this script
         
+**How to run netCDF\_2\_GeoCSV\_2D.py:**
+
+    - use the sample 2D netCDF file under the "samples" directory or download a 2D netCDF Earth model file from the EMC 
+      repository:
+   http://ds.iris.edu/ds/products/emc-earthmodels/
+   
+    - [optional] create a "data" directory with a path relative to the script as "../data/" and place the netCDF file 
+      there
+    - run the script to convert the netCDF file. The converted file will have the same name as the netCDF file but with 
+      extension ".csv" and will be placed under the same directory where the netCDF file was found.
+            
+            netCDF_2_GeoCSV_2D.py -i Crustal_Thickness_Error.nc (will look for the file under the script directory and 
+            data directory)
+
+            The following options are also available:
+                -d debug mode with verbose execution
+                -H display file header information for both netCDF and GeoCSV (no output file created)
+
+**How to run GeoCSV\_2\_netCDF\_2D.py:**
+
+    - use the sample GeoCSV file under the "samples" directory as a template to create your own GeoCSV file with proper 
+      header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV_2D.py script above
+    - run the script to convert the GeoCSV file to netCDF. The converted file will have the same name as the GeoCSV file
+      but with extension ".nc" and will be placed under the same directory where the GeoCSV file was found.
+
+            GeoCSV_2_netCDF_2D.py -i Crustal_Thickness_Error.csv (will look for the file under the script directory and 
+            data directory)
+
+            The following options are also available:
+                -d debug mode with verbose execution
+                -H display file header information for both netCDF and GeoCSV 
+            
  **HEADERS:**
  
     GeoCSV Headers are similar to the netCDF headers with the following exceptions:
@@ -94,7 +130,8 @@ help (**-h**) option:
     To view the file header information for both netCDF and GeoCSV, run the above scripts with -H option:
             netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
             GeoCSV_2_netCDF_3D.py -H -i SAW642ANB_kmps.csv
-            
+            netCDF_2_GeoCSV_2D.py -H -i Crustal_Thickness_Error.nc
+            GeoCSV_2_netCDF_2D.py -H -i Crustal_Thickness_Error.csv
 
 **Creating EMC GeoCSV Earth Model Files**
 
@@ -105,6 +142,10 @@ help (**-h**) option:
    
        Note: Familiarize yourself with the "GeoCSV format" at: 
    http://geows.ds.iris.edu/documents/GeoCSV.pdf
+   
+      Note: The following steps are for converting 3D models. For 2D models use the corresponding scripts but note that
+            in 2D domain, each point is defined by a set of (latitude,longitude) values. 
+            Your data must be sorted in the same order (latitude column first and then the longitude column).
        
      - download the "SAW642ANB_kmps.csv" from the samples folder and inspect it. The file has three parts:
           * metadata header - starts at the beginning of the file with each line starting with a "#" 

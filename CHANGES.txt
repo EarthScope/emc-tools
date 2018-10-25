@@ -20,4 +20,6 @@ Version 0.5 Public release R.0.5.2018.295
 2018-10-25
 =========================================================
 expanded the error message R.0.5.2018.298
+added GeoCSV_2_netCDF_2D.py
+added netCDF_2_GeoCSV_2D.py
 
