@@ -19,13 +19,14 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2018-10-25 IRIS DMC Manoch: expanded the error message R.0.5.2018.298
    2018-10-22 IRIS DMC Manoch: initial release R.0.5.2018.295
    2018-10-17 IRIS DMC Manoch: fill_value and missing_value attributes are now supported
    2018-10-16 IRIS DMC Manoch: created VERSION 2018.289
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'R.0.5.2018.295'
+VERSION = 'R.0.5.2018.298'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -136,8 +137,9 @@ def read_geocsv(file_name):
 
     try:
        content = fp.read()
-    except Exception:
+    except Exception as err:
         print('\n[Error] failed to read the input file!')
+        print('{0}\n'.format(err))
         fp.close()
         sys.exit(2)
 
