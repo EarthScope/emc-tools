@@ -1,0 +1,47 @@
+# dataset: GeoCSV2.0
+# created: 2018-10-25 19:26:04 UTC (netCDF_2_GeoCSV_2D.py)
+# netCDF_file: Crustal_Thickness_Error.nc
+# delimiter: |
+# global_title: Crustal thickness values within the western United States derived from receiver function observations
+# global_id: Crustal_Thickness_Error
+# global_summary: crustal thicknesses for the Western United States
+# global_keywords: crust , Receiver function , IRIS EMC , CCP , Gilbert , thickness , Earth model , error
+# global_Conventions: CF-1.0
+# global_Metadata_Conventions: Unidata Dataset Discovery v1.0
+# global_creator_name: IRIS EMC
+# global_creator_url: http://www.iris.edu/dms/products/emc/
+# global_creator_email: product@iris.edu
+# global_institution: IRIS DMC
+# global_acknowledgment: Model was provided by Hersh Gilbert,  Purdue University
+# global_references: Crustal thicknesses for the Western United States, Gilbert (2012)
+# global_history: 2015-11-09 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
+# global_comment: model converted to netCDF by IRIS EMC
+# global_geospatial_lat_min: 30.7
+# global_geospatial_lat_max: 50.2
+# global_geospatial_lat_units: degrees_north
+# global_geospatial_lat_resolution: 0.1
+# global_geospatial_lon_min: -125.0
+# global_geospatial_lon_max: -101.0
+# global_geospatial_lon_units: degrees_east
+# global_geospatial_lon_resolution: 0.53
+# latitude_column: latitude
+# latitude_long_name: Latitude; positive north
+# latitude_units: degrees_north
+# latitude_standard_name: latitude
+# longitude_column: longitude
+# longitude_long_name: Longitude; positive east
+# longitude_units: degrees_east
+# longitude_standard_name: longitude
+# thickness_column: thickness
+# thickness_long_name: crustal thickness
+# thickness_display_name: crustal thickness in km
+# thickness_units: kilometer
+# thickness_missing_value: nan
+# thickness__FillValue: nan
+# error_column: error
+# error_long_name: crustal thickness error
+# error_display_name: crustal thickness error in km
+# error_units: kilometer
+# error_missing_value: nan
+# error__FillValue: nan
+latitude|longitude|thickness|error
