@@ -1,11 +1,9 @@
  
-Incorporated Research Institutions for Seismology (IRIS)
+Incorporated Research Institutions for Seismology (IRIS):
 
-Data Management Center (DMC)
-
-Data Products Team
-
-IRIS Earth Model Collaboration (EMC) - Tools
+    Data Management Center (DMC)
+    Data Products Team
+    IRIS Earth Model Collaboration (EMC) - Tools
 
 COMMENTS/QUESTIONS:
 
