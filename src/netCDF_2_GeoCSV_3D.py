@@ -27,13 +27,14 @@ from netCDF4 import Dataset
     netCDF_2_GeoCSV_3D.py -i FILE -x long -y lat -z depth -m depth -d -H
 
  HISTORY:
+   2018-10-25 IRIS DMC Manoch: expanded the error message R.0.5.2018.298
    2018-10-22 IRIS DMC Manoch: initial release R.0.5.2018.295
    2018-09-15 IRIS DMC Manoch: created VERSION 2018.258 
    2018-10-16 IRIS DMC Manoch: updated to include full netCDF header VERSION 2018.289
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'R.0.5.2018.295'
+VERSION = 'R.0.5.2018.298'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -136,21 +137,21 @@ def get_var_header(model_data, var):
 def usage_csv():
     print('\n{} reads a 3D netCDF Earth model file and convert it to GeoCSV format.\n\n'.format(SCRIPT))
     print(' USAGE:\n\n',
-          '             |\n',
-          '             |          input netCDF Earth model file\n',
-          '             |          |\n',
-          '             |          |       longitude variable (default longitude)\n',
-          '             |          |       |\n',
-          '             |          |       |       latitude variable (default latitude)\n',
-          '             |          |       |       |\n',
-          '             |          |       |       |      depth variable, default depth\n',
-          '             |          |       |       |      |\n',
-          '             |          |       |       |      |        output mode (single, depth)\n',
-          '             |          |       |       |      |        |\n',
-          '             |          |       |       |      |        |        debug mode\n',
-          '             |          |       |       |      |        |         |\n',
-          '             |          |       |       |      |        |         |    display headers only\n',
-          '             |          |       |       |      |        |         |    |\n',
+          '              \n',
+          '                        input netCDF Earth model file\n',
+          '                        |\n',
+          '                        |       longitude variable (default longitude)\n',
+          '                        |       |\n',
+          '                        |       |       latitude variable (default latitude)\n',
+          '                        |       |       |\n',
+          '                        |       |       |      depth variable, default depth\n',
+          '                        |       |       |      |\n',
+          '                        |       |       |      |        output mode (single, depth)\n',
+          '                        |       |       |      |        |\n',
+          '                        |       |       |      |        |        debug mode\n',
+          '                        |       |       |      |        |         |\n',
+          '                        |       |       |      |        |         |    display headers only\n',
+          '                        |       |       |      |        |         |    |\n',
           '{}   -i FILE -x long -y lat -z depth -m depth -d   -H'.format(SCRIPT))
 
 
@@ -333,8 +334,9 @@ def make_model_geocsv():
                             if var not in emcin.keys():
                                 try:
                                     emcin[var] = model_data.variables[var][:]
-                                except Exception:
-                                    print('\n[Error] problem reading variable "{}"\n'.format(var))
+                                except Exception as err:
+                                    print('\n[Error] problem reading variable "{}"'.format(var))
+                                    print('{0}\n'.format(err))
                                     sys.exit(2)
 
                         index[depth_index] = k
