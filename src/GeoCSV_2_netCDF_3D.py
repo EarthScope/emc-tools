@@ -19,6 +19,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2019-01-22 IRIS DMC Manoch: V.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
    2018-10-25 IRIS DMC Manoch: expanded the error message R.0.5.2018.298
    2018-10-22 IRIS DMC Manoch: initial release R.0.5.2018.295
    2018-10-17 IRIS DMC Manoch: fill_value and missing_value attributes are now supported
@@ -26,7 +27,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'R.0.5.2018.298'
+VERSION = 'V.2019.022'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -363,7 +364,9 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
                 var, VAR_DTYPE, (this_params['level_column'], this_params['latitude_column'],
                                   this_params['longitude_column']))
 
-        var_values[var] = np.zeros((len(levels_list), len(latitude_list), len(longitude_list)))
+        # fill in missing points (if any) with nan
+        var_values[var] = np.empty((len(levels_list), len(latitude_list), len(longitude_list)))
+        var_values[var][:] = np.nan
 
         # set variable attributes
         for key in this_params.keys():
