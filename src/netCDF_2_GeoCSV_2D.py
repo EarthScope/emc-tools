@@ -23,11 +23,12 @@ from netCDF4 import Dataset
     netCDF_2_GeoCSV_3D.py -i FILE -x long -y lat -d -H
 
  HISTORY:
+   2019-01-22 IRIS DMC Manoch: V.2019.022 corrected variable_name  
    2018-10-25 IRIS DMC Manoch: created R.0.5.2018.298
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'R.0.5.2018.298'
+VERSION = 'V.2019.022'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -72,7 +73,7 @@ def get_variable_attributes(model_data, header, variable, variable_name):
     the geoCSV header for the model
     """
     header.append('# {}_column: {}\n'.format(variable, variable_name))
-    for attr, value in vars(model_data.variables[variable]).items():
+    for attr, value in vars(model_data.variables[variable_name]).items():
         if '_range' in attr:
             header.append('# {}_{}: {},{}\n'.format(variable, attr, value[0], value[1]))
         else:
