@@ -19,13 +19,15 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2019-01-28 IRIS DMC Manoch: V.2019.148 removed the extra '_' character behind the coordinate variable parameter
+                               names.
    2019-01-22 IRIS DMC Manoch: V.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
    2018-10-25 IRIS DMC Manoch: created R.0.5.2018.298
 
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2019.022'
+VERSION = 'V.2019.148'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -273,8 +275,8 @@ def create_coordinate_variables(this_dataset, this_params):
 
     for var in (this_params['latitude_column'], this_params['longitude_column']):
         for key in this_params.keys():
-            if key.strip().startswith('{}_'.format(var)):
-                attribute = key.replace(var, '').strip()
+            if '{}_'.format(var) in key and key != '{}_column'.format(var):
+                attribute = key.replace('{}_'.format(var), '').strip()
 
                 # let it default to default values
                 if attribute != '_FillValue':
