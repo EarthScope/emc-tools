@@ -11,7 +11,17 @@ COMMENTS/QUESTIONS:
 ---------------------------------------------------------
 
 =========================================================
-201905-28 R.1.1 Release
+2019-12-05 R.1.2 Release
+=========================================================
+- netCDF_2_GeoCSV_2D.py V.2019.318 now retains order of variables
+- netCDF_2_GeoCSV_3D.py V.2019.318 now retains order of variables
+- header_3D.csv corrected typo in email address
+- header_2D.csv corrected typo in email address
+- SAW642ANB_kmps.csv corrected typo in email address
+- Crustal_Thickness_Error.csv corrected typo in email address
+
+=========================================================
+2019-05-28 R.1.1 Release
 =========================================================
 - GeoCSV_2_netCDF_2D.py V.2019.148 removed the extra '_' character behind the coordinate variable parameter names.
 - GeoCSV_2_netCDF_3D.py V.2019.148 removed the extra '_' character behind the coordinate variable parameter names.
