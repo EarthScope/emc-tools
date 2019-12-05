@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import os
+import collections
 from operator import itemgetter
 from netCDF4 import Dataset
 import numpy as np
@@ -19,6 +20,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2019-11-14 IRIS DMC Manoch: V.2019.318 now retains order of variables
    2019-01-28 IRIS DMC Manoch: V.2019.148 removed the extra '_' character behind the coordinate variable parameter
                                names.
    2019-01-22 IRIS DMC Manoch: V.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
@@ -27,7 +29,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2019.148'
+VERSION = 'V.2019.318'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -146,7 +148,7 @@ def read_geocsv(file_name):
 
     lines = content.split('\n')
     fp.close()
-    header_params = dict()
+    header_params = collections.OrderedDict()
     data = list()
     found_header = False
     for i in range(len(lines)):
@@ -256,7 +258,7 @@ def create_coordinate_variables(this_dataset, this_params):
     longitudes: longitude variable
     """
 
-    coordinate = dict()
+    coordinate = collections.OrderedDict()
     this_value = get_attribute(this_params, this_params['latitude_column'], '_FillValue')
     if this_value:
         coordinate[params['latitude_column']] = this_dataset.createVariable(
@@ -316,13 +318,22 @@ def create_2d_variables(this_dataset, this_params, data, latitude_list, longitud
     all_vars: a dictionary of 3D variables
     """
 
-    header = this_params['header']
+    # We want to retain order of variables.
+    #var_list = list(set(header) - set([this_params['latitude_column'], this_params['longitude_column']]))
 
-    var_list = list(set(header) - set([this_params['latitude_column'], this_params['longitude_column']]))
-    all_vars = dict()
-    var_values = dict()
+    header = this_params['header']
+    var_list = list()
+    for _var in header:
+        if _var in [this_params['latitude_column'], this_params['longitude_column']]:
+            continue
+        if _var not in var_list:
+            var_list.append(_var)
+
+    all_vars = collections.OrderedDict()
+    var_values = collections.OrderedDict()
 
     for var in var_list:
+
         this_value = get_attribute(this_params, var, '_FillValue')
         if this_value:
             all_vars[var] = this_dataset.createVariable(
