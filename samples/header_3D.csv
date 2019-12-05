@@ -12,7 +12,7 @@
 # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
 # global_creator_name: IRIS EMC
 # global_creator_url: http://ds.iris.edu/ds/products/emc/
-# global_creator_email: product@iris.edu
+# global_creator_email: product@iris.washington.edu
 # global_institution: IRIS DMC
 # global_acknowledgment: Model was provided by Professor Mark Panning,  Department of Geological SciencesUniversity of Florida 
 # global_history: 2011-06-21 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
