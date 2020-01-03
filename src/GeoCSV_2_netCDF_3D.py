@@ -20,6 +20,8 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2020-01-03 IRIS DMC Manoch: V.2020.003 preserves the history and avoids mixing variable names with common
+                               characters (like Qp and QpQs)
    2019-11-14 IRIS DMC Manoch: V.2019.318 now retains order of variables
    2019-01-28 IRIS DMC Manoch: V.2019.148 removed the extra '_' character  behind the coordinate variable parameter
                                names.
@@ -31,7 +33,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2019.318'
+VERSION = 'V.2020.003'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -100,7 +102,8 @@ def get_attribute(this_params, this_var, this_attribute):
     """
     this_value = None
     for this_key in this_params.keys():
-        if this_var in this_key and this_attribute in this_key:
+        # if this_var in this_key and this_attribute in this_key:
+        if '_'.join([this_var, this_attribute]) == this_key:
             this_value = this_params[this_key]
 
     return this_value
@@ -384,7 +387,7 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
 
         # set variable attributes
         for key in this_params.keys():
-            if '{}_'.format(var) in key and key != '{}_column'.format(var):
+            if key.startswith('{}_'.format(var)) and key != '{}_column'.format(var):
                 attribute = key.replace('{}_'.format(var), '').strip()
 
                 # let it default to default values
@@ -446,6 +449,7 @@ def set_global_attributes(this_dataset, this_file, header_params):
     else:
         dot()
 
+    history = None
     for key in header_params.keys():
         if key.strip().startswith('global_'):
             attr_name = key.replace('global_', '').strip()
@@ -455,9 +459,16 @@ def set_global_attributes(this_dataset, this_file, header_params):
                 dot()
 
             setattr(this_dataset, attr_name, header_params[key])
+            if attr_name == 'history':
+                history = header_params[key]
 
     this_dataset.source = 'Converted from {}'.format(os.path.basename(this_file))
-    this_dataset.history = 'Created by {} ({})'.format(SCRIPT, datetime.now(timezone.utc).isoformat(timespec='seconds'))
+    if history is not None:
+        this_dataset.history = '{} Created by {} {} \n{}'.format(
+            datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S %Z'), SCRIPT, VERSION, history)
+    else:
+        this_dataset.history = '{} Created by {} {}'.format(datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S %Z'),
+                                                         SCRIPT, VERSION)
 
     return this_dataset
 
