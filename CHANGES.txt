@@ -11,11 +11,21 @@ COMMENTS/QUESTIONS:
 ---------------------------------------------------------
 
 =========================================================
+2020-01-06 R.1.4 Release
+=========================================================
+- GeoCSV_2_netCDF_2D.py  V.2020.006 History now includes the source file name
+- GeoCSV_2_netCDF_3D.py  V.2020.006 History now includes the source file name
+- netCDF_2_GeoCSV_2D.py  V.2020.006 added history if it does not exist.
+                               The history now includes the source file name
+- netCDF_2_GeoCSV_3D.py  V.2020.006 added history if it does not exist.
+                               The history now includes the source file name
+
+=========================================================
 2020-01-03 R.1.3 Release
 =========================================================
-- netCDF_2_GeoCSV_2D.py V.2020.003 preserves the history and avoids mixing variable names with common
+- GeoCSV_2_netCDF_2D.py V.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
-- netCDF_2_GeoCSV_3D.py V.2020.003 preserves the history and avoids mixing variable names with common
+- GeoCSV_2_netCDF_3D.py V.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
 
 =========================================================
