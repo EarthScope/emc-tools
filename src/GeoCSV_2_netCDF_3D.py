@@ -20,6 +20,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2020-01-06 IRIS DMC Manoch: V.2020.006 History now includes the source file name
    2020-01-03 IRIS DMC Manoch: V.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
    2019-11-14 IRIS DMC Manoch: V.2019.318 now retains order of variables
@@ -33,7 +34,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.003'
+VERSION = 'V.2020.006'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -454,7 +455,7 @@ def set_global_attributes(this_dataset, this_file, header_params):
         if key.strip().startswith('global_'):
             attr_name = key.replace('global_', '').strip()
             if DEBUG:
-                print('{}: {}\n'.format(attr_name, header_params[key]))
+                print(f'{attr_name}: {header_params[key]}\n')
             else:
                 dot()
 
@@ -462,13 +463,14 @@ def set_global_attributes(this_dataset, this_file, header_params):
             if attr_name == 'history':
                 history = header_params[key]
 
-    this_dataset.source = 'Converted from {}'.format(os.path.basename(this_file))
     if history is not None:
-        this_dataset.history = '{} Created by {} {} \n{}'.format(
-            datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S %Z'), SCRIPT, VERSION, history)
+        this_dataset.history = f'{datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")} ' \
+            f'Converted to netCDF by ' \
+            f'{SCRIPT} {VERSION} from {os.path.basename(this_file)}\n{history}'
     else:
-        this_dataset.history = '{} Created by {} {}'.format(datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S %Z'),
-                                                         SCRIPT, VERSION)
+        this_dataset.history = f'{datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")} ' \
+            f'Converted to netCDF by ' \
+            f'{SCRIPT} {VERSION} from {os.path.basename(this_file)}'
 
     return this_dataset
 
@@ -511,7 +513,7 @@ def display_headers(model_data, params):
     # global attributes
     print('\n\tglobal attributes:', flush=True)
     for attr, value in vars(model_data).items():
-        value = value.replace('\n', ' ')
+        value = value.replace('\n', '; ')
         print('\t\t\t{} = {}'.format(attr, value), flush=True)
 
 
