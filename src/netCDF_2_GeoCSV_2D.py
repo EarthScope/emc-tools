@@ -2,7 +2,7 @@
 import sys
 import os
 import getopt
-from datetime import datetime
+from datetime import datetime, timezone
 from netCDF4 import Dataset
 
 '''
@@ -23,12 +23,14 @@ from netCDF4 import Dataset
     netCDF_2_GeoCSV_3D.py -i FILE -x long -y lat -d -H
 
  HISTORY:
+   2020-01-06 IRIS DMC Manoch: V.2020.006 added history if it does not exist. 
+                               The history now includes the source file name
    2019-01-22 IRIS DMC Manoch: V.2019.022 corrected variable_name  
    2018-10-25 IRIS DMC Manoch: created R.0.5.2018.298
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2019.022'
+VERSION = 'V.2020.006'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -99,10 +101,20 @@ def get_model_header(model_file, model_data):
     header.append('# delimiter: {}\n'.format(DELIMITER))
 
     # global attributes
+    history_done = False
+    history = f'{datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")} Converted to GeoCSV by {SCRIPT} ,' \
+        f'{VERSION} ' \
+        f'from {NETCDF_FILE_NAME}'
     for attr, value in vars(model_data).items():
         if isinstance(value, str):
-            value = value.replace('\n', ' ')
-        header.append('# global_{}: {}\n'.format(attr, value))
+            value = value.replace('\n', '; ')
+        if attr.lower() == 'history':
+            value = f'{history}; {value}'
+            history_done = True
+        header.append(f'# global_{attr}: {value}\n')
+
+    if not history_done:
+        header.append(f'# global_history: {history}\n')
 
     # variable s
     header = get_variable_attributes(model_data, header, 'latitude', LAT_VARIABLE)
@@ -207,7 +219,7 @@ def display_headers(model_file, model_data):
     print('\n\tglobal attributes:', flush=True)
     for attr, value in vars(model_data).items():
         if isinstance(value, str):
-            value = value.replace('\n', ' ')
+            value = value.replace('\n', '; ')
         print('\t\t\t{} = {}'.format(attr, value), flush=True)
 
     # GeoCSV header
