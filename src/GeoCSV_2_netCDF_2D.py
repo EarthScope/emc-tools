@@ -20,6 +20,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2020-02-28 IRIS DMC Manoch: V.2020.059 float global attribute values are outputted as float and not string. 
    2020-01-06 IRIS DMC Manoch: V.2020.006 History now includes the source file name
    2020-01-03 IRIS DMC Manoch: V.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
@@ -32,7 +33,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.006'
+VERSION = 'V.2020.059'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -422,7 +423,7 @@ def set_global_attributes(this_dataset, this_file, header_params):
             else:
                 dot()
 
-            setattr(this_dataset, attr_name, header_params[key])
+            setattr(this_dataset, attr_name, get_float(header_params[key]))
             if attr_name == 'history':
                 history = header_params[key]
 
