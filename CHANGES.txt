@@ -11,6 +11,13 @@ COMMENTS/QUESTIONS:
 ---------------------------------------------------------
 
 =========================================================
+2020-02-28 R.1.5 Release
+=========================================================
+- GeoCSV_2_netCDF_2D.py V.2020.059 float global attribute values are outputted as float and not string
+- GeoCSV_2_netCDF_3D.py V.2020.059 float global attribute values are outputted as float and not string
+- samples are updated for new metadata
+
+=========================================================
 2020-01-06 R.1.4 Release
 =========================================================
 - GeoCSV_2_netCDF_2D.py  V.2020.006 History now includes the source file name
