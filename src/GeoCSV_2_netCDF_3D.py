@@ -20,6 +20,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2020-06-16 IRIS DMC Manoch: V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
    2020-02-28 IRIS DMC Manoch: V.2020.059 float global attribute values are outputted as float and not string. 
    2020-01-06 IRIS DMC Manoch: V.2020.006 History now includes the source file name
    2020-01-03 IRIS DMC Manoch: V.2020.003 preserves the history and avoids mixing variable names with common
@@ -35,7 +36,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.059'
+VERSION = 'V.2020.168'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -51,7 +52,6 @@ GEOCSV_FILE_NAME = None
 BASE_NAME = None
 VIEW_HEADER = False
 VAR_DTYPE = 'f4'  # set variables as 'f4' (32-bit floating point) or 'f8' (64-bit floating point) variables
-
 
 
 def usage():
@@ -86,7 +86,11 @@ def get_float(this_string):
     """
 
     try:
-        this_value = float(this_string)
+        if VAR_DTYPE == 'f4':
+            this_value = np.float32(this_string)
+        else:
+            this_value = np.float64(this_string)
+
     except ValueError as e:
         this_value = this_string
     return this_value
@@ -147,9 +151,9 @@ def read_geocsv(file_name):
         dot()
 
     try:
-       content = fp.read()
+        content = fp.read()
     except Exception as err:
-        print('\n[Error] failed to read the input file!')
+        print('\n[ERR] failed to read the input file!')
         print('{0}\n'.format(err))
         fp.close()
         sys.exit(2)
@@ -320,10 +324,10 @@ def create_coordinate_variables(this_dataset, this_params):
                         setattr(coordinate[var], attribute, get_float(this_params[key]))
                     elif '_range' in attribute:
                         this_range = list()
-                        this_value = this_params[key].replace('[','').replace(']','').strip().split(',')
+                        this_value = this_params[key].replace('[', '').replace(']', '').strip().split(',')
                         for item in this_value:
                             this_range.append(get_float(item))
-                        setattr(coordinate[var], attribute, this_range)
+                        setattr(coordinate[var], attribute, np.array(this_range, dtype=VAR_DTYPE))
                     else:
                         setattr(coordinate[var], attribute, this_params[key])
 
@@ -358,8 +362,8 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
 
     header = this_params['header']
 
-    var_list = list(set(header) - set([this_params['latitude_column'], this_params['longitude_column'],
-                                       this_params['level_column']]))
+    # var_list = list(set(header) - set([this_params['latitude_column'], this_params['longitude_column'],
+    #                                   this_params['level_column']]))
 
     # We want to retain order of variables.
     # var_list = list(set(header) - set([this_params['latitude_column'], this_params['longitude_column']]))
@@ -378,11 +382,11 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
         if this_value:
             all_vars[var] = this_dataset.createVariable(
                 var, VAR_DTYPE, (this_params['level_column'], this_params['latitude_column'],
-                                  this_params['longitude_column']), fill_value=this_value)
+                                 this_params['longitude_column']), fill_value=this_value)
         else:
             all_vars[var] = this_dataset.createVariable(
                 var, VAR_DTYPE, (this_params['level_column'], this_params['latitude_column'],
-                                  this_params['longitude_column']))
+                                 this_params['longitude_column']))
 
         # fill in missing points (if any) with nan
         var_values[var] = np.empty((len(levels_list), len(latitude_list), len(longitude_list)))
@@ -407,7 +411,7 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
 
                         for item in this_value:
                             this_range.append(get_float(item))
-                        setattr(all_vars[var], attribute, this_range)
+                        setattr(all_vars[var], attribute, np.array(this_range, dtype=VAR_DTYPE))
                     else:
                         setattr(all_vars[var], attribute, this_params[key])
 
@@ -477,7 +481,7 @@ def set_global_attributes(this_dataset, this_file, header_params):
     return this_dataset
 
 
-def display_headers(model_data, params):
+def display_headers(model_data, data_params):
     """extract and display netCDF and GeoCSV header information
 
     Keyword arguments:
@@ -488,17 +492,17 @@ def display_headers(model_data, params):
     """
     # GeoCSV header
     print('\n\nGeoCSV header information:\n\n', flush=True)
-    for key in params.keys():
+    for key in data_params.keys():
         if key == 'header':
             continue
-        print('# {}: {}'.format(key,params[key]), flush=True)
+        print('# {}: {}'.format(key, data_params[key]), flush=True)
 
     # netCDF header
     print('\n\nnetCDF header information:\n\n', flush=True)
 
     # dimension information.
     nc_dims = [dim for dim in model_data.dimensions]  # list of netCDF dimensions
-    print ('\tdimensions:', flush=True)
+    print('\tdimensions:', flush=True)
     for dim in nc_dims:
         print('\t\t{} {}'.format(model_data.dimensions[dim].name, model_data.dimensions[dim].size), flush=True)
 
@@ -529,7 +533,7 @@ def check_geocsv_file():
     # check the model file and extract necessary information
     # must be in the argument list
     if GEOCSV_FILE_NAME is None:
-        print('[ERROR] the netCDF model file name is required', flush=True)
+        print('[ERR] the netCDF model file name is required', flush=True)
         usage()
         sys.exit(1)
 
@@ -545,7 +549,7 @@ def check_geocsv_file():
 
     # could not find the file
     else:
-        print('[ERROR] could not find the GeoCSV model file {}'.format(GEOCSV_FILE_NAME), flush=True)
+        print('[ERR] could not find the GeoCSV model file {}'.format(GEOCSV_FILE_NAME), flush=True)
         usage()
         sys.exit(1)
 
@@ -618,4 +622,3 @@ else:
 print('\n[INFO] Output netCDF file: {}.nc\n'.format(base_file_name), flush=True)
 
 dataset.close()
-
