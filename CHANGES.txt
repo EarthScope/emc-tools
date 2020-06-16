@@ -11,10 +11,18 @@ COMMENTS/QUESTIONS:
 ---------------------------------------------------------
 
 =========================================================
+2020-06-16 R.1.6 Release
+=========================================================
+- GeoCSV_2_netCDF_2D.py V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
+- GeoCSV_2_netCDF_3D.py V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
+- netCDF_2_GeoCSV_2D.py V.2020.168 minor style updates
+- netCDF_2_GeoCSV_3D.py V.2020.168 minor style updates
+
+=========================================================
 2020-02-28 R.1.5 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py V.2020.059 float global attribute values are outputted as float and not string
-- GeoCSV_2_netCDF_3D.py V.2020.059 float global attribute values are outputted as float and not string
+- GeoCSV_2_netCDF_2D.py  V.2020.059 float global attribute values are outputted as float and not string
+- GeoCSV_2_netCDF_3D.py  V.2020.059 float global attribute values are outputted as float and not string
 - samples are updated for new metadata
 
 =========================================================
@@ -70,4 +78,3 @@ Version 0.5 Public release R.0.5.2018.295
 expanded the error message R.0.5.2018.298
 added GeoCSV_2_netCDF_2D.py
 added netCDF_2_GeoCSV_2D.py
-
