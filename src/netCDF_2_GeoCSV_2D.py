@@ -23,6 +23,7 @@ from netCDF4 import Dataset
     netCDF_2_GeoCSV_3D.py -i FILE -x long -y lat -d -H
 
  HISTORY:
+   2020-06-16 IRIS DMC Manoch: V.2020.168 minor style updates
    2020-01-06 IRIS DMC Manoch: V.2020.006 added history if it does not exist. 
                                The history now includes the source file name
    2019-01-22 IRIS DMC Manoch: V.2019.022 corrected variable_name  
@@ -30,7 +31,7 @@ from netCDF4 import Dataset
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.006'
+VERSION = 'V.2020.168'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -164,7 +165,7 @@ def check_netcdf_file():
     # check the model file and extract necessary information
     # must be in the argument list
     if NETCDF_FILE_NAME is None:
-        print('[ERROR] the netCDF model file name is required', flush=True)
+        print('[ERR] the netCDF model file name is required', flush=True)
         usage_csv()
         sys.exit(1)
 
@@ -180,7 +181,7 @@ def check_netcdf_file():
 
     # could not find the file
     else:
-        print('[ERROR] could not find the netCDF model file {}'.format(NETCDF_FILE_NAME), flush=True)
+        print('[ERR] could not find the netCDF model file {}'.format(NETCDF_FILE_NAME), flush=True)
         usage_csv()
         sys.exit(1)
 
@@ -248,7 +249,7 @@ def make_model_geocsv():
         for this_value in model_data.variables[LON_VARIABLE][:]:
             lon.append("{}".format(str(this_value)))
     except Exception:
-        print('\n[Error] the expected variables ({}, {}) not in the variable list: {}\n'.format(
+        print('\n[ERR] the expected variables ({}, {}) not in the variable list: {}\n'.format(
             LAT_VARIABLE, LON_VARIABLE, str(list(model_data.variables.keys()))))
         sys.exit(1)
 
@@ -260,7 +261,7 @@ def make_model_geocsv():
         if len(model_data.variables[var].shape) == 2:
             var_2d.append(var)
     if len(var_2d) <= 0:
-        print('\n[ERROR] not a 2D netCDF file\n\n', flush=True)
+        print('\n[ERR] not a 2D netCDF file\n\n', flush=True)
         sys.exit(1)
 
     # the standard order is (Z, Y, X) or (depth, latitude, longitude)
@@ -309,7 +310,7 @@ def make_model_geocsv():
                                 try:
                                     emcin[var] = model_data.variables[var][:]
                                 except Exception as err:
-                                    print('\n[Error] problem reading variable "{}"'.format(var))
+                                    print('\n[ERR] problem reading variable "{}"'.format(var))
                                     print('{0}\n'.format(err))
                                     sys.exit(2)
 

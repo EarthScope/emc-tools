@@ -27,6 +27,7 @@ from netCDF4 import Dataset
     netCDF_2_GeoCSV_3D.py -i FILE -x long -y lat -z depth -m depth -d -H
 
  HISTORY:
+   2020-06-16 IRIS DMC Manoch: V.2020.168 minor style updates
    2020-01-06 IRIS DMC Manoch: V.2020.006 added history if it does not exist. 
                                The history now includes the source file name
    2018-10-25 IRIS DMC Manoch: expanded the error message R.0.5.2018.298
@@ -36,7 +37,7 @@ from netCDF4 import Dataset
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.006'
+VERSION = 'V.2020.168'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -61,6 +62,7 @@ VIEW_HEADER = False
 # output mode (depth | lat | lon) as individual files based on depth, lat, lon
 # or (single) as a single file
 OUTPUT_MODE = 'single'
+
 
 def dot():
     """print a dot on screen"""
@@ -176,7 +178,7 @@ def check_netcdf_file():
     # check the model file and extract necessary information
     # must be in the argument list
     if NETCDF_FILE_NAME is None:
-        print('[ERROR] the netCDF model file name is required', flush=True)
+        print('[ERR] the netCDF model file name is required', flush=True)
         usage_csv()
         sys.exit(1)
 
@@ -192,7 +194,7 @@ def check_netcdf_file():
 
     # could not find the file
     else:
-        print('[ERROR] could not find the netCDF model file {}'.format(NETCDF_FILE_NAME), flush=True)
+        print('[ERR] could not find the netCDF model file {}'.format(NETCDF_FILE_NAME), flush=True)
         usage_csv()
         sys.exit(1)
 
@@ -213,7 +215,7 @@ def display_headers(model_file, model_data):
 
     # dimension information.
     nc_dims = [dim for dim in model_data.dimensions]  # list of netCDF dimensions
-    print ('\tdimensions:', flush=True)
+    print('\tdimensions:', flush=True)
     for dim in nc_dims:
         print('\t\t{} {}'.format(model_data.dimensions[dim].name, model_data.dimensions[dim].size), flush=True)
 
@@ -261,8 +263,8 @@ def make_model_geocsv():
             lon.append("{}".format(str(this_value)))
         for this_value in model_data.variables[DEPTH_VARIABLE][:]:
             depth.append("{}".format(str(this_value)))
-    except Exception:
-        print('\n[Error] the expected variables ({}, {}, {}) not in the variable list: {}\n'.format(
+    except Exception as ex:
+        print('\n[ERR] the expected variables ({}, {}, {}) not in the variable list: {}\n'.format(
             LAT_VARIABLE, LON_VARIABLE, DEPTH_VARIABLE, str(list(model_data.variables.keys()))))
         sys.exit(1)
 
@@ -274,7 +276,7 @@ def make_model_geocsv():
         if len(model_data.variables[var].shape) == 3:
             var_3d.append(var)
     if len(var_3d) <= 0:
-        print('\n[ERROR] not a 3D netCDF file\n\n', flush=True)
+        print('\n[ERR] not a 3D netCDF file\n\n', flush=True)
         sys.exit(1)
 
     # the standard order is (Z, Y, X) or (depth, latitude, longitude)
@@ -317,7 +319,7 @@ def make_model_geocsv():
             for j, this_lon in enumerate(lon):
                 if OUTPUT_MODE == 'single':
                     output_data.append('{}{}{}{}{}'.format(str(this_lat), DELIMITER, str(this_lon), DELIMITER,
-                                                                       str(this_depth)))
+                                                           str(this_depth)))
                 else:
                     output_data.append('{}{}{}'.format(str(this_lat), DELIMITER, str(this_lon)))
 
@@ -347,7 +349,7 @@ def make_model_geocsv():
                                 try:
                                     emcin[var] = model_data.variables[var][:]
                                 except Exception as err:
-                                    print('\n[Error] problem reading variable "{}"'.format(var))
+                                    print('\n[ERR] problem reading variable "{}"'.format(var))
                                     print('{0}\n'.format(err))
                                     sys.exit(2)
 
@@ -376,8 +378,8 @@ def make_model_geocsv():
 
 try:
     options, remainder = getopt.getopt(sys.argv[1:], 'hdHi:v:x:y:z:m:', ['help', 'input=', 'variables=',
-                                                                        'latitude=', 'longitude=', 'depth=', 'mode=',
-                                                                        'debug', 'header'])
+                                                                         'latitude=', 'longitude=', 'depth=', 'mode=',
+                                                                         'debug', 'header'])
     for opt, arg in options:
         if opt == '-h':
             usage_csv()
@@ -397,7 +399,7 @@ try:
         elif opt in ('-m', '--mode'):
             OUTPUT_MODE = arg
             if OUTPUT_MODE not in VALID_MODES:
-                print('[ERROR] could not find the netCDF model file {}'.format(NETCDF_FILE_NAME), flush=True)
+                print('[ERR] could not find the netCDF model file {}'.format(NETCDF_FILE_NAME), flush=True)
                 usage_csv()
                 sys.exit(2)
 except getopt.GetoptError:
