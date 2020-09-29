@@ -10,7 +10,7 @@ COMMENTS/QUESTIONS:
     Please contact manoch@iris.washington.edu
 
 
- 2018-10-25
+ 2020-09-28
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  DESCRIPTION:
@@ -181,98 +181,110 @@ netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
 
 
 	dimensions:
-		depth 46
 		latitude 91
 		longitude 180
+		depth 46
 
 	variables:
 		vs:
+			_FillValue = 99999.0
 			long_name = Shear Velocity
 			display_name = S Velocity (km/s)
 			units = km.s-1
 			missing_value = 99999.0
-			_FillValue = 99999.0
 		vp:
+			_FillValue = 99999.0
 			long_name = P Velocity
 			display_name = P Velocity (km/s)
 			units = km.s-1
 			missing_value = 99999.0
-			_FillValue = 99999.0
 		rho:
+			_FillValue = 99999.0
 			long_name = Density
 			display_name = Density (kg/m^3)
 			units = kg.m-3
 			missing_value = 99999.0
-			_FillValue = 99999.0
 		Qs:
+			_FillValue = 99999.0
 			long_name = Shear Q
 			display_name = Shear Q (dimensionless)
 			units = count
 			missing_value = 99999.0
-			_FillValue = 99999.0
 
 	global attributes:
 			title = A radially anisotropic whole mantle model with improved crustal corrections
 			id = SAW642ANb_kmps
-			summary = SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2). 
-			reference = Panning, Lekic and Romanowicz (2010)
-			references = http://ds.iris.edu/ds/products/emc-references
-			keywords = seismic, tomography, shear wave, s wave, elastic waveform 
+			data_revision = r.0.0
+			summary = SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).;
+			keywords = seismic, tomography, shear wave, s wave, elastic waveform
 			Conventions = CF-1.0
 			Metadata_Conventions = Unidata Dataset Discovery v1.0
-			creator_name = IRIS EMC
-			creator_url = http://ds.iris.edu/ds/products/emc/
-			creator_email = product@iris.edu
-			institution = IRIS DMC
-			acknowledgment = Model was provided by Professor Mark Panning,  Department of Geological SciencesUniversity of Florida 
-			history = 2011-06-21 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
+			acknowledgment = Model was provided by Professor Mark Panning, ; Department of Geological SciencesUniversity of Florida
+			history = 2020-09-29 19:10:48 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py V.2020.273 from SAW642ANB_kmps.csv; 2020-03-02 19:39:08 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.006 from SAW642ANB_kmps.nc; 2019-12-05 IRIS DMC, updated geospatial fields, if needed, to float ; Wed Nov 20 10:28:33 2019: ncatted -O -a creator_email,global,m,c,product@iris.washington.edu SAW642ANB_kmps.nc; 2016-08-11 IRIS DMC, updated variable definitions to make sure they are compatible with CF; 2011-06-21 created; 2020-02-28 IRIS DMC, updated metadata to organize reference, author, repository and also add PID
 			comment = model converted to netCDF by IRIS EMC
-			geospatial_lat_min = -90.00
-			geospatial_lat_max = 90.00
+			geospatial_lat_min = -90.0
+			geospatial_lat_max = 90.0
 			geospatial_lat_units = degrees_north
-			geospatial_lat_resolution = 2
-			geospatial_lon_min = -180.00
+			geospatial_lat_resolution = 2.0
+			geospatial_lon_min = -180.0
 			geospatial_lon_max = 178.0
 			geospatial_lon_units = degrees_east
-			geospatial_lon_resolution = 2
-			geospatial_vertical_min = 50
-			geospatial_vertical_max = 2850
+			geospatial_lon_resolution = 2.0
+			geospatial_vertical_min = 24.399999618530273
+			geospatial_vertical_max = 2891.0
 			geospatial_vertical_units = km
 			geospatial_vertical_positive = down
+			NCO = netCDF Operators version 4.7.5 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
+			netcdf_file = SAW642ANB_kmps.nc
+			reference = Panning, Lekic and Romanowicz (2010)
+			reference_pid = doi:10.1029/2010JB007520
+			author_name = M. P. Panning
+			author_email = mpanning@ufl.edu
+			author_institution = Department of Geological Sciences, University of Florida, Gainesville, FL
+			author_url = http://users.clas.ufl.edu/mpanning/SAW642ANb.html
+			repository_name = EMC
+			repository_institution = IRIS DMC
+			repository_pid = doi:10.17611/DP/9991698
 			
 **GeoCSV header information:**
 
-	    # dataset: GeoCSV2.0
-        # created: 2018-10-23 21:23:32 UTC (netCDF_2_GeoCSV_3D.py)
+        # dataset: GeoCSV2.0
+        # created: 2020-09-29 19:22:25 UTC (netCDF_2_GeoCSV_3D.py)
         # netCDF_file: SAW642ANB_kmps.nc
         # delimiter: |
         # global_title: A radially anisotropic whole mantle model with improved crustal corrections
         # global_id: SAW642ANb_kmps
-        # global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).
-        # global_reference: Panning, Lekic and Romanowicz (2010)
-        # global_references: http://ds.iris.edu/ds/products/emc-references
+        # global_data_revision: r.0.0
+        # global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).;
         # global_keywords: seismic, tomography, shear wave, s wave, elastic waveform
         # global_Conventions: CF-1.0
         # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
-        # global_creator_name: IRIS EMC
-        # global_creator_url: http://ds.iris.edu/ds/products/emc/
-        # global_creator_email: product@iris.edu
-        # global_institution: IRIS DMC
-        # global_acknowledgment: Model was provided by Professor Mark Panning,  Department of Geological SciencesUniversity of Florida
-        # global_history: 2011-06-21 created 2016-08-11 IRID DMC, updated variable definitions to make sure they are compatible with CF
+        # global_acknowledgment: Model was provided by Professor Mark Panning, ; Department of Geological SciencesUniversity of Florida
+        # global_history: 2020-09-29 19:22:25 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.168 from ../samples/SAW642ANB_kmps.nc; 2020-09-29 19:10:48 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py V.2020.273 from SAW642ANB_kmps.csv; 2020-03-02 19:39:08 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.006 from SAW642ANB_kmps.nc; 2019-12-05 IRIS DMC, updated geospatial fields, if needed, to float ; Wed Nov 20 10:28:33 2019: ncatted -O -a creator_email,global,m,c,product@iris.washington.edu SAW642ANB_kmps.nc; 2016-08-11 IRIS DMC, updated variable definitions to make sure they are compatible with CF; 2011-06-21 created; 2020-02-28 IRIS DMC, updated metadata to organize reference, author, repository and also add PID
         # global_comment: model converted to netCDF by IRIS EMC
-        # global_geospatial_lat_min: -90.00
-        # global_geospatial_lat_max: 90.00
+        # global_geospatial_lat_min: -90.0
+        # global_geospatial_lat_max: 90.0
         # global_geospatial_lat_units: degrees_north
-        # global_geospatial_lat_resolution: 2
-        # global_geospatial_lon_min: -180.00
+        # global_geospatial_lat_resolution: 2.0
+        # global_geospatial_lon_min: -180.0
         # global_geospatial_lon_max: 178.0
         # global_geospatial_lon_units: degrees_east
-        # global_geospatial_lon_resolution: 2
-        # global_geospatial_vertical_min: 50
-        # global_geospatial_vertical_max: 2850
+        # global_geospatial_lon_resolution: 2.0
+        # global_geospatial_vertical_min: 24.399999618530273
+        # global_geospatial_vertical_max: 2891.0
         # global_geospatial_vertical_units: km
         # global_geospatial_vertical_positive: down
+        # global_NCO: netCDF Operators version 4.7.5 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
+        # global_netcdf_file: SAW642ANB_kmps.nc
+        # global_reference: Panning, Lekic and Romanowicz (2010)
+        # global_reference_pid: doi:10.1029/2010JB007520
+        # global_author_name: M. P. Panning
+        # global_author_email: mpanning@ufl.edu
+        # global_author_institution: Department of Geological Sciences, University of Florida, Gainesville, FL
+        # global_author_url: http://users.clas.ufl.edu/mpanning/SAW642ANb.html
+        # global_repository_name: EMC
+        # global_repository_institution: IRIS DMC
+        # global_repository_pid: doi:10.17611/DP/9991698
         # latitude_column: latitude
         # latitude_long_name: Latitude; positive north
         # latitude_units: degrees_north
@@ -285,30 +297,6 @@ netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
         # depth_long_name: depth below earth surface
         # depth_units: km
         # depth_positive: down
-        # vs_column: vs
-        # vs_long_name: Shear Velocity
-        # vs_display_name: S Velocity (km/s)
-        # vs_units: km.s-1
-        # vs_missing_value: 99999.0
-        # vs__FillValue: 99999.0
-        # vp_column: vp
-        # vp_long_name: P Velocity
-        # vp_display_name: P Velocity (km/s)
-        # vp_units: km.s-1
-        # vp_missing_value: 99999.0
-        # vp__FillValue: 99999.0
-        # rho_column: rho
-        # rho_long_name: Density
-        # rho_display_name: Density (kg/m^3)
-        # rho_units: kg.m-3
-        # rho_missing_value: 99999.0
-        # rho__FillValue: 99999.0
-        # Qs_column: Qs
-        # Qs_long_name: Shear Q
-        # Qs_display_name: Shear Q (dimensionless)
-        # Qs_units: count
-        # Qs_missing_value: 99999.0
-        # Qs__FillValue: 99999.0
 			
 
 
