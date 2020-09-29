@@ -20,6 +20,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2020-09-29 IRIS DMC Manoch: V.2020.273 now supports location variables other than latitude and longitude.
    2020-06-16 IRIS DMC Manoch: V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
    2020-02-28 IRIS DMC Manoch: V.2020.059 float global attribute values are outputted as float and not string. 
    2020-01-06 IRIS DMC Manoch: V.2020.006 History now includes the source file name
@@ -36,7 +37,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.168'
+VERSION = 'V.2020.273'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -52,6 +53,9 @@ GEOCSV_FILE_NAME = None
 BASE_NAME = None
 VIEW_HEADER = False
 VAR_DTYPE = 'f4'  # set variables as 'f4' (32-bit floating point) or 'f8' (64-bit floating point) variables
+
+# A dictionary of parameter tags.
+tag_dict = dict()
 
 
 def usage():
@@ -183,25 +187,73 @@ def read_geocsv(file_name):
                 found_header = True
                 continue
             data.append(list(str2float(this_line.split(header_params['delimiter']))))
-    if 'latitude_column' not in header_params.keys():
-        header_params['latitude_column'] = 'latitude'
-    if 'longitude_column' not in header_params.keys():
+
+    head = header_params.keys()
+
+    # Take different X, Y, Z naming user may have used into consideration.
+    if 'x_column' in head:
+        header_params['longitude_column'] = header_params['x_column']
+        tag_dict['longitude'] = 'x'
+        tag_dict[header_params['x_column']] = 'x'
+    elif 'X_column' in head:
+        header_params['longitude_column'] = header_params['X_column']
+        tag_dict['longitude'] = 'X'
+        tag_dict[header_params['X_column']] = 'X'
+    elif 'longitude_column' in head:
+        tag_dict['longitude'] = 'longitude'
+        tag_dict[header_params['longitude_column']] = 'longitude'
+    elif 'longitude_column' not in head:
         header_params['longitude_column'] = 'longitude'
-    if 'depth_column' not in header_params.keys() and 'elevation_column' not in header_params.keys():
-        header_params['level_column'] = 'depth'
-        header_params['depth_column'] = 'depth'
-    elif 'depth_column' in header_params.keys():
+        tag_dict['longitude'] = 'longitude'
+        tag_dict[header_params['longitude_column']] = 'longitude'
+
+    if 'y_column' in head:
+        header_params['latitude_column'] = header_params['y_column']
+        tag_dict['latitude'] = 'y'
+        tag_dict[header_params['y_column']] = 'y'
+    elif 'Y_column' in head:
+        header_params['latitude_column'] = header_params['Y_column']
+        tag_dict['latitude'] = 'Y'
+        tag_dict[header_params['Y_column']] = 'Y'
+    elif 'latitude_column' in head:
+        tag_dict['latitude'] = 'latitude'
+        tag_dict[header_params['latitude_column']] = 'latitude'
+    elif 'latitude_column' not in head:
+        header_params['latitude_column'] = 'latitude'
+        tag_dict['latitude'] = 'latitude'
+        tag_dict[header_params['latitude_column']] = 'latitude'
+
+    if 'z_column' in head:
+        header_params['level_column'] = header_params['z_column']
+        tag_dict['level'] = 'z'
+        tag_dict[header_params['z_column']] = 'z'
+    elif 'Z_column' in head:
+        header_params['level_column'] = header_params['Z_column']
+        tag_dict['level'] = 'Z'
+        tag_dict[header_params['Z_column']] = 'Z'
+    elif 'depth_column' in head:
         header_params['level_column'] = header_params['depth_column']
-    elif 'elevation_column' in header_params.keys():
+        tag_dict['level'] = 'depth'
+        tag_dict[header_params['level_column']] = 'depth'
+    elif 'level_column' in head:
+        header_params['level_column'] = header_params['level_column']
+        tag_dict['level'] = 'level'
+        tag_dict[header_params['level_column']] = 'level'
+    elif 'elevation_column' in head:
         header_params['level_column'] = header_params['elevation_column']
+        tag_dict['level'] = 'elevation'
+        tag_dict[header_params['elevation_column']] = 'elevation'
+    elif 'level_column' not in head:
+        tag_dict['level'] = 'level'
+        header_params['level_column'] = 'level'
 
     if not DEBUG:
         dot()
 
     header = header_params['header']
-    latitude_column = header.index(header_params['latitude_column'])
-    longitude_column = header.index(header_params['longitude_column'])
-    level_column = header.index(header_params['depth_column'])
+    latitude_column = header.index(header_params[f'{tag_dict["latitude"]}_column'])
+    longitude_column = header.index(header_params[f'{tag_dict["longitude"]}_column'])
+    level_column = header.index(header_params[f'{tag_dict["level"]}_column'])
 
     if not VIEW_HEADER:
         data.sort(key=itemgetter(level_column, latitude_column, longitude_column))
@@ -315,7 +367,7 @@ def create_coordinate_variables(this_dataset, this_params):
 
     for var in (this_params['latitude_column'], this_params['longitude_column'], this_params['level_column']):
         for key in this_params.keys():
-            if '{}_'.format(var) in key and key != '{}_column'.format(var):
+            if f'{var}_' in key and key != f'{var}_column':
                 attribute = key.replace('{}_'.format(var), '').strip()
 
                 # let it default to default values
@@ -377,8 +429,15 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
     all_vars = collections.OrderedDict()
     var_values = collections.OrderedDict()
 
+    # In case user has used a name different from the variable name to define parameters.
     for var in var_list:
-        this_value = get_attribute(this_params, var, '_FillValue')
+        for tag, val in this_params.items():
+            if val == var:
+                tag_dict[var] = (tag.split('_'))[0]
+
+    for var in var_list:
+        tag = tag_dict[var]
+        this_value = get_attribute(this_params, tag, '_FillValue')
         if this_value:
             all_vars[var] = this_dataset.createVariable(
                 var, VAR_DTYPE, (this_params['level_column'], this_params['latitude_column'],
@@ -394,8 +453,9 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
 
         # set variable attributes
         for key in this_params.keys():
-            if key.startswith('{}_'.format(var)) and key != '{}_column'.format(var):
-                attribute = key.replace('{}_'.format(var), '').strip()
+            tag = tag_dict[var]
+            if key.startswith(f'{tag}_') and key != f'{tag}_column':
+                attribute = key.replace(f'{tag}_', '').strip()
 
                 # let it default to default values
                 if attribute != '_FillValue':
@@ -436,7 +496,7 @@ def create_3d_variables(this_dataset, this_params, data, latitude_list, longitud
     else:
         dot()
 
-    return this_dataset, all_vars
+    return this_dataset, all_vars, tag_dict
 
 
 def set_global_attributes(this_dataset, this_file, header_params):
@@ -607,7 +667,7 @@ else:
 set_global_attributes(dataset, model_file, params)
 
 # create the 3D variables
-dataset, variables = create_3d_variables(dataset, params, data_matrix, lat_list, lon_list, level_list)
+dataset, variables, tag_dict = create_3d_variables(dataset, params, data_matrix, lat_list, lon_list, level_list)
 
 if VIEW_HEADER:
     display_headers(dataset, params)
