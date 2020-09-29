@@ -43,8 +43,6 @@
 # thickness_long_name: crustal thickness
 # thickness_display_name: crustal thickness in km
 # thickness_units: kilometer
-# thickness_missing_value: -999.0
-# thickness__FillValue: -999.0
 # error_column: error
 # error_long_name: crustal thickness error
 # error_display_name: crustal thickness error in km
