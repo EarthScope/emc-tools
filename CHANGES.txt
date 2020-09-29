@@ -9,7 +9,13 @@ COMMENTS/QUESTIONS:
     Please contact manoch@iris.washington.edu
 
 ---------------------------------------------------------
-
+=========================================================
+2020-09-29 R.1.9 Release
+=========================================================
+The package is update to support:
+   - additional data_revision tag
+   - location variables other than latitude, longitude and depth
+     location variables can now include x,y, z, latitude, longitude, depth, elevation, and level
 =========================================================
 2020-06-16 R.1.6 Release
 =========================================================
