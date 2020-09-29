@@ -4,6 +4,7 @@
 # delimiter: |
 # global_title: A radially anisotropic whole mantle model with improved crustal corrections
 # global_id: SAW642ANb_kmps
+# global_data_revision: r.0.0
 # global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).; 
 # global_keywords: seismic, tomography, shear wave, s wave, elastic waveform 
 # global_Conventions: CF-1.0
@@ -50,24 +51,16 @@
 # vs_long_name: Shear Velocity
 # vs_display_name: S Velocity (km/s)
 # vs_units: km.s-1
-# vs_missing_value: 99999.0
-# vs__FillValue: 99999.0
 # vp_column: vp
 # vp_long_name: P Velocity
 # vp_display_name: P Velocity (km/s)
 # vp_units: km.s-1
-# vp_missing_value: 99999.0
-# vp__FillValue: 99999.0
 # rho_column: rho
 # rho_long_name: Density
 # rho_display_name: Density (kg/m^3)
 # rho_units: kg.m-3
-# rho_missing_value: 99999.0
-# rho__FillValue: 99999.0
 # Qs_column: Qs
 # Qs_long_name: Shear Q
 # Qs_display_name: Shear Q (dimensionless)
 # Qs_units: count
-# Qs_missing_value: 99999.0
-# Qs__FillValue: 99999.0
 latitude|longitude|depth|vs|vp|rho|Qs
