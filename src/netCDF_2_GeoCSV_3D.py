@@ -27,6 +27,7 @@ from netCDF4 import Dataset
     netCDF_2_GeoCSV_3D.py -i FILE -x long -y lat -z depth -m depth -d -H
 
  HISTORY:
+   2020-09-29 IRIS DMC Manoch: V.2020.273 fix for a bug when x,y,or z variables were changed.
    2020-06-16 IRIS DMC Manoch: V.2020.168 minor style updates
    2020-01-06 IRIS DMC Manoch: V.2020.006 added history if it does not exist. 
                                The history now includes the source file name
@@ -37,7 +38,7 @@ from netCDF4 import Dataset
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.168'
+VERSION = 'V.2020.273'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -126,9 +127,9 @@ def get_model_header(model_file, model_data):
         header.append(f'# global_history: {history}\n')
 
     # variable s
-    header = get_variable_attributes(model_data, header, 'latitude', LAT_VARIABLE)
-    header = get_variable_attributes(model_data, header, 'longitude', LON_VARIABLE)
-    header = get_variable_attributes(model_data, header, 'depth', DEPTH_VARIABLE)
+    header = get_variable_attributes(model_data, header, LAT_VARIABLE, 'latitude')#, LAT_VARIABLE)
+    header = get_variable_attributes(model_data, header, LON_VARIABLE, 'longitude')#, LON_VARIABLE)
+    header = get_variable_attributes(model_data, header, DEPTH_VARIABLE, 'depth')#, DEPTH_VARIABLE)
 
     return ''.join(header)
 
