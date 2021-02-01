@@ -20,6 +20,7 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+   2021-02-01 IRIS DMC Manoch: V.2021.032 fixed the bug that was trying to do a replace on a numeric value
    2020-09-29 IRIS DMC Manoch: V.2020.273 now supports location variables other than latitude and longitude.
    2020-06-16 IRIS DMC Manoch: V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
    2020-02-28 IRIS DMC Manoch: V.2020.059 float global attribute values are outputted as float and not string. 
@@ -37,7 +38,7 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2020.273'
+VERSION = 'V.2021.032'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -564,7 +565,7 @@ def display_headers(model_data, data_params):
     nc_dims = [dim for dim in model_data.dimensions]  # list of netCDF dimensions
     print('\tdimensions:', flush=True)
     for dim in nc_dims:
-        print('\t\t{} {}'.format(model_data.dimensions[dim].name, model_data.dimensions[dim].size), flush=True)
+        print(f'\t\t{model_data.dimensions[dim].name} {model_data.dimensions[dim].size}', flush=True)
 
     # variable information.
     nc_vars = [var for var in model_data.variables]  # list of nc variables
@@ -574,13 +575,14 @@ def display_headers(model_data, data_params):
         if var not in nc_dims:
             print('\t\t{}:'.format(var), flush=True)
             for attr, value in vars(model_data.variables[var]).items():
-                print('\t\t\t{} = {}'.format(attr, value), flush=True)
+                print(f'\t\t\t{attr} = {value}', flush=True)
 
     # global attributes
     print('\n\tglobal attributes:', flush=True)
     for attr, value in vars(model_data).items():
-        value = value.replace('\n', '; ')
-        print('\t\t\t{} = {}'.format(attr, value), flush=True)
+        if isinstance(value, str):
+            value = value.replace('\n', '; ')
+        print(f'\t\t\t{attr} = {value}', flush=True)
 
 
 def check_geocsv_file():
