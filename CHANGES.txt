@@ -10,12 +10,20 @@ COMMENTS/QUESTIONS:
 
 ---------------------------------------------------------
 =========================================================
+2021-02-01 R.1.10 Release
+=========================================================
+The package is update to support:
+- GeoCSV_2_netCDF_2D.py V.2021.032  fixed the bug that was trying to do a replace on a numeric value
+- GeoCSV_2_netCDF_3D.py V.2021.032  fixed the bug that was trying to do a replace on a numeric value
+
+=========================================================
 2020-09-29 R.1.9 Release
 =========================================================
 The package is update to support:
    - additional data_revision tag
    - location variables other than latitude, longitude and depth
      location variables can now include x,y, z, latitude, longitude, depth, elevation, and level
+
 =========================================================
 2020-06-16 R.1.6 Release
 =========================================================
