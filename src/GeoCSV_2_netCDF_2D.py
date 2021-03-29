@@ -20,23 +20,24 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
-   2021-02-01 IRIS DMC Manoch: V.2021.032 fixed the bug that was trying to do a replace on a numeric value
-   2020-09-29 IRIS DMC Manoch: V.2020.273 now supports location variables other than latitude and longitude.
-   2020-06-16 IRIS DMC Manoch: V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
-   2020-02-28 IRIS DMC Manoch: V.2020.059 float global attribute values are outputted as float and not string. 
-   2020-01-06 IRIS DMC Manoch: V.2020.006 History now includes the source file name
-   2020-01-03 IRIS DMC Manoch: V.2020.003 preserves the history and avoids mixing variable names with common
+   2021-03-39 IRIS DMC Manoch: v.2021.088 added check for presence of the required columns.
+   2021-02-01 IRIS DMC Manoch: v.2021.032 fixed the bug that was trying to do a replace on a numeric value
+   2020-09-29 IRIS DMC Manoch: v.2020.273 now supports location variables other than latitude and longitude.
+   2020-06-16 IRIS DMC Manoch: v.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
+   2020-02-28 IRIS DMC Manoch: v.2020.059 float global attribute values are outputted as float and not string. 
+   2020-01-06 IRIS DMC Manoch: v.2020.006 History now includes the source file name
+   2020-01-03 IRIS DMC Manoch: v.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
-   2019-11-14 IRIS DMC Manoch: V.2019.318 now retains order of variables
-   2019-01-28 IRIS DMC Manoch: V.2019.148 removed the extra '_' character behind the coordinate variable parameter
+   2019-11-14 IRIS DMC Manoch: v.2019.318 now retains order of variables
+   2019-01-28 IRIS DMC Manoch: v.2019.148 removed the extra '_' character behind the coordinate variable parameter
                                names.
-   2019-01-22 IRIS DMC Manoch: V.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
-   2018-10-25 IRIS DMC Manoch: created R.0.5.2018.298
+   2019-01-22 IRIS DMC Manoch: v.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
+   2018-10-25 IRIS DMC Manoch: created r0.5.2018.298
 
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'V.2021.032'
+VERSION = 'v.2021.088'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -226,8 +227,14 @@ def read_geocsv(file_name):
         dot()
 
     header = header_params['header']
-    latitude_column = header.index(header_params['latitude_column'])
-    longitude_column = header.index(header_params['longitude_column'])
+
+    try:
+        latitude_column = header.index(header_params['latitude_column'])
+        longitude_column = header.index(header_params['longitude_column'])
+    except Exception as ex:
+        usage()
+        print(f'\n\n[ERR] did not find all the required variables (latitude, longitude) columns for a 2D model!\n{ex}')
+        sys.exit(1)
 
     if not VIEW_HEADER:
         data.sort(key=itemgetter(latitude_column, longitude_column))
