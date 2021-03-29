@@ -10,14 +10,21 @@ COMMENTS/QUESTIONS:
 
 ---------------------------------------------------------
 =========================================================
-2021-02-01 R.1.10 Release
+2021-03-29 r1.11 Release
 =========================================================
 The package is update to support:
-- GeoCSV_2_netCDF_2D.py V.2021.032  fixed the bug that was trying to do a replace on a numeric value
-- GeoCSV_2_netCDF_3D.py V.2021.032  fixed the bug that was trying to do a replace on a numeric value
+- GeoCSV_2_netCDF_2D.py v.2021.088  added check for presence of the required columns
+- GeoCSV_2_netCDF_3D.py v.2021.088  added check for presence of the required columns
 
 =========================================================
-2020-09-29 R.1.9 Release
+2021-02-01 r1.10 Release
+=========================================================
+The package is update to support:
+- GeoCSV_2_netCDF_2D.py v.2021.032  fixed the bug that was trying to do a replace on a numeric value
+- GeoCSV_2_netCDF_3D.py v.2021.032  fixed the bug that was trying to do a replace on a numeric value
+
+=========================================================
+2020-09-29 r1.9 Release
 =========================================================
 The package is update to support:
    - additional data_revision tag
@@ -25,70 +32,70 @@ The package is update to support:
      location variables can now include x,y, z, latitude, longitude, depth, elevation, and level
 
 =========================================================
-2020-06-16 R.1.6 Release
+2020-06-16 r1.6 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
-- GeoCSV_2_netCDF_3D.py V.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
-- netCDF_2_GeoCSV_2D.py V.2020.168 minor style updates
-- netCDF_2_GeoCSV_3D.py V.2020.168 minor style updates
+- GeoCSV_2_netCDF_2D.py v.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
+- GeoCSV_2_netCDF_3D.py v.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
+- netCDF_2_GeoCSV_2D.py v.2020.168 minor style updates
+- netCDF_2_GeoCSV_3D.py v.2020.168 minor style updates
 
 =========================================================
-2020-02-28 R.1.5 Release
+2020-02-28 r1.5 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py  V.2020.059 float global attribute values are outputted as float and not string
-- GeoCSV_2_netCDF_3D.py  V.2020.059 float global attribute values are outputted as float and not string
+- GeoCSV_2_netCDF_2D.py v.2020.059 float global attribute values are outputted as float and not string
+- GeoCSV_2_netCDF_3D.py v.2020.059 float global attribute values are outputted as float and not string
 - samples are updated for new metadata
 
 =========================================================
-2020-01-06 R.1.4 Release
+2020-01-06 r1.4 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py  V.2020.006 History now includes the source file name
-- GeoCSV_2_netCDF_3D.py  V.2020.006 History now includes the source file name
-- netCDF_2_GeoCSV_2D.py  V.2020.006 added history if it does not exist.
+- GeoCSV_2_netCDF_2D.py v.2020.006 History now includes the source file name
+- GeoCSV_2_netCDF_3D.py v.2020.006 History now includes the source file name
+- netCDF_2_GeoCSV_2D.py v.2020.006 added history if it does not exist.
                                The history now includes the source file name
-- netCDF_2_GeoCSV_3D.py  V.2020.006 added history if it does not exist.
+- netCDF_2_GeoCSV_3D.py v.2020.006 added history if it does not exist.
                                The history now includes the source file name
 
 =========================================================
-2020-01-03 R.1.3 Release
+2020-01-03 r1.3 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py V.2020.003 preserves the history and avoids mixing variable names with common
+- GeoCSV_2_netCDF_2D.py v.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
-- GeoCSV_2_netCDF_3D.py V.2020.003 preserves the history and avoids mixing variable names with common
+- GeoCSV_2_netCDF_3D.py v.2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
 
 =========================================================
-2019-12-05 R.1.2 Release
+2019-12-05 r1.2 Release
 =========================================================
-- netCDF_2_GeoCSV_2D.py V.2019.318 now retains order of variables
-- netCDF_2_GeoCSV_3D.py V.2019.318 now retains order of variables
+- netCDF_2_GeoCSV_2D.py v.2019.318 now retains order of variables
+- netCDF_2_GeoCSV_3D.py v.2019.318 now retains order of variables
 - header_3D.csv corrected typo in email address
 - header_2D.csv corrected typo in email address
 - SAW642ANB_kmps.csv corrected typo in email address
 - Crustal_Thickness_Error.csv corrected typo in email address
 
 =========================================================
-2019-05-28 R.1.1 Release
+2019-05-28 r1.1 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py V.2019.148 removed the extra '_' character behind the coordinate variable parameter names.
-- GeoCSV_2_netCDF_3D.py V.2019.148 removed the extra '_' character behind the coordinate variable parameter names.
+- GeoCSV_2_netCDF_2D.py v.2019.148 removed the extra '_' character behind the coordinate variable parameter names.
+- GeoCSV_2_netCDF_3D.py v.2019.148 removed the extra '_' character behind the coordinate variable parameter names.
 
 =========================================================
-2019-01-22 R.1.0 Release
+2019-01-22 r1.0 Release
 =========================================================
-- GeoCSV_2_netCDF_2D.py V.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
-- GeoCSV_2_netCDF_3D.py V.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
-- netCDF_2_GeoCSV_2D.py V.2019.022 corrected variable_name
+- GeoCSV_2_netCDF_2D.py v.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
+- GeoCSV_2_netCDF_3D.py v.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
+- netCDF_2_GeoCSV_2D.py v.2019.022 corrected variable_name
 
 =========================================================
 2018-10-22
 =========================================================
 
-Version 0.5 Public release R.0.5.2018.295
+Version 0.5 Public release r0.5.2018.295
 
 =========================================================
 2018-10-25
 =========================================================
-expanded the error message R.0.5.2018.298
+expanded the error message r0.5.2018.298
 added GeoCSV_2_netCDF_2D.py
 added netCDF_2_GeoCSV_2D.py
