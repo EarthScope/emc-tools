@@ -10,6 +10,15 @@ COMMENTS/QUESTIONS:
 
 ---------------------------------------------------------
 =========================================================
+2022-01-26 r1.12 Release
+=========================================================
+The package is update to support:
+- GeoCSV_2_netCDF_2D.py v.2022.026  addressed the issue caused by v2021.088 when the value of a
+                                    variable is the same as the variable name
+- GeoCSV_2_netCDF_3D.py v.2022.026  addressed the issue caused by v2021.088 when the value of a
+                                    variable is the same as the variable name
+
+=========================================================
 2021-03-29 r1.11 Release
 =========================================================
 The package is update to support:
