@@ -20,24 +20,26 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
-   2021-03-39 IRIS DMC Manoch: v.2021.088 added check for presence of the required columns.
-   2021-02-01 IRIS DMC Manoch: v.2021.032 fixed the bug that was trying to do a replace on a numeric value
-   2020-09-29 IRIS DMC Manoch: v.2020.273 now supports location variables other than latitude and longitude.
-   2020-06-16 IRIS DMC Manoch: v.2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
-   2020-02-28 IRIS DMC Manoch: v.2020.059 float global attribute values are outputted as float and not string. 
-   2020-01-06 IRIS DMC Manoch: v.2020.006 History now includes the source file name
-   2020-01-03 IRIS DMC Manoch: v.2020.003 preserves the history and avoids mixing variable names with common
+   2022-01-26 IRIS DMC Manoch: v2022.026 addressed the issue caused by v2021.088 when the value of a variable is 
+                               the same as the variable name.
+   2021-03-39 IRIS DMC Manoch: v2021.088 added check for presence of the required columns.
+   2021-02-01 IRIS DMC Manoch: v2021.032 fixed the bug that was trying to do a replace on a numeric value
+   2020-09-29 IRIS DMC Manoch: v2020.273 now supports location variables other than latitude and longitude.
+   2020-06-16 IRIS DMC Manoch: v2020.168 made sure variable types are set based on VAR_DTYPE. Also, minor style updates
+   2020-02-28 IRIS DMC Manoch: v2020.059 float global attribute values are outputted as float and not string. 
+   2020-01-06 IRIS DMC Manoch: v2020.006 History now includes the source file name
+   2020-01-03 IRIS DMC Manoch: v2020.003 preserves the history and avoids mixing variable names with common
                                characters (like Qp and QpQs)
-   2019-11-14 IRIS DMC Manoch: v.2019.318 now retains order of variables
-   2019-01-28 IRIS DMC Manoch: v.2019.148 removed the extra '_' character behind the coordinate variable parameter
+   2019-11-14 IRIS DMC Manoch: v2019.318 now retains order of variables
+   2019-01-28 IRIS DMC Manoch: v2019.148 removed the extra '_' character behind the coordinate variable parameter
                                names.
-   2019-01-22 IRIS DMC Manoch: v.2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
+   2019-01-22 IRIS DMC Manoch: v2019.022 modified to fill in the missing points (if any) with nan, rather than zeros
    2018-10-25 IRIS DMC Manoch: created r0.5.2018.298
 
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'v.2021.088'
+VERSION = 'v2022.026'
 print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
 
 DEBUG = False
@@ -388,8 +390,8 @@ def create_2d_variables(this_dataset, this_params, data, latitude_list, longitud
     # In case user has used a name different from the variable name to define parameters.
     for var in var_list:
         for tag, val in this_params.items():
-            if val == var:
-                tag_dict[var] = (tag.split('_'))[0]
+            if val == var and '_column' in tag:
+                tag_dict[var] = (tag.split('_column'))[0]
 
     for var in var_list:
         tag = tag_dict[var]
