@@ -20,6 +20,8 @@ from datetime import datetime, timezone
        GeoCSV_2_netCDF_3D  -i FILE -d  -H
 
  HISTORY:
+    2022-01-28 IRIS DMC Manoch: v2022.028 updated how it handles X and Y to avid issue with tags. Converted formats
+                                to fstring.
    2022-01-26 IRIS DMC Manoch: v2022.026 addressed the issue caused by v2021.088 when the value of a variable is 
                                the same as the variable name.
    2021-03-39 IRIS DMC Manoch: v2021.088 added check for presence of the required columns.
@@ -39,8 +41,8 @@ from datetime import datetime, timezone
 '''
 
 SCRIPT = os.path.basename(sys.argv[0])
-VERSION = 'v2022.026'
-print('\n\n[INFO] {} version {}'.format(SCRIPT, VERSION), flush=True)
+VERSION = 'v2022.028'
+print(f'\n\n[INFO] {SCRIPT} version {VERSION}', flush=True)
 
 DEBUG = False
 
@@ -61,7 +63,7 @@ tag_dict = dict()
 
 
 def usage():
-    print('\n{} reads a 2D GetCSV Earth model file and convert it to netCDF format.\n\n'.format(SCRIPT))
+    print(f'\n{SCRIPT} reads a 2D GetCSV Earth model file and convert it to netCDF format.\n\n')
     print(' USAGE:\n\n',
           '                         input getCSV Earth model file\n',
           '                         |          \n',
@@ -70,7 +72,7 @@ def usage():
           '                         |       debug mode\n',
           '                         |       |    display headers only\n',
           '                         |       |    |\n',
-          '{}   -i FILE -d   -H'.format(SCRIPT))
+          f'{SCRIPT}   -i FILE -d   -H')
 
 
 def dot():
@@ -152,7 +154,7 @@ def read_geocsv(file_name):
     data: a text block of the body
     """
     fp = open(file_name, 'r')
-    print('\n[INFO] Input GeoCSV file: {}\n'.format(file_name), flush=True)
+    print(f'\n[INFO] Input GeoCSV file: {file_name}\n', flush=True)
     if not DEBUG:
         dot()
 
@@ -160,7 +162,7 @@ def read_geocsv(file_name):
         content = fp.read()
     except Exception as err:
         print('\n[ERR] failed to read the input file!')
-        print('{0}\n'.format(err))
+        print(f'{err}\n')
         fp.close()
         sys.exit(2)
 
@@ -268,8 +270,7 @@ def get_dimensions(column_data, header_params):
     lon = list(sorted(set(column_data[longitude_column])))
 
     if DEBUG:
-        print('\n\n[INFO] values:\n\n{}:{},\n\n{}:{}'.format(header[latitude_column], lat,
-                                                             header[longitude_column], lon), flush=True)
+        print(f'\n\n[INFO] values:\n\n{header[latitude_column]}:{lat},\n\n{header[longitude_column]}:{lon}', flush=True)
     else:
         dot()
     return lat, lon
@@ -291,8 +292,8 @@ def set_dimensions(this_dataset, header_params, latitude_list, longitude_list):
     lon_dim = this_dataset.createDimension(header_params['longitude_column'], len(longitude_list))
 
     if DEBUG:
-        print('\n\n[INFO] dimensions:\n\n{}:{},\n{}:{}'.format(header_params['latitude_column'], lat_dim,
-                                                               header_params['longitude_column'], lon_dim),
+        print(f"\n\n[INFO] dimensions:\n\n{header_params['latitude_column']}:{lat_dim},"
+              f"\n{header_params['longitude_column']}:{lon_dim}",
               flush=True)
     else:
         dot()
@@ -332,8 +333,8 @@ def create_coordinate_variables(this_dataset, this_params):
 
     for var in (this_params['latitude_column'], this_params['longitude_column']):
         for key in this_params.keys():
-            if key.startswith('{}_'.format(var)) and key != '{}_column'.format(var):
-                attribute = key.replace('{}_'.format(var), '').strip()
+            if key.startswith(f'{var}_') and key != f'{var}_column':
+                attribute = key.replace(f'{var}_', '').strip()
 
                 # let it default to default values
                 if attribute != '_FillValue':
@@ -349,9 +350,9 @@ def create_coordinate_variables(this_dataset, this_params):
                         setattr(coordinate[var], attribute, this_params[key])
 
     if DEBUG:
-        print('\n\n[INFO] coordinate variables:\n\n{}:{},\n{}:{}'.format(
-            this_params['latitude_column'], coordinate[this_params['latitude_column']], this_params['longitude_column'],
-            coordinate[this_params['longitude_column']]), flush=True)
+        print(f"\n\n[INFO] coordinate variables:\n\n{this_params['latitude_column']}:"
+              f"{coordinate[this_params['latitude_column']]},"
+              f"\n{this_params['longitude_column']}:{coordinate[this_params['longitude_column']]}", flush=True)
     else:
         dot()
 
@@ -447,7 +448,7 @@ def create_2d_variables(this_dataset, this_params, data, latitude_list, longitud
     if DEBUG:
         print('\n\n[INFO] 2D variables:', flush=True)
         for var in var_list:
-            print('\n\n{}:{}'.format(var, all_vars[var]), flush=True)
+            print(f'\n\n{var}:{all_vars[var]}', flush=True)
     else:
         dot()
 
@@ -510,7 +511,7 @@ def display_headers(model_data, data_params):
     for key in data_params.keys():
         if key == 'header':
             continue
-        print('# {}: {}'.format(key, data_params[key]), flush=True)
+        print(f'# {key}: {data_params[key]}', flush=True)
 
     # netCDF header
     print('\n\nnetCDF header information:\n\n', flush=True)
@@ -565,7 +566,7 @@ def check_geocsv_file():
 
     # could not find the file
     else:
-        print('[ERR] could not find the GeoCSV model file {}'.format(GEOCSV_FILE_NAME), flush=True)
+        print(f'[ERR] could not find the GeoCSV model file {GEOCSV_FILE_NAME}', flush=True)
         usage()
         sys.exit(1)
 
@@ -600,7 +601,7 @@ lat_list, lon_list = get_dimensions(data_columns, params)
 if VIEW_HEADER:
     dataset = Dataset('temp.nc', 'w', diskless=True, format=NETCDF_FORMAT)
 else:
-    dataset = Dataset('{}.nc'.format(base_file_name), 'w', format=NETCDF_FORMAT)
+    dataset = Dataset(f'{base_file_name}.nc', 'w', format=NETCDF_FORMAT)
 
 # set the dimensions
 dataset = set_dimensions(dataset, params, lat_list, lon_list)
@@ -612,8 +613,8 @@ dataset, latitudes, longitudes = create_coordinate_variables(dataset, params)
 latitudes[:] = lat_list
 longitudes[:] = lon_list
 if DEBUG:
-    print('\n\n[INFO] coordinates:\n\n{}:{},\n{}:{}'.format(
-        params['latitude_column'], latitudes, params['longitude_column'], longitudes), flush=True)
+    print(f"\n\n[INFO] coordinates:\n\n{params['latitude_column']}:"
+          f"{latitudes},\n{params['longitude_column']}:{longitudes}", flush=True)
 else:
     dot()
 
