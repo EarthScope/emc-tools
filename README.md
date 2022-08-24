@@ -133,136 +133,164 @@ help (**-h**) option:
      
 **HEADER EXAMPLE:**
 
-netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
+netCDF_2_GeoCSV.py -i KEA20-Moho.r0.0.nc -H
 
+[INFO] netCDF_2_GeoCSV.py version v2022.237
+[INFO] working on the 3D netCDF file: KEA20-Moho.r0.0.nc
 
-[INFO] netCDF_2_GeoCSV_3D.py version R.0.0.2018.295
-[INFO] Input netCDF File: SAW642ANB_kmps.nc
+[INFO] Input netCDF File: KEA20-Moho.r0.0.nc
 
 
 **netCDF header information:**
 
 
 	dimensions:
-		latitude 91
-		longitude 180
-		depth 46
+		latitude 181
+		longitude 401
 
 	variables:
-		vs:
-			_FillValue = 99999.0
-			long_name = Shear Velocity
-			display_name = S Velocity (km/s)
-			units = km.s-1
-			missing_value = 99999.0
-		vp:
-			_FillValue = 99999.0
-			long_name = P Velocity
-			display_name = P Velocity (km/s)
-			units = km.s-1
-			missing_value = 99999.0
-		rho:
-			_FillValue = 99999.0
-			long_name = Density
-			display_name = Density (kg/m^3)
-			units = kg.m-3
-			missing_value = 99999.0
-		Qs:
-			_FillValue = 99999.0
-			long_name = Shear Q
-			display_name = Shear Q (dimensionless)
-			units = count
-			missing_value = 99999.0
+		moho:
+			variable = moho
+			long_name = Moho depth relative to a mean Earth radius of 6371 km
+			display_name = Moho depth (km)
+			units = km
 
 	global attributes:
-			title = A radially anisotropic whole mantle model with improved crustal corrections
-			id = SAW642ANb_kmps
+			title = Moho depth model for East Asia
+			id = KEA20_Moho
 			data_revision = r.0.0
-			summary = SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).;
-			keywords = seismic, tomography, shear wave, s wave, elastic waveform
 			Conventions = CF-1.0
 			Metadata_Conventions = Unidata Dataset Discovery v1.0
-			acknowledgment = Model was provided by Professor Mark Panning, ; Department of Geological SciencesUniversity of Florida
-			history = 2020-09-29 19:10:48 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py V.2020.273 from SAW642ANB_kmps.csv; 2020-03-02 19:39:08 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.006 from SAW642ANB_kmps.nc; 2019-12-05 IRIS DMC, updated geospatial fields, if needed, to float ; Wed Nov 20 10:28:33 2019: ncatted -O -a creator_email,global,m,c,product@iris.washington.edu SAW642ANB_kmps.nc; 2016-08-11 IRIS DMC, updated variable definitions to make sure they are compatible with CF; 2011-06-21 created; 2020-02-28 IRIS DMC, updated metadata to organize reference, author, repository and also add PID
-			comment = model converted to netCDF by IRIS EMC
-			geospatial_lat_min = -90.0
-			geospatial_lat_max = 90.0
+			keywords = seismic, surface wave, tomography, East Asia, Moho, receiver functions, reflection
+			acknowledgment = Model was provided by Michael Witek, Department of Geophysics, Kangwon National University
+			history = 2022-08-22 19:48:38 UTC Converted to netCDF by GeoCSV_2_netCDF.py v2022.230 from KEA20-Moho.r0.0.csv; 2022-08-22 19:46:46 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from KEA20-Moho.r0.0.nc; v1.0.0 created 2021-06-02
+			summary = Here we provide depths to the Moho boundary in KEA20, relative to a mean Earth radius of 6371 km.; These Moho depths result from an initial inversion of point constraints from teleseismic; receiver function and seismic reflection studies, plus additional Moho perturbations from the; surface wave dispersion data inversion. The reference model Moho is taken from CRUST1.0.  ; For additional information please see the supplementary information of Witek et al. (2021).
+			reference = ; @article{witek-2021-kea20,; title={Radial anisotropy in East Asia from multimode surface wave tomography},; author={M. Witek and S.-J. Chang and D.Y. Lim and S. Ning and J. Ning},; journal={Journal of Geophysical Research},; year={2021},; volume={},; pages={}; };
+			reference_pid = 
+			author_name = M. Witek
+			author_email = mwitek2@gmail.com
+			author_institution = Department of Geophysics, Kangwon National University
+			geospatial_lat_min = 15.0
+			geospatial_lat_max = 51.0
+			geospatial_lat_resolution = 0.20000000298023224
 			geospatial_lat_units = degrees_north
-			geospatial_lat_resolution = 2.0
-			geospatial_lon_min = -180.0
-			geospatial_lon_max = 178.0
+			geospatial_lon_min = 70.0
+			geospatial_lon_max = 150.0
+			geospatial_lon_resolution = 0.20000000298023224
 			geospatial_lon_units = degrees_east
-			geospatial_lon_resolution = 2.0
-			geospatial_vertical_min = 24.399999618530273
-			geospatial_vertical_max = 2891.0
-			geospatial_vertical_units = km
-			geospatial_vertical_positive = down
-			NCO = netCDF Operators version 4.7.5 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
-			netcdf_file = SAW642ANB_kmps.nc
-			reference = Panning, Lekic and Romanowicz (2010)
-			reference_pid = doi:10.1029/2010JB007520
-			author_name = M. P. Panning
-			author_email = mpanning@ufl.edu
-			author_institution = Department of Geological Sciences, University of Florida, Gainesville, FL
-			author_url = http://users.clas.ufl.edu/mpanning/SAW642ANb.html
+			netcdf_file = KEA20_Moho.nc
 			repository_name = EMC
-			repository_institution = IRIS DMC
-			repository_pid = doi:10.17611/DP/9991698
-			
+			repository_institution = IRIS EMC
+			repository_pid = doi:10.17611/dp/emc.2021.kea20.1
+
+
 **GeoCSV header information:**
 
-        # dataset: GeoCSV2.0
-        # created: 2020-09-29 19:22:25 UTC (netCDF_2_GeoCSV_3D.py)
-        # netCDF_file: SAW642ANB_kmps.nc
-        # delimiter: |
-        # global_title: A radially anisotropic whole mantle model with improved crustal corrections
-        # global_id: SAW642ANb_kmps
-        # global_data_revision: r.0.0
-        # global_summary: SAW642ANb is a radially anisotropic shear velocity model, parameterized in terms of isotropic S velocity (Voigt average) and the anisotropic parameter, xi (Vsh^2/Vsv^2).;
-        # global_keywords: seismic, tomography, shear wave, s wave, elastic waveform
-        # global_Conventions: CF-1.0
-        # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
-        # global_acknowledgment: Model was provided by Professor Mark Panning, ; Department of Geological SciencesUniversity of Florida
-        # global_history: 2020-09-29 19:22:25 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.168 from ../samples/SAW642ANB_kmps.nc; 2020-09-29 19:10:48 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py V.2020.273 from SAW642ANB_kmps.csv; 2020-03-02 19:39:08 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.006 from SAW642ANB_kmps.nc; 2019-12-05 IRIS DMC, updated geospatial fields, if needed, to float ; Wed Nov 20 10:28:33 2019: ncatted -O -a creator_email,global,m,c,product@iris.washington.edu SAW642ANB_kmps.nc; 2016-08-11 IRIS DMC, updated variable definitions to make sure they are compatible with CF; 2011-06-21 created; 2020-02-28 IRIS DMC, updated metadata to organize reference, author, repository and also add PID
-        # global_comment: model converted to netCDF by IRIS EMC
-        # global_geospatial_lat_min: -90.0
-        # global_geospatial_lat_max: 90.0
-        # global_geospatial_lat_units: degrees_north
-        # global_geospatial_lat_resolution: 2.0
-        # global_geospatial_lon_min: -180.0
-        # global_geospatial_lon_max: 178.0
-        # global_geospatial_lon_units: degrees_east
-        # global_geospatial_lon_resolution: 2.0
-        # global_geospatial_vertical_min: 24.399999618530273
-        # global_geospatial_vertical_max: 2891.0
-        # global_geospatial_vertical_units: km
-        # global_geospatial_vertical_positive: down
-        # global_NCO: netCDF Operators version 4.7.5 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
-        # global_netcdf_file: SAW642ANB_kmps.nc
-        # global_reference: Panning, Lekic and Romanowicz (2010)
-        # global_reference_pid: doi:10.1029/2010JB007520
-        # global_author_name: M. P. Panning
-        # global_author_email: mpanning@ufl.edu
-        # global_author_institution: Department of Geological Sciences, University of Florida, Gainesville, FL
-        # global_author_url: http://users.clas.ufl.edu/mpanning/SAW642ANb.html
-        # global_repository_name: EMC
-        # global_repository_institution: IRIS DMC
-        # global_repository_pid: doi:10.17611/DP/9991698
-        # latitude_column: latitude
-        # latitude_long_name: Latitude; positive north
-        # latitude_units: degrees_north
-        # latitude_standard_name: latitude
-        # longitude_column: longitude
-        # longitude_long_name: Longitude; positive east
-        # longitude_units: degrees_east
-        # longitude_standard_name: longitude
-        # depth_column: depth
-        # depth_long_name: depth below earth surface
-        # depth_units: km
-        # depth_positive: down
-			
+    # dataset: GeoCSV2.0
+    # created: 2022-08-24 16:09:10 UTC (netCDF_2_GeoCSV.py)
+    # netCDF_file: KEA20-Moho.r0.0.nc
+    # delimiter: |
+    # global_title: Moho depth model for East Asia
+    # global_id: KEA20_Moho
+    # global_data_revision: r.0.0
+    # global_Conventions: CF-1.0
+    # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
+    # global_keywords: seismic, surface wave, tomography, East Asia, Moho, receiver functions, reflection
+    # global_acknowledgment: Model was provided by Michael Witek, Department of Geophysics, Kangwon National University
+    # global_history: 2022-08-24 16:09:10 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.237 from KEA20-Moho.r0.0.nc; 2022-08-22 19:48:38 UTC Converted to netCDF by GeoCSV_2_netCDF.py v2022.230 from KEA20-Moho.r0.0.csv; 2022-08-22 19:46:46 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from KEA20-Moho.r0.0.nc; v1.0.0 created 2021-06-02
+    # global_summary: Here we provide depths to the Moho boundary in KEA20, relative to a mean Earth radius of 6371 km.; These Moho depths result from an initial inversion of point constraints from teleseismic; receiver function and seismic reflection studies, plus additional Moho perturbations from the; surface wave dispersion data inversion. The reference model Moho is taken from CRUST1.0.  ; For additional information please see the supplementary information of Witek et al. (2021).
+    # global_reference: ; @article{witek-2021-kea20,; title={Radial anisotropy in East Asia from multimode surface wave tomography},; author={M. Witek and S.-J. Chang and D.Y. Lim and S. Ning and J. Ning},; journal={Journal of Geophysical Research},; year={2021},; volume={},; pages={}; };
+    # global_reference_pid: 
+    # global_author_name: M. Witek
+    # global_author_email: mwitek2@gmail.com
+    # global_author_institution: Department of Geophysics, Kangwon National University
+    # global_geospatial_lat_min: 15.0
+    # global_geospatial_lat_max: 51.0
+    # global_geospatial_lat_resolution: 0.20000000298023224
+    # global_geospatial_lat_units: degrees_north
+    # global_geospatial_lon_min: 70.0
+    # global_geospatial_lon_max: 150.0
+    # global_geospatial_lon_resolution: 0.20000000298023224
+    # global_geospatial_lon_units: degrees_east
+    # global_netcdf_file: KEA20_Moho.nc
+    # global_repository_name: EMC
+    # global_repository_institution: IRIS EMC
+    # global_repository_pid: doi:10.17611/dp/emc.2021.kea20.1
 
 
+NOTE: For information on variables, the -x, -y, and -z parameters are required			
 
 
+**Models with projected coordinate systems***
 
+The extended EMC netCDF format includes both the projected coordinate system variables (x and y) and the geographic 
+latitude and longitude variables that are defined as a function of the primary x and y coordinate variables 
+(Table 1, right). These two-dimensional latitude and longitude coordinate variables allow users to quickly switch 
+between the model’s projected coordinates and the geographic latitudes and longitudes. In this extended netCDF format, 
+the x and y of the projection coordinate system become the primary coordinates, and the geographic latitude and 
+longitude, which depend on x and y, represent the auxiliary coordinate variables. The directions of the primary 
+coordinate variables are defined by adding the **axis** attribute to the x and y coordinate variables. The model 
+variables (thickness and vp in Table 1, right) are now defined based on the primary x and y coordinate variables, 
+and are tied to the auxiliary coordinate variables via the **coordinates** attribute.
+
+* for more information see: https://ds.iris.edu/ds/newsletter/vol99/no1/543/emc-two-dimensional-latitude-longitude-coordinate-variables/
+
+*Table 1*. A comparison of dimensions and variables in a classic EMC model with geographic coordinates (top), 
+and in an extended EMC model with a projected coordinate system (bottom).
+
+* Dimensions and variables in a classic EMC model
+
+**dimensions**:
+
+    depth = 5;
+    latitude = 10;
+    longitude = 20;
+**variables**:
+
+    double longitude(longitude);
+        .
+        .
+    double latitude(latitude);
+        .
+        .
+    double depth(depth);
+        .
+        .
+    double thickness(latitude, longitude);
+        .
+        .
+    double vp(depth, latitude, longitude);
+        .
+* Dimensions and variables in an extended EMC model with a projected coordinate system 
+
+**dimensions**:
+
+    depth = 5;
+    y = 10;
+    x = 20;
+**variables**:
+
+    float y(y);
+        y:axis = "Y";
+        .
+        .
+    float x(x);
+        x:axis = "X"
+        .
+        .
+    double depth(depth);
+        .
+        .
+    double latitude(y, x);
+        .
+        .
+    double longitude(y, x);
+        .
+        .
+    double thickness(y, x);
+        .
+        thickness:coordinates = "longitude latitude";
+      .
+    double vp(depth, y, x);
+        .
+        vp:coordinates = "longitude latitude";
