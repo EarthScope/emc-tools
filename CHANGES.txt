@@ -2,13 +2,23 @@
 Incorporated Research Institutions for Seismology (IRIS)
 Data Management Center (DMC)
 Data Products Team
-IRIS Earth Model Collaboration (EMC) - Tools
+IRIS Earth Model Collaboration (EMC) - Tools, Release 2
 
 COMMENTS/QUESTIONS:
 
     Please contact manoch@iris.washington.edu
 
 ---------------------------------------------------------
+
+=========================================================
+2022-08-25 r2.0 Release
+=========================================================
+The package is update to support:
+- GeoCSV_2_netCDF.py v2022.237 R2 release combines 2D and 3D scripts and also adds support for the
+                     models with projected coordinate systems.
+- netCDF_2_GeoCSV.py v2022.237 R2 release combines 2D and 3D scripts and also adds support for the
+                     models with projected coordinate systems.
+
 =========================================================
 2022-01-26 r1.12 Release
 =========================================================
