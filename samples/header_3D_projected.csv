@@ -1,0 +1,106 @@
+# dataset: GeoCSV2.0
+# created: 2022-08-23 20:55:18 UTC (netCDF_2_GeoCSV.py)
+# netCDF_file: ref-model-nzwide2p2-crust.r0.0-2D.nc
+# delimiter: |
+# global_title: New Zealand Wide Velocity Model v2.2 - North Island
+# global_id: nz_wide2p2_eberhart_phillips_etal_2021
+# global_data_revision: r0.0
+# global_Conventions: CF-1.0
+# global_Metadata_Convetions: Unidata Dataset Discovery v1.0
+# global_summary: NZ-Wide2.2 Velocity Model created by Eberhart-Phillips et al. (2021). This provided reference model has been modified from its original format for use in our adjoint tomography inversion. Modifications include: rotation to the UTM-60S coordinate system, interpolation to a regular grid, and subsequent regularization. This reference model is parameterized in terms of: Vp (km/s), Vs (km/s), density (kg/m^3), Qp, and Qs.
+# global_reference: Eberhart-Phillips et al. (2021)
+# global_attribution: DOI:10.5281/zenodo.3779523
+# global_repository_name: EMC
+# global_repository_institution: IRIS DMC
+# global_repository_pid: doi:10.17611/dp/emc.2021.nzatomnnorthvpvs.1
+# global_reference_ellipsoid: WGS 84
+# global_geodetic_datum: UTM 60S / EPSG 32760
+# global_geospatial_lat_min: -43.63199996948242
+# global_geospatial_lat_max: -36.4109992980957
+# global_geospatial_lat_units: degrees_north
+# global_geospatial_lon_min: 171.49600219726562
+# global_geospatial_lon_max: 179.78799438476562
+# global_geospatial_lon_units: degrees_east
+# global_geospatial_vertical_min: 7.0
+# global_geospatial_vertical_max: 50.0
+# global_geospatial_vertical_units: km
+# global_geospatial_vertical_positive: down
+# global_history: 2022-08-23 20:55:18 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from ref-model-nzwide2p2-crust.r0.0-2D.nc; 2022-01-31 16:23:21 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py v2022.028 from ref-model-nzwide2p2-crust.r0.0.csv
+# y_column: y
+# y_variable: y
+# y_dimensions: 1
+# y_axis: Y
+# y_long_name: y_axis_utm
+# y_units: km
+# y_min: 5169.000
+# y_max: 5959.000
+# x_column: x
+# x_variable: x
+# x_dimensions: 1
+# x_axis: X
+# x_long_name: x_axis_utm
+# x_units: km
+# x_min: 55.000
+# x_max: 725.000
+# z_column: depth
+# z_variable: depth
+# z_dimensions: 1
+# z_long_name: z_axis_utm
+# z_units: km
+# z_min: 7.000
+# z_max: 50.000
+# z_positive: down
+# latitude_column: latitude
+# latitude_variable: latitude
+# latitude_dimensions: 2
+# latitude_long_name: latitude
+# latitude_units: degrees_north
+# latitude_min: -43.632
+# latitude_max: -36.411
+# longitude_column: longitude
+# longitude_variable: longitude
+# longitude_dimensions: 2
+# longitude_long_name: longitude
+# longitude_units: degrees_east
+# longitude_min: 171.496
+# longitude_max: 179.788
+# vp_column: vp
+# vp_variable: vp
+# vp_dimensions: 3
+# vp_long_name: p_velocity
+# vp_coordinates: longitude latitude
+# vp_units: km/s
+# vp_min: 3.630
+# vp_max: 9.310
+# vs_column: vs
+# vs_variable: vs
+# vs_dimensions: 3
+# vs_long_name: s_velocity
+# vs_coordinates: longitude latitude
+# vs_units: km/s
+# vs_min: 2.059
+# vs_max: 5.330
+# rho_column: rho
+# rho_variable: rho
+# rho_dimensions: 3
+# rho_long_name: density
+# rho_coordinates: longitude latitude
+# rho_units: kg/m^3
+# rho_min: 2339.100
+# rho_max: 3801.700
+# qp_column: qp
+# qp_variable: qp
+# qp_dimensions: 3
+# qp_long_name: p_attenuation
+# qp_coordinates: longitude latitude
+# qp_units: count
+# qp_min: 117.700
+# qp_max: 1675.500
+# qs_column: qs
+# qs_variable: qs
+# qs_dimensions: 3
+# qs_long_name: s_attenuation
+# qs_coordinates: longitude latitude
+# qs_units: count
+# qs_min: 90.600
+# qs_max: 2227.300
