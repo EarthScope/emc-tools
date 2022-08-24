@@ -9,11 +9,10 @@ COMMENTS/QUESTIONS:
 
     Please contact manoch@iris.washington.edu
 
-DATE: 2022-08-25 
-
-Release 2.0 Note: The R2 release has made changes to the GeoCSV fields. The R1 GeoCSV files are not supported under R2.
+2022-08-25 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
  
+**Release 2.0 Note**: The R2 release has made changes to the GeoCSV fields. The R1 GeoCSV files are not supported under R2.
 
  DESCRIPTION:
 
