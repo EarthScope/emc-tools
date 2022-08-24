@@ -1,50 +1,49 @@
 # dataset: GeoCSV2.0
-# created: 2020-03-02 19:36:49 UTC (netCDF_2_GeoCSV_2D.py)
-# netCDF_file: Crustal_Thickness_Error.nc
+# created: 2022-08-24 15:32:32 UTC (netCDF_2_GeoCSV.py)
+# netCDF_file: KEA20-Moho.r0.0.nc
 # delimiter: |
-# global_title: Crustal thickness values within the western United States derived from receiver function observations
-# global_id: Crustal_Thickness_Error
+# global_title: Moho depth model for East Asia
+# global_id: KEA20_Moho
 # global_data_revision: r.0.0
-# global_summary: crustal thicknesses for the Western United States
-# global_keywords: crust , Receiver function , IRIS EMC , CCP , Gilbert , thickness , Earth model , error
 # global_Conventions: CF-1.0
 # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
-# global_acknowledgment: Model was provided by Hersh Gilbert, ; Purdue University
-# global_history: 2020-03-02 19:36:49 UTC Converted to GeoCSV by netCDF_2_GeoCSV_2D.py ,V.2020.006 from Crustal_Thickness_Error.nc; 2019-12-05 IRIS DMC, updated geospatial fields, if needed, to convert to float ; Wed Nov 20 10:27:36 2019: ncatted -O -a creator_email,global,m,c,product@iris.washington.edu Crustal_Thickness_Error.nc; 2015-11-09 created; 2016-08-11 IRIS DMC, updated variable definitions to make sure they are compatible with CF; 2020-02-28 IRIS DMC, updated metadata to organize reference, author, repository and also add PID
-# global_comment: model converted to netCDF by IRIS EMC
-# global_geospatial_lat_min: 30.7
-# global_geospatial_lat_max: 50.2
+# global_keywords: seismic, surface wave, tomography, East Asia, Moho, receiver functions, reflection
+# global_acknowledgment: Model was provided by Michael Witek, Department of Geophysics, Kangwon National University
+# global_history: 2022-08-24 15:32:32 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.237 from KEA20-Moho.r0.0.nc; 2022-08-22 19:48:38 UTC Converted to netCDF by GeoCSV_2_netCDF.py v2022.230 from KEA20-Moho.r0.0.csv; 2022-08-22 19:46:46 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from KEA20-Moho.r0.0.nc; v1.0.0 created 2021-06-02
+# global_summary: Here we provide depths to the Moho boundary in KEA20, relative to a mean Earth radius of 6371 km.; These Moho depths result from an initial inversion of point constraints from teleseismic; receiver function and seismic reflection studies, plus additional Moho perturbations from the; surface wave dispersion data inversion. The reference model Moho is taken from CRUST1.0.  ; For additional information please see the supplementary information of Witek et al. (2021).
+# global_reference: ; @article{witek-2021-kea20,; title={Radial anisotropy in East Asia from multimode surface wave tomography},; author={M. Witek and S.-J. Chang and D.Y. Lim and S. Ning and J. Ning},; journal={Journal of Geophysical Research},; year={2021},; volume={},; pages={}; };
+# global_reference_pid: 
+# global_author_name: M. Witek
+# global_author_email: mwitek2@gmail.com
+# global_author_institution: Department of Geophysics, Kangwon National University
+# global_geospatial_lat_min: 15.0
+# global_geospatial_lat_max: 51.0
+# global_geospatial_lat_resolution: 0.2
 # global_geospatial_lat_units: degrees_north
-# global_geospatial_lat_resolution: 0.3
-# global_geospatial_lon_min: -124.9
-# global_geospatial_lon_max: -101.6
+# global_geospatial_lon_min: 70.0
+# global_geospatial_lon_max: 150.0
+# global_geospatial_lon_resolution: 0.2
 # global_geospatial_lon_units: degrees_east
-# global_geospatial_lon_resolution: 0.53
-# global_NCO: netCDF Operators version 4.7.5 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
-# global_netcdf_file: Crustal_Thickness_Error.nc
-# global_reference: Gilbert, 2012
-# global_reference_pid: doi:10.1130/GES00720.1
-# global_author_name: Hersh Gilbert
-# global_author_email: hersh@purdue.edu
-# global_author_institution: Department of Earth, Atmospheric, and Planetary Sciences, Purdue University, West Lafayette, Indiana, 47907, USA
-# global_author_url: http://dx.doi.org/10.1130/GES00720.S1
+# global_netcdf_file: KEA20_Moho.nc
 # global_repository_name: EMC
-# global_repository_institution: IRIS DMC
-# global_repository_pid: doi:10.17611/DP/EMCCTE1
-# latitude_column: latitude
-# latitude_long_name: Latitude; positive north
-# latitude_units: degrees_north
-# latitude_standard_name: latitude
-# longitude_column: longitude
-# longitude_long_name: Longitude; positive east
-# longitude_units: degrees_east
-# longitude_standard_name: longitude
-# thickness_column: thickness
-# thickness_long_name: crustal thickness
-# thickness_display_name: crustal thickness in km
-# thickness_units: kilometer
-# error_column: error
-# error_long_name: crustal thickness error
-# error_display_name: crustal thickness error in km
-# error_units: kilometer
-latitude|longitude|thickness|error
+# global_repository_institution: IRIS EMC
+# global_repository_pid: doi:10.17611/dp/emc.2021.kea20.1
+# y_column: latitude
+# y_variable: latitude
+# y_dimensions: 1
+# y_long_name: Latitude; positive north
+# y_units: degrees_north
+# y_standard_name: latitude
+# x_column: longitude
+# x_variable: longitude
+# x_dimensions: 1
+# x_long_name: Longitude; positive east
+# x_units: degrees_east
+# x_standard_name: longitude
+# moho_column: moho
+# moho_variable: moho
+# moho_dimensions: 2
+# moho_variable: moho
+# moho_long_name: Moho depth relative to a mean Earth radius of 6371 km
+# moho_display_name: Moho depth (km)
+# moho_units: km
