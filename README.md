@@ -3,27 +3,26 @@ Incorporated Research Institutions for Seismology (IRIS):
 
     Data Management Center (DMC)
     Data Products Team
-    IRIS Earth Model Collaboration (EMC) - Tools
+    IRIS Earth Model Collaboration (EMC) - Tools, R2
 
 COMMENTS/QUESTIONS:
 
     Please contact manoch@iris.washington.edu
 
 
- 2020-09-28
+ 2022-08-25
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
  DESCRIPTION:
 
- EMC Tools contains a set of Python scripts for converting the EMC's netCDF Earth model files (in netCDF 3 format) to 
+ EMC Tools contains two Python scripts for converting the EMC's netCDF Earth model files (in netCDF 3 format) to 
  and from GeoCSV format:
  
-    - netCDF_2_GeoCSV_3D.py - a Python script to read a 3D netCDF Earth model file and display its header information or
-      convert it to GeoCSV format.
-    - GeoCSV_2_netCDF_3D.py - a Python script to read a 3D GeoCSV Earth model file and display its header information or
-      convert it to netCDF format.
-    - netCDF_2_GeoCSV_2D.py - a Python script to read a 2D netCDF Earth model file and convert it to GeoCSV format.
-    - GeoCSV_2_netCDF_2D.py - a Python script to read a 2D GeoCSV Earth model file and convert it to netCDF format.
+    - netCDF_2_GeoCSV.py - a Python script to read a 2D or 3D netCDF Earth model file in geographic or projected 
+      coordinate system and display its header information or convert it to GeoCSV format.
+
+    - GeoCSV_2_netCDF.py - a Python script to read a 2D or 3D GeoCSV Earth model file in geographic or projected 
+      coordinate system and display its header information or convert it to netCDF format.
 
  * For information on EMC (IRIS Earth Model Collaboration) visit: http://ds.iris.edu/ds/products/emc/
  * For information on netCDF (Network Common Data Form) visit: https://www.unidata.ucar.edu/software/netcdf/
@@ -34,12 +33,10 @@ COMMENTS/QUESTIONS:
 You can work with each script directly and independently. To view the usage message, run the script with the 
 help (**-h**) option:
 
-* netCDF_2_GeoCSV_3D.py -h
-* GeoCSV_2_netCDF_3D.py -h
-* netCDF_2_GeoCSV_2D.py -h
-* GeoCSV_2_netCDF_2D.py -h
+* netCDF_2_GeoCSV.py -h
+* GeoCSV_2_netCDF.py -h
 
-**How to run netCDF\_2\_GeoCSV\_3D.py:**
+**How to run netCDF\_2\_GeoCSV.py:**
 
     - use the sample 3D netCDF file under the "samples" directory or download a 3D netCDF Earth model file from the EMC 
       repository:
@@ -50,73 +47,39 @@ help (**-h**) option:
     - run the script to convert the netCDF file. The converted file will have the same name as the netCDF file but with 
       extension ".csv" and will be placed under the same directory where the netCDF file was found.
             
-            netCDF_2_GeoCSV_3D.py -i SAW642ANB_kmps.nc (will look for the file under the script directory and data 
-            directory)
-
-            The following options are also available:
-                -d debug mode with verbose execution
-                -m [single, depth] the mode option tells the script how to convert the netCDF file
-                    single (default) will create a single ".csv" file
-                    depth will create one ".csv" file per depth
-                -H display file header information for both netCDF and GeoCSV (no output file created)
+     netCDF_2_GeoCSV.py -i FILE -x longitude -y latitude -z depth -m mode -d -H
+        -i [required] FILE is the input GeoCSV Earth model file
+        -x [required] the netCDF variable representing the x-axis (must match the netCDF file's x variable)
+        -y [required] the netCDF variable representing the y-axis (must match the netCDF file's y variable)
+        -z [required] the netCDF variable representing the z-axis (must match the netCDF file's z variable OR set to 'none' for 2D models)
+        -m [default:single] output mode [single: single GeoCSV file OR depth: one GeoCSV file per depth
+        -d [default:False] debug mode
+        -H [default:False] display headers only
                  
-            NOTE: only a .csv files converted with "-m single" option can be converted back to netCDF using the 
-                  GeoCSV_2_netCDF_3D.py script
+    NOTE: only a .csv files converted with "-m single" option can be converted back to netCDF using the 
+          GeoCSV_2_netCDF_3D.py script
 
-**How to run GeoCSV\_2\_netCDF\_3D.py:**
+**How to run GeoCSV\_2\_netCDF.py:**
 
     - use the sample GeoCSV file under the "samples" directory as a template to create your own GeoCSV file with proper 
-      header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV_3D.py script above
+      header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV.py script above
     - run the script to convert the GeoCSV file to netCDF. The converted file will have the same name as the GeoCSV file
       but with extension ".nc" and will be placed under the same directory where the GeoCSV file was found.
 
-            GeoCSV_2_netCDF_3D.py -i SAW642ANB_kmps.csv (will look for the file under the script directory and data 
-            directory)
+     GeoCSV_2_netCDF.py -i FILE -d -H
+        -i [required] FILE is the input GeoCSV Earth model file
+        -d [default:False] debug mode
+        -H [default:False] display headers only
 
-            The following options are also available:
-                -d debug mode with verbose execution
-                -H display file header information for both netCDF and GeoCSV 
+    NOTE: only a single ".csv" files can be converted back to netCDF using this script
 
-            NOTE: only a single ".csv" files can be converted back to netCDF using this script
-        
-**How to run netCDF\_2\_GeoCSV\_2D.py:**
-
-    - use the sample 2D netCDF file under the "samples" directory or download a 2D netCDF Earth model file from the EMC 
-      repository:
-   http://ds.iris.edu/ds/products/emc-earthmodels/
-   
-    - [optional] create a "data" directory with a path relative to the script as "../data/" and place the netCDF file 
-      there
-    - run the script to convert the netCDF file. The converted file will have the same name as the netCDF file but with 
-      extension ".csv" and will be placed under the same directory where the netCDF file was found.
-            
-            netCDF_2_GeoCSV_2D.py -i Crustal_Thickness_Error.nc (will look for the file under the script directory and 
-            data directory)
-
-            The following options are also available:
-                -d debug mode with verbose execution
-                -H display file header information for both netCDF and GeoCSV (no output file created)
-
-**How to run GeoCSV\_2\_netCDF\_2D.py:**
-
-    - use the sample GeoCSV file under the "samples" directory as a template to create your own GeoCSV file with proper 
-      header, or convert a netCDF model file to GeoCSV using the netCDF_2_GeoCSV_2D.py script above
-    - run the script to convert the GeoCSV file to netCDF. The converted file will have the same name as the GeoCSV file
-      but with extension ".nc" and will be placed under the same directory where the GeoCSV file was found.
-
-            GeoCSV_2_netCDF_2D.py -i Crustal_Thickness_Error.csv (will look for the file under the script directory and 
-            data directory)
-
-            The following options are also available:
-                -d debug mode with verbose execution
-                -H display file header information for both netCDF and GeoCSV 
             
  **HEADERS:**
  
     GeoCSV Headers are similar to the netCDF headers with the following exceptions:
         - GeoCSV-specific header lines:
             # dataset: GeoCSV2.0
-            # created: 2018-10-18 13:33:30 UTC (netCDF_2_GeoCSV_3D.py)
+            # created: 2022-08-18 13:33:30 UTC (netCDF_2_GeoCSV.py)
             # netCDF_file: SAW642ANB_kmps.nc
             # delimiter: |
             # {VAR}_column: {VAR} where {VAR} represents a model or coordinate variable such as latitude, vs, etc.
@@ -128,10 +91,10 @@ help (**-h**) option:
    http://ds.iris.edu/ds/products/emc-contributionguide/
 
     To view the file header information for both netCDF and GeoCSV, run the above scripts with -H option:
-            netCDF_2_GeoCSV_3D.py -H -i SAW642ANB_kmps.nc
-            GeoCSV_2_netCDF_3D.py -H -i SAW642ANB_kmps.csv
-            netCDF_2_GeoCSV_2D.py -H -i Crustal_Thickness_Error.nc
-            GeoCSV_2_netCDF_2D.py -H -i Crustal_Thickness_Error.csv
+            netCDF_2_GeoCSV.py -H -i SAW642ANB_kmps.nc
+            GeoCSV_2_netCDF.py -H -i SAW642ANB_kmps.csv
+            netCDF_2_GeoCSV.py -H -i Crustal_Thickness_Error.nc
+            GeoCSV_2_netCDF.py -H -i Crustal_Thickness_Error.csv
 
 **Creating EMC GeoCSV Earth Model Files**
 
