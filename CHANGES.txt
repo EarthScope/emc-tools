@@ -2,13 +2,19 @@
 Incorporated Research Institutions for Seismology (IRIS)
 Data Management Center (DMC)
 Data Products Team
-IRIS Earth Model Collaboration (EMC) - Tools, Release 2
+IRIS Earth Model Collaboration (EMC) - Tools, Release 2.1
 
 COMMENTS/QUESTIONS:
 
-    Please contact manoch@iris.washington.edu
+    Please contact data-help@earthscope.org
 
 ---------------------------------------------------------
+=========================================================
+2024-09-16 r2.1 Release
+=========================================================
+- emc_inspector.py v2024.260 R2.1 release. This script checks a given netCDF file against the EMC requirements and 
+flags any missing or incorrectly defined attributes. The check is not exhaustive, and visual validation is required 
+to identify any additional errors.
 
 =========================================================
 2022-08-25 r2.0 Release

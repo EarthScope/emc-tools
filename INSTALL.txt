@@ -1,26 +1,31 @@
  
-Incorporated Research Institutions for Seismology (IRIS)
-Data Management Center (DMC)
-Data Products Team
-IRIS Earth Model Collaboration (EMC) - ParaView support bundle Release 2
+EarthScope
+Data Services (DS)
+Data Products Unit
+EarthScope Earth Model Collaboration (EMC) - Release 2.1
 
 COMMENTS/QUESTIONS:
+    
+    Please contact data-help@earthscope.org
 
-    Please contact manoch@iris.washington.edu
 
-
- 2022-08-25
+ 2024-09-16
 ======================================================================================================================================================================
 
  DESCRIPTION:
 
- EMC Tools contains a set of Python scripts for working with EMC's netCDF Earth model files (netCDF 3 format):
+ EMC Tools contains a set of Python scripts for working with EMC's netCDF Earth model files (netCDF 3 & 4 CLASSIC formats):
     - netCDF_2_GeoCSV.py - a Python script to convert a 2D or 3D netCDF Earth model file to GeoCSV format.
     - GeoCSV_2_netCDF.py - a Python script to convert a 2D or 3D 3D GeoCSV Earth model file to netCDF format.
- Both scripts support models with projected coordinate systems:
+    - emc-inspector.py   - a Python script to check a given netCDF file against the EMC requirements and 
+                           flags any missing or incorrectly defined attributes. The check is not exhaustive, and visual validation is required 
+                           to identify any additional errors.
+
+ Above scripts support models with projected coordinate systems as auxiliary coordinates:
+
  https://ds.iris.edu/ds/newsletter/vol99/no1/543/emc-two-dimensional-latitude-longitude-coordinate-variables/
 
- For information on EMC (IRIS Earth Model Collaboration) visit: http://ds.iris.edu/ds/products/emc/
+ For information on EMC (EarthScope Earth Model Collaboration) visit: http://ds.iris.edu/ds/products/emc/
  For information on netCDF (Network Common Data Form) visit https://www.unidata.ucar.edu/software/netcdf/
  For information on GeoCSV (tabular text formatting for geoscience data)
                             visit: http://geows.ds.iris.edu/documents/GeoCSV.pdf
@@ -29,9 +34,9 @@ COMMENTS/QUESTIONS:
     - Python: These scripts were created and tested under:
 
         Mac:
-            python version : 3.10.5
-            conda version : 4.13.0
-            System Version:	macOS 12.5.1 (21G83)
+            python version : 3.12.0
+            conda version : 23.11.0
+            System Version:	macOS 14.61.1 
 
          Packages required:
             netCDF4 Python library
@@ -43,13 +48,25 @@ COMMENTS/QUESTIONS:
 
       NOTE: These scripts will NOT create directories
 
+      INSTALLATION STEPS:
+
+      Clone the Repository
+
+      Set Up a Virtual Environment:
+
+      python3 -m venv env
+      source env/bin/activate
+      Install the Dependencies:
+
+         pip install -r requirements.txt
+
  USAGE:
 
  See the README.md
  
  COMMENTS/QUESTIONS:
 
-    Please contact manoch@iris.washington.edu
+    data-help@earthscope.org
 
 
 
