@@ -20,6 +20,14 @@ version = "v2024.260"
 script = os.path.basename(sys.argv[0])
 version_tag = f"""\n\n[INFO] {script} version {version}"""
 
+# Preferred order of dimensions.
+preferred_dimensions_order = {
+    "latitude": ["latitude", "longitude"],
+    "longitude": ["latitude", "longitude"],
+    "x": ["x", "y"],
+    "y": ["x", "y"],
+}
+
 # Dictionary of required global attributes and their start string
 required_global_attributes = {
     "title": None,
@@ -151,7 +159,6 @@ def list_coordinates(dataset):
         primary_coords = []
         auxiliary_coords = set()  # Use a set to avoid duplicate entries
         third_dimension = None
-
         # Iterate over variables to identify coordinates
         for var_name, variable in dataset.variables.items():
             if hasattr(variable, "coordinates"):
@@ -491,12 +498,13 @@ def list_variables(dataset, primary_coords):
 
         for var_name, variable in dataset.variables.items():
             var_type = None
-            if var_name in dataset.dimensions:
+            if "depth" in var_name.lower():
+                var_type = "depth"
+            elif var_name in dataset.dimensions:
                 var_type = "coordinates"
             elif var_name in auxiliary_coordinates:
                 var_type = "auxiliary"
-            elif "depth" in var_name.lower():
-                var_type = "depth"
+
             else:
                 var_type = "model"
 
@@ -513,6 +521,8 @@ def list_variables(dataset, primary_coords):
                     "units",
                     "standard_name",
                 ]
+                if var_type == "depth":
+                    required_attributes_coordinates.append("positive")
                 for attr in required_attributes_coordinates:
                     if attr not in variable.ncattrs():
                         missing_attributes.append(attr)
@@ -532,9 +542,13 @@ def list_variables(dataset, primary_coords):
             # Determine expected order of dimensions based on coordinates and third dimension
             if var_type == "model" and len(variable.dimensions) == 3:
                 # Ensure the third dimension is not already in primary_coords
-                expected_order = [third_dimension] + [
-                    coord for coord in primary_coords if coord != third_dimension
-                ]
+                for coord in primary_coords:
+                    if coord != third_dimension:
+                        expected_order = preferred_dimensions_order[coord]
+                        break
+
+                expected_order = [third_dimension] + expected_order
+
                 if var_dims != expected_order:
                     output(
                         f"Error: Variable '{var_name}' has incorrect dimension order: {', '.join(var_dims)}. Expected order is '{', '.join(expected_order)}'. ✖️",
@@ -596,8 +610,8 @@ def list_variables(dataset, primary_coords):
         metadata_summary["Coordinate Variables"] = coordinate_variables
         metadata_summary["Model Variables"] = model_variables
     except Exception as e:
-        output(f"Error listing variables: {e} ✖️")
-        metadata_summary["Variables"] = f"Error listing variables: {e} ✖️"
+        output(f"Error while listing variables: {e} ✖️")
+        metadata_summary["Variables"] = f"Error while listing variables: {e} ✖️"
 
 
 def print_metadata_summary():
