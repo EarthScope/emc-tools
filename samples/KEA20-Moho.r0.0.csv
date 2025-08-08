@@ -3,16 +3,21 @@
 # netCDF_file: KEA20-Moho.r0.0.nc
 # delimiter: |
 # global_title: Moho depth model for East Asia
-# global_id: KEA20_Moho
+# global_id: KEA20
+# global_model: KEA20
+# global_year: 2021
+# global_model_type: Tomography Earth Model
+# global_model_subtype: Radially anisotropic S velocities (km/s) and Moho depth (km)
+# global_model_grid_dim: 2D
 # global_data_revision: r.0.0
 # global_Conventions: CF-1.0
 # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
 # global_keywords: seismic, surface wave, tomography, East Asia, Moho, receiver functions, reflection
 # global_acknowledgment: Model was provided by Michael Witek, Department of Geophysics, Kangwon National University
-# global_history: 2022-08-24 15:32:32 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.237 from KEA20-Moho.r0.0.nc; 2022-08-22 19:48:38 UTC Converted to netCDF by GeoCSV_2_netCDF.py v2022.230 from KEA20-Moho.r0.0.csv; 2022-08-22 19:46:46 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from KEA20-Moho.r0.0.nc; v1.0.0 created 2021-06-02
+# global_history: 2022-08-24 15:32:32 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py 
 # global_summary: Here we provide depths to the Moho boundary in KEA20, relative to a mean Earth radius of 6371 km.; These Moho depths result from an initial inversion of point constraints from teleseismic; receiver function and seismic reflection studies, plus additional Moho perturbations from the; surface wave dispersion data inversion. The reference model Moho is taken from CRUST1.0.  ; For additional information please see the supplementary information of Witek et al. (2021).
-# global_reference: ; @article{witek-2021-kea20,; title={Radial anisotropy in East Asia from multimode surface wave tomography},; author={M. Witek and S.-J. Chang and D.Y. Lim and S. Ning and J. Ning},; journal={Journal of Geophysical Research},; year={2021},; volume={},; pages={}; };
-# global_reference_pid: 
+# global_reference:  Witek et al. (2021)
+# global_reference_pid: doi:10.1029/2020JB021201
 # global_author_name: M. Witek
 # global_author_email: mwitek2@gmail.com
 # global_author_institution: Department of Geophysics, Kangwon National University
@@ -24,9 +29,8 @@
 # global_geospatial_lon_max: 150.0
 # global_geospatial_lon_resolution: 0.2
 # global_geospatial_lon_units: degrees_east
-# global_netcdf_file: KEA20_Moho.nc
 # global_repository_name: EMC
-# global_repository_institution: IRIS EMC
+# global_repository_institution: EarthScope DS
 # global_repository_pid: doi:10.17611/dp/emc.2021.kea20.1
 # y_column: latitude
 # y_variable: latitude
