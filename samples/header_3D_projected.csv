@@ -4,6 +4,10 @@
 # delimiter: |
 # global_title: New Zealand Wide Velocity Model v2.2 - North Island
 # global_id: nz_wide2p2_eberhart_phillips_etal_2021
+# global_model: nz_wide2p2_eberhart_phillips_etal_2021
+# global_year: 2021
+# global_model_type: 3-D Tomography Earth Model
+# global_model_Subtype: Shear-wave velocity (km/s) and Compressional-wave velocity (km/s)
 # global_data_revision: r0.0
 # global_Conventions: CF-1.0
 # global_Metadata_Convetions: Unidata Dataset Discovery v1.0
@@ -11,7 +15,7 @@
 # global_reference: Eberhart-Phillips et al. (2021)
 # global_attribution: DOI:10.5281/zenodo.3779523
 # global_repository_name: EMC
-# global_repository_institution: IRIS DMC
+# global_repository_institution: Earthscope DS
 # global_repository_pid: doi:10.17611/dp/emc.2021.nzatomnnorthvpvs.1
 # global_reference_ellipsoid: WGS 84
 # global_geodetic_datum: UTM 60S / EPSG 32760
@@ -25,6 +29,7 @@
 # global_geospatial_vertical_max: 50.0
 # global_geospatial_vertical_units: km
 # global_geospatial_vertical_positive: down
+# global_grid_ref: projected
 # global_history: 2022-08-23 20:55:18 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from ref-model-nzwide2p2-crust.r0.0-2D.nc; 2022-01-31 16:23:21 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py v2022.028 from ref-model-nzwide2p2-crust.r0.0.csv
 # y_column: y
 # y_variable: y

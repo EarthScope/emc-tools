@@ -49,27 +49,33 @@ preferred_dimensions_order = {
 
 # Dictionary of required global attributes and their start string
 required_global_attributes = {
-    "title": None,
-    "id": None,
-    "model": None,
-    "data_revision": "r",
-    "summary": None,
-    "Conventions": "CF-1.0",
-    "Metadata_Conventions": "Unidata Dataset Discovery v1.0",
-    "repository_name": None,
-    "repository_institution": None,
-    "repository_pid": "doi:",
-    "author_name": None,
     "author_institution": None,
-    "reference": None,
+    "author_name": None,
+    "Conventions": "CF-1.0",
+    "data_revision": "r",
+    "id": None,
+    "Metadata_Conventions": "Unidata Dataset Discovery v1.0",
+    "model": None,
+    "model_type": None,
+    "model_subtype": None,
     "reference_pid": "doi",
+    "reference": None,
+    "repository_institution": None,
+    "repository_name": None,
+    "repository_pid": "doi:",
+    "summary": None,
+    "title": None,
+    "year": None,
 }
 
 # Dictionary of optional global attributes and their start string
 optional_global_attributes = {
     "author_email": None,
     "author_url": None,
+    "grid_ref": None,
     "version": "v",
+    "grid_dim": "3D",
+    "grid_ref": "latitude_longitude",
 }
 
 metadata_summary = {}
@@ -92,15 +98,15 @@ def check_netcdf_file(file_name):
         try:
             # Determine the format
             if dataset.file_format == "NETCDF3_CLASSIC":
-                metadata_summary["File Type"] = "NetCDF-3 Classic"
+                metadata_summary["File Type"] = f"NetCDF-3 Classic {FAIL}"
             elif dataset.file_format == "NETCDF3_64BIT":
-                metadata_summary["File Type"] = "NetCDF-3 64-bit offset"
+                metadata_summary["File Type"] = f"NetCDF-3 64-bit offset {FAIL}"
             elif dataset.file_format == "NETCDF4_CLASSIC":
-                metadata_summary["File Type"] = "NetCDF-4 Classic Model"
+                metadata_summary["File Type"] = f"NetCDF-4 Classic Model {CHECK}"
             elif dataset.file_format == "NETCDF4":
-                metadata_summary["File Type"] = "NetCDF-4"
+                metadata_summary["File Type"] = f"NetCDF-4 {FAIL}"
             else:
-                metadata_summary["File Type"] = "Unknown"
+                metadata_summary["File Type"] = f"Unknown {FAIL}"
         except Exception as e:
             output(f"Error determining file format: {e} {FAIL}")
             metadata_summary["File Type"] = f"Error determining file format: {e} {FAIL}"
@@ -156,8 +162,10 @@ def check_netcdf_file(file_name):
 
     # Print metadata summary
     try:
-        output_header(
-            "Metadata Inspection Summary"
+        print(
+            "\n\n\n============================\n",
+            "Metadata Inspection Summary",
+            "\n============================",
         )  # Changed to 'Metadata Inspection Summary'
         print_metadata_summary()
     except Exception as e:
@@ -451,37 +459,75 @@ def is_within_tolerance(metadata_value, computed_value, tolerance=0.1):
 def check_global_attributes(dataset):
     try:
         missing_required_attributes = []
+        empty_required_attributes = []
+        checked_required_attributes = []
         missing_optional_attributes = []
+        empty_optional_attributes = []
+        checked_optional_attributes = []
 
+        # Required
         for attribute in required_global_attributes:
             if attribute not in dataset.ncattrs():
                 missing_required_attributes.append(attribute)
+            elif not str(dataset.getncattr(attribute)).strip():
+                empty_required_attributes.append(attribute)
+            else:
+                checked_required_attributes.append(attribute)
 
+        if missing_required_attributes:
+            output(f"Missing required global attributes: {FAIL}", indent=True)
+            for attr in missing_required_attributes:
+                output(f"- {attr}", indent=True, level=2)
+            metadata_summary["Missing required global attributes"] = (
+                missing_required_attributes
+            )
+
+        if empty_required_attributes:
+            output(f"Required global attributes NOT assigned: {FAIL}", indent=True)
+            for attr in empty_required_attributes:
+                output(f"- {attr}", indent=True, level=2)
+            metadata_summary["Required global attributes present but not assigned"] = (
+                empty_required_attributes
+            )
+
+        output(f"Global attributes (values not checked): {CHECK}", indent=True)
+        for attr in checked_required_attributes:
+            output(f"- {attr}", indent=True, level=2)
+        metadata_summary["Present global attributes (values not checked)"] = (
+            checked_required_attributes
+        )
+
+        # Optional
         for attribute in optional_global_attributes:
             if attribute not in dataset.ncattrs():
                 missing_optional_attributes.append(attribute)
-
-        if missing_required_attributes:
-            output(f"Missing Required Global Attributes: {FAIL}", indent=True)
-            for attr in missing_required_attributes:
-                output(f"- {attr}", indent=True, level=2)
-            metadata_summary["Missing Required Global Attributes"] = (
-                missing_required_attributes
-            )
-        else:
-            output(f"All required global attributes are present. {CHECK}", indent=True)
+            elif not str(dataset.getncattr(attribute)).strip():
+                empty_optional_attributes.append(attribute)
+            else:
+                checked_optional_attributes.append(attribute)
 
         if missing_optional_attributes:
-            output(
-                f"Missing Optional Global Attributes (optional): {WARNING}", indent=True
-            )
+            output(f"Missing optional global attribute(s): {WARNING}", indent=True)
             for attr in missing_optional_attributes:
                 output(f"- {attr}", indent=True, level=2)
-            metadata_summary["Missing Optional Global Attributes"] = (
+            metadata_summary["Missing optional global attributes"] = (
                 missing_optional_attributes
             )
-        else:
-            output(f"All optional global attributes are present. {CHECK}", indent=True)
+
+        if empty_optional_attributes:
+            output(f"Optional global attributes NOT assigned: {WARNING}", indent=True)
+            for attr in empty_optional_attributes:
+                output(f"- {attr}", indent=True, level=2)
+            metadata_summary["Optional global attributes present but not assigned"] = (
+                empty_optional_attributes
+            )
+
+        output(f"Optional global attributes (values not checked): {CHECK}", indent=True)
+        for attr in checked_optional_attributes:
+            output(f"- {attr}", indent=True, level=2)
+        metadata_summary["Optional global attributes (values not checked)"] = (
+            checked_optional_attributes
+        )
     except Exception as e:
         output(f"Error checking global attributes: {e} {FAIL}")
         metadata_summary["Global Attributes"] = (

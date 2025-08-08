@@ -1,73 +1,78 @@
-# dataset: GeoCSV2.0
-# created: 2022-08-24 15:53:59 UTC (netCDF_2_GeoCSV.py)
-# netCDF_file: SLC-Vs10km-2022.r0.0.nc
+# dataset: GeoCSV 2.0
 # delimiter: |
-# global_title: A shear velocity model for Salt Lake Valley, UT, USA
-# global_id: SLC-Vs10km-2022_kmps
-# global_data_revision: r.0.0
-# global_summary: Rayleigh wave ellipticity and phase velocity measurement from Mw6.5 Idaho earthquake 2020 and coda cross correlations were used to estimate Vs in Salt Lake Valley, Vp and Rho used for MCMC inversion were calculated from Vs using expirical relationship from Brocher 2005;
-# global_keywords: seismic, tomography, shear wave, s wave, elastic waveform, emc, shear-wave velocity, Zeng, Lin, Allam, Salt Lake Valley
+# created: 2025-08-07T19:19:37 UTC (cvm_convert.py)
+# global_title: CSEM2 in the region Africa at a resolution of 2 points per degree and 10 km
+# global_id: CSEM2_Africa
+# global_keywords: Collaborative Seismic Earth Model, multi-scale full-waveform inversion
+# global_model: CSEM2_Africa
+# global_version: v2024.12.01
+# global_data_revision: r0.0
+# global_summary: CSEM2 in the region Africa at a resolution of 2 points per degree and 10 km. The second-generation Collaborative Seismic Earth Model (CSEM2) is a global, multi-scale Earth model developed using full-waveform inversion. The term 'multi-scale' reflects the varying sizes of the inversion domains. CSEM2 integrates information from both global and regional inversions into a unified framework. For user-specific domains and spatial resolution, please contact the author.
 # global_Conventions: CF-1.0
 # global_Metadata_Conventions: Unidata Dataset Discovery v1.0
-# global_acknowledgment: Model was provided by Qicheng Zeng,; Department of Geology and Geophysics,; University of Utah
-# global_history: 2022-08-24 15:53:59 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.237 from SLC-Vs10km-2022.r0.0.nc; 2022-06-23 19:22:15 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py v2022.026 from SLC_Vs10km_ZLA_TSR_2022.csv; 2020-03-02 19:39:08 UTC Converted to GeoCSV by netCDF_2_GeoCSV_3D.py ,V.2020.006 from SAW642ANB_kmps.nc; 2019-12-05 IRIS DMC, updated geospatial fields, if needed, to float ; Wed Nov 20 10:28:33 2019: ncatted -O -a creator_email,global,m,c,product@iris.washington.edu SAW642ANB_kmps.nc; 2016-08-11 IRIS DMC, updated variable definitions to make sure they are compatible with CF; 2011-06-21 created; 2020-02-28 IRIS DMC, updated metadata to organize reference, author, repository and also add PID
-# global_comment: model converted to netCDF by IRIS EMC
-# global_geospatial_lat_min: 40.4
-# global_geospatial_lat_max: 40.9
+# global_repository_name: EMC
+# global_repository_institution: EarthScope DS
+# global_repository_pid: doi:10.17611/dp/emc.2025.csem2.africa.1
+# global_author_name: Sebastian Noe
+# global_author_institution: ETH Zurich, Zurich, Switzerland
+# global_reference: Noe et al. (2024), The Collaborative Seismic Earth Model: Generation 2
+# global_reference_pid: doi:10.1029/2024JB029656
+# global_author_email: sebastian.noe@eaps.ethz.ch and andreas.fichtner@eaps.ethz.ch
+# global_author_url: https://cos.ethz.ch/models.html
 # global_geospatial_lat_units: degrees_north
-# global_geospatial_lat_resolution: 0.005
-# global_geospatial_lon_min: -112.5
-# global_geospatial_lon_max: -111.6
+# global_geospatial_lat_resolution: 2.0
 # global_geospatial_lon_units: degrees_east
-# global_geospatial_lon_resolution: 0.005
-# global_geospatial_vertical_min: 0.0
-# global_geospatial_vertical_max: 10.0
+# global_geospatial_lon_resolution: 2.0
 # global_geospatial_vertical_units: km
 # global_geospatial_vertical_positive: down
-# global_NCO: netCDF Operators version 4.7.5 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
-# global_netcdf_file: SLC-Vs10km-2022.r0.0.nc
-# global_reference: Zeng, Q., Lin, F.-C., and Allam, A. A. (2022). 3D Shear Wave Velocity Model of Salt Lake Valley via Rayleigh Wave Ellipticity across a Temporary Geophone Array, The Seismic Record. 2(2), 127–136, doi: 10.1785/0320220016
-# global_reference_pid: doi: 10.1785/0320220016
-# global_author_name: Qicheng Zeng
-# global_author_email: Qicheng.Zeng@utah.edu
-# global_author_institution: Department of Geology and Geophysics, University of Utah, Salt Lake City, Utah, 84102, USA
-# global_author_url: 
-# global_repository_name: EMC
-# global_repository_institution: IRIS DMC
-# global_repository_pid: 10.17611/dp/emc.2022.slcvss10km-2022.1
-# y_column: latitude
-# y_variable: latitude
-# y_dimensions: 1
-# y_long_name: Latitude; positive north
-# y_units: degrees_north
-# y_standard_name: latitude
-# x_column: longitude
-# x_variable: longitude
-# x_dimensions: 1
-# x_long_name: Longitude; positive east
-# x_units: degrees_east
-# x_standard_name: longitude
-# z_column: depth
+# global_geospatial_lat_min: -54.0
+# global_geospatial_lat_max: 46.0
+# global_geospatial_lon_min: -28.0
+# global_geospatial_lon_max: 62.0
+# global_geospatial_vertical_min: 0
+# global_geospatial_vertical_max: 1200
+# global_year: 2024
+# global_model_type: 3-D Tomography Earth Model
+# global_model_subtype: VSV,VSH,VPV,VPH,RHO
+# global_history: Tue Jul 15 05:19:31 2025: ncatted -a model
+# VSV_variable: VSV
+# VSV_dimensions: 3
+# VSV_long_name: Wave speed of vertically polarized S-waves
+# VSV_units: km/s
+# VSV_display_name: VSV
+# VSH_variable: VSH
+# VSH_dimensions: 3
+# VSH_long_name: Wave speed of horizontally polarized S-waves
+# VSH_units: km/s
+# VSH_display_name: VSH
+# VPV_variable: VPV
+# VPV_dimensions: 3
+# VPV_long_name: P-wave velocity in vertical propagation direction
+# VPV_units: km/s
+# VPV_display_name: VPV
+# VPH_variable: VPH
+# VPH_dimensions: 3
+# VPH_long_name: P-wave velocity in horizontal propagation direction
+# VPH_units: km/s
+# VPH_display_name: VPH
+# RHO_variable: RHO
+# RHO_dimensions: 3
+# RHO_long_name: Material density
+# RHO_units: kg/m^3
+# RHO_display_name: RHO
 # z_variable: depth
 # z_dimensions: 1
-# z_long_name: depth below earth surface
-# z_units: km
+# z_long_name: Depth below surface
+# z_units: kilometers
+# z_standard_name: depth
 # z_positive: down
-# vs_column: vs
-# vs_variable: vs
-# vs_dimensions: 3
-# vs_long_name: Shear Velocity
-# vs_display_name: S Velocity (km/s)
-# vs_units: km.s-1
-# vp_column: vp
-# vp_variable: vp
-# vp_dimensions: 3
-# vp_long_name: P Velocity
-# vp_display_name: P Velocity (km/s)
-# vp_units: km.s-1
-# rho_column: rho
-# rho_variable: rho
-# rho_dimensions: 3
-# rho_long_name: Density
-# rho_display_name: Density (g/cc)
-# rho_units: g.cc-1
+# y_variable: latitude
+# y_dimensions: 1
+# y_long_name: Latitude
+# y_units: degrees_north
+# y_standard_name: latitude
+# x_variable: longitude
+# x_dimensions: 1
+# x_long_name: Longitude
+# x_units: degrees_east
+# x_standard_name: longitude
