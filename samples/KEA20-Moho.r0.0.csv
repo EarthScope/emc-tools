@@ -8,7 +8,7 @@
 # global_year: 2021
 # global_model_type: Tomography Earth Model
 # global_model_subtype: Radially anisotropic S velocities (km/s) and Moho depth (km)
-# global_model_grid_dim: 2D
+# global_grid_dim: 2D
 # global_data_revision: r.0.0
 # global_Conventions: CF-1.0
 # global_Metadata_Conventions: Unidata Dataset Discovery v1.0

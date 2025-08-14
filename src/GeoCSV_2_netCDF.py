@@ -17,7 +17,7 @@ from datetime import datetime, timezone
                             |       debug mode      
                             |       |   display headers only           
                             |       |   |            
-       GeoCSV_2_netCDF_3D  -i FILE -d  -H
+       GeoCSV_2_netCDF  -i FILE -d  -H
 
  HISTORY:
    2022-08-25 IRIS DMC Manoch: v2022.237 R2 release combines 2D and 3D scripts and also adds support for the 
@@ -57,7 +57,7 @@ ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # The optional directory to store netCDF and GeoCSV files.
 DATA_DIR = os.path.join(ROOT_DIR, "data")
 
-NETCDF_FORMAT = "NETCDF3_CLASSIC"
+NETCDF_FORMAT = "NETCDF4_CLASSIC"
 geocsv_file_name = None
 BASE_NAME = None
 view_header = False
@@ -78,6 +78,11 @@ def usage():
         f"\t-d [default:{debug}] debug mode\n",
         f"\t-H [default:{view_header}] display headers only\n",
     )
+
+
+# Compression-only kwargs for data variables (no chunking)
+def var_kwargs_compressed(enable=True, level=4, shuffle=True):
+    return dict(zlib=True, complevel=level, shuffle=shuffle) if enable else {}
 
 
 def dot():
@@ -480,164 +485,96 @@ def create_coordinate_variables(ds, par):
     return ds, coordinate[y_column], coordinate[x_column], coordinate[z_column]
 
 
-def create_variables(ds, par, data, latitude_list, longitude_list, levels_list):
-    """create variables
+def create_variables(ds, par, data, y_list, x_list, z_list):
+    """create variables (compression only, no chunking)"""
 
-    Keyword arguments:
-    ds: the working netCDF dataset
-    this_params" GeoCSV parameters
-    data: block of data
-    latitude_list: list of unique latitudes from GeoCSV file
-    longitude_list: list of unique longitudes from GeoCSV file
-    levels_list: list of unique levels from GeoCSV file
-
-    Return values:
-    ds: the input dataset with coordinate variables set
-    all_vars: a dictionary of 3D variables
-    """
-
-    # var_list = list(set(header) - set([par['latitude_column'], par['longitude_column'],
-    #                                   par['level_column']]))
-
-    # We want to retain order of variables.
-    # var_list = list(set(header) - set([par['latitude_column'], par['longitude_column']]))
-    var_list = list()
-
-    # The header is a list of all variables.
+    var_list = []
     for tag in header_tags(par):
-        # Skip coordinate variables.
         if tag in ["x", "y", "z"]:
             continue
-        if "dimensions" in par[tag]:
-            z_column = "z"
-            if int(par[tag]["dimensions"]) > 2:
-                z_column = par["z"]["column"]
-        else:
+        if "dimensions" not in par[tag]:
             print(f"\n[ERR] Missing dimension definition for '{tag}'")
             sys.exit(2)
-
         var_list.append(tag)
-        """ We may need to explore the variable field to name the variable
-        for key in par[var]:
-            if 'column' in par[key]:
-                if par[key]['column'] == key:
-                    var_list.append(key)
-        """
-    all_vars = dict()
-    var_values = dict()
 
-    variable = dict()
+    all_vars = {}
+    var_values = {}
+    variable = {}
+
+    ny, nx = len(y_list), len(x_list)
+    nz = len(z_list) if z_list else 0
+
     for var in var_list:
-        three_d = False
-        if "dimensions" in par[var]:
-            if int(par[var]["dimensions"]) > 2:
-                three_d = True
-        else:
-            three_d = True
-        # Tag is used when user uses a different tag than the variable name. For now not used.
+        three_d = int(par[var].get("dimensions", 3)) > 2
         tag = var
-        # tag = tag_dict[var]
-        this_value = get_attribute(par, tag, "_FillValue")
-        if "variable" in par[var]:
-            variable[var] = par[var]["variable"]
-        else:
-            variable[var] = par[var]["column"]
+        fillv = get_attribute(par, tag, "_FillValue")
+        variable[var] = par[var].get("variable", par[var]["column"])
 
-        if this_value:
-            if three_d:
-                all_vars[variable[var]] = ds.createVariable(
-                    variable[var],
-                    VAR_DTYPE,
-                    (par["z"]["column"], par["y"]["column"], par["x"]["column"]),
-                    fill_value=this_value,
-                )
-            else:
-                all_vars[variable[var]] = ds.createVariable(
-                    variable[var],
-                    VAR_DTYPE,
-                    (par["y"]["column"], par["x"]["column"]),
-                    fill_value=this_value,
-                )
-        else:
-            if three_d:
-                all_vars[variable[var]] = ds.createVariable(
-                    variable[var],
-                    VAR_DTYPE,
-                    (par["z"]["column"], par["y"]["column"], par["x"]["column"]),
-                )
-            else:
-                all_vars[variable[var]] = ds.createVariable(
-                    variable[var], VAR_DTYPE, (par["y"]["column"], par["x"]["column"])
-                )
+        # Compression-only kwargs; no chunksizes passed
+        create_kwargs = var_kwargs_compressed(enable=True, level=4, shuffle=True)
 
-        # Create the data holders and fill in the points with nan.
-        if int(par[var]["dimensions"]) == 2:
-            var_values[variable[var]] = np.empty((len(y_list), len(x_list)))
-            var_values[f"{variable[var]}_done"] = np.empty((len(y_list), len(x_list)))
-            var_values[f"{variable[var]}_done"][:] = np.nan
+        if three_d:
+            dims = (par["z"]["column"], par["y"]["column"], par["x"]["column"])
         else:
-            var_values[variable[var]] = np.empty(
-                (len(z_list), len(y_list), len(x_list))
+            dims = (par["y"]["column"], par["x"]["column"])
+
+        # Create variable with/without fill value
+        if fillv is not None:
+            all_vars[variable[var]] = ds.createVariable(
+                variable[var], VAR_DTYPE, dims, fill_value=fillv, **create_kwargs
             )
+        else:
+            all_vars[variable[var]] = ds.createVariable(
+                variable[var], VAR_DTYPE, dims, **create_kwargs
+            )
+
+        # Allocate and init with NaN
+        if three_d:
+            var_values[variable[var]] = np.empty((nz, ny, nx))
+        else:
+            var_values[variable[var]] = np.empty((ny, nx))
+            var_values[f"{variable[var]}_done"] = np.empty((ny, nx))
+            var_values[f"{variable[var]}_done"][:] = np.nan
         var_values[variable[var]][:] = np.nan
 
-        # set variable attributes
+        # Copy attributes (except _FillValue handled above)
         for key in par[var]:
-            # Tag is used when user uses a different tag than the variable name. For now not used.
-            tag = var
-            # tag = tag_dict[var]
-            if key not in ("column", "dimensions"):
-                attribute = key
-
-                # let it default to default values
-                if attribute != "_FillValue":
-                    if attribute == "missing_value":
-                        setattr(
-                            all_vars[variable[var]], attribute, get_float(par[var][key])
-                        )
-                    elif "_range" in attribute:
-                        this_range = list()
-                        this_value = (
-                            par[var][key].replace("[", "").replace("]", "").strip()
-                        )
-                        if "," in this_value:
-                            this_value = this_value.split(",")
-                        else:
-                            this_value = this_value.split()
-
-                        for item in this_value:
-                            this_range.append(get_float(item))
-                        setattr(
-                            all_vars[variable[var]],
-                            attribute,
-                            np.array(this_range, dtype=VAR_DTYPE),
-                        )
-                    else:
-                        setattr(all_vars[variable[var]], attribute, par[var][key])
+            if key in ("column", "dimensions", "_FillValue"):
+                continue
+            if key == "missing_value":
+                setattr(all_vars[variable[var]], key, get_float(par[var][key]))
+            elif "_range" in key:
+                txt = par[var][key].replace("[", "").replace("]", "").strip()
+                parts = txt.split(",") if "," in txt else txt.split()
+                arr = np.array([get_float(it) for it in parts], dtype=VAR_DTYPE)
+                setattr(all_vars[variable[var]], key, arr)
+            else:
+                setattr(all_vars[variable[var]], key, par[var][key])
 
     header = header_tags(par)
 
     for line in data:
         y_val = line[header.index("y")]
-        y_index = y_list.index(y_val)
+        y_idx = y_list.index(y_val)
         x_val = line[header.index("x")]
-        x_index = x_list.index(x_val)
+        x_idx = x_list.index(x_val)
+
         for var in var_list:
             try:
+                value = line[header.index(var)]
                 if int(par[var]["dimensions"]) == 3:
                     z_val = line[header.index("z")]
-                    z_index = z_list.index(z_val)
-                value = line[header.index(var)]
-                if int(par[var]["dimensions"]) == 2:
-                    # For the 2D variables, we only keep the first set of values.
-                    if np.isnan(var_values[f"{variable[var]}_done"][y_index, x_index]):
-                        var_values[variable[var]][y_index, x_index] = value
-                        var_values[f"{variable[var]}_done"][y_index, x_index] = 1
+                    z_idx = z_list.index(z_val)
+                    var_values[variable[var]][z_idx, y_idx, x_idx] = value
                 else:
-                    var_values[variable[var]][z_index, y_index, x_index] = value
+                    # keep the first 2D value at each (y,x)
+                    if np.isnan(var_values[f"{variable[var]}_done"][y_idx, x_idx]):
+                        var_values[variable[var]][y_idx, x_idx] = value
+                        var_values[f"{variable[var]}_done"][y_idx, x_idx] = 1
             except Exception as ex:
                 print(
-                    f"\n\n[ERR] For variable '{var}' the 'dimensions' parameter is set to {par[var]['dimensions']}, is that correct?\n{ex}"
+                    f"\n\n[ERR] For variable '{var}' the 'dimensions' parameter is set to "
+                    f"{par[var]['dimensions']}, is that correct?\n{ex}"
                 )
                 sys.exit(2)
 
@@ -645,13 +582,13 @@ def create_variables(ds, par, data, latitude_list, longitude_list, levels_list):
         all_vars[variable[var]][:] = var_values[variable[var]]
 
     if debug:
-        print(f"\n\n[INFO] {par[var]['dimensions']}D variables:", flush=True)
+        print(f"\n\n[INFO] Variables created (compression only).", flush=True)
         for var in var_list:
-            print(f"\n\n{variable[var]}:{all_vars[variable[var]]}", flush=True)
+            print(f"{variable[var]}: {all_vars[variable[var]]}", flush=True)
     else:
         dot()
 
-    return ds, all_vars, tag_dict
+    return ds, all_vars, var_list, tag_dict
 
 
 def set_global_attributes(ds, netcdf_file, par):
@@ -812,7 +749,11 @@ y_list, x_list, z_list = get_dimensions(data_columns, params)
 if view_header:
     dataset = Dataset("temp.nc", "w", diskless=True, format=NETCDF_FORMAT)
 else:
-    dataset = Dataset(f"{base_file_name}.nc", "w", format=NETCDF_FORMAT)
+    dataset = Dataset(
+        f"{base_file_name}.nc",
+        "w",
+        format=NETCDF_FORMAT,
+    )
 
 # Set the dimensions.
 dataset = set_dimensions(dataset, params, x_list, y_list, z_list)
@@ -838,7 +779,7 @@ else:
 dataset = set_global_attributes(dataset, model_file, params)
 
 # Create variables.
-dataset, variables, tag_dict = create_variables(
+dataset, variables, var_list, tag_dict = create_variables(
     dataset, params, data_matrix, y_list, x_list, z_list
 )
 

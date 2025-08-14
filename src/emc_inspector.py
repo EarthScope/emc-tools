@@ -60,8 +60,8 @@ required_global_attributes = {
     "model_subtype": None,
     "reference_pid": "doi",
     "reference": None,
-    "repository_institution": None,
-    "repository_name": None,
+    "repository_institution": "EarthScope DS",
+    "repository_name": "EMC",
     "repository_pid": "doi:",
     "summary": None,
     "title": None,
@@ -471,40 +471,58 @@ def check_global_attributes(dataset):
                 missing_required_attributes.append(attribute)
             elif not str(dataset.getncattr(attribute)).strip():
                 empty_required_attributes.append(attribute)
+            elif required_global_attributes[attribute]:
+                if (
+                    not str(dataset.getncattr(attribute))
+                    .strip()
+                    .startswith(required_global_attributes[attribute])
+                ):
+                    empty_required_attributes.append(attribute)
+                else:
+                    checked_required_attributes.append(attribute)
             else:
                 checked_required_attributes.append(attribute)
 
+        # Missing!
         if missing_required_attributes:
             output(f"Missing required global attributes: {FAIL}", indent=True)
-            for attr in missing_required_attributes:
+            for attr in sorted(missing_required_attributes):
                 output(f"- {attr}", indent=True, level=2)
             metadata_summary["Missing required global attributes"] = (
                 missing_required_attributes
             )
 
         if empty_required_attributes:
-            output(f"Required global attributes NOT assigned: {FAIL}", indent=True)
-            for attr in empty_required_attributes:
-                output(f"- {attr}", indent=True, level=2)
-            metadata_summary["Required global attributes present but not assigned"] = (
-                empty_required_attributes
+            output(
+                f"Required global attribute has bad value or NOT assigned: {FAIL}",
+                indent=True,
             )
+            for attr in sorted(empty_required_attributes):
+                output(f"- {attr}", indent=True, level=2)
+            metadata_summary[
+                "Required global attribute has bad value or NOT assigned"
+            ] = empty_required_attributes
 
-        output(f"Global attributes (values not checked): {CHECK}", indent=True)
-        for attr in checked_required_attributes:
-            output(f"- {attr}", indent=True, level=2)
-        metadata_summary["Present global attributes (values not checked)"] = (
+        # Global included
+        output(f"Global attributes included (values not checked): {CHECK}", indent=True)
+        for attr in sorted(checked_required_attributes):
+            output(
+                f"- {attr}: {str(dataset.getncattr(attr)).strip()}",
+                indent=True,
+                level=2,
+            )
+        metadata_summary["Present global attributes included (values not checked)"] = (
             checked_required_attributes
         )
 
         # Optional
-        for attribute in optional_global_attributes:
-            if attribute not in dataset.ncattrs():
-                missing_optional_attributes.append(attribute)
-            elif not str(dataset.getncattr(attribute)).strip():
-                empty_optional_attributes.append(attribute)
+        for attr in optional_global_attributes:
+            if attr not in dataset.ncattrs():
+                missing_optional_attributes.append(attr)
+            elif not str(dataset.getncattr(attr)).strip():
+                empty_optional_attributes.append(attr)
             else:
-                checked_optional_attributes.append(attribute)
+                checked_optional_attributes.append(attr)
 
         if missing_optional_attributes:
             output(f"Missing optional global attribute(s): {WARNING}", indent=True)
@@ -517,15 +535,26 @@ def check_global_attributes(dataset):
         if empty_optional_attributes:
             output(f"Optional global attributes NOT assigned: {WARNING}", indent=True)
             for attr in empty_optional_attributes:
-                output(f"- {attr}", indent=True, level=2)
+                output(
+                    f"- {attr}",
+                    indent=True,
+                    level=2,
+                )
             metadata_summary["Optional global attributes present but not assigned"] = (
                 empty_optional_attributes
             )
 
-        output(f"Optional global attributes (values not checked): {CHECK}", indent=True)
-        for attr in checked_optional_attributes:
-            output(f"- {attr}", indent=True, level=2)
-        metadata_summary["Optional global attributes (values not checked)"] = (
+        output(
+            f"Optional global attributes included (values not checked): {CHECK}",
+            indent=True,
+        )
+        for attr in sorted(checked_optional_attributes):
+            output(
+                f"- {attr}: {str(dataset.getncattr(attr)).strip()}",
+                indent=True,
+                level=2,
+            )
+        metadata_summary["Optional global attributes included (values not checked)"] = (
             checked_optional_attributes
         )
     except Exception as e:
