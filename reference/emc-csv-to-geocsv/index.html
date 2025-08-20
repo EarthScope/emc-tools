@@ -829,15 +829,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#faq" class="md-nav__link">
-    <span class="md-ellipsis">
-      FAQ
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       Next steps
@@ -1098,15 +1089,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#faq" class="md-nav__link">
-    <span class="md-ellipsis">
-      FAQ
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       Next steps
@@ -1137,7 +1119,7 @@
 <h1 id="convert-csv-to-geocsv-emc">Convert CSV to GeoCSV (EMC)<a class="headerlink" href="#convert-csv-to-geocsv-emc" title="Permanent link">&para;</a></h1>
 <p>This guide shows how to turn a plain <strong>CSV</strong> table into a valid <strong>GeoCSV</strong> file that EMC tools can ingest — using the sample header templates in <code>samples/</code>.</p>
 <blockquote>
-<p>TL;DR: <strong>GeoCSV = header (lines starting with <code>#</code>) + your CSV data</strong>.<br />
+<p><strong>GeoCSV = header (lines starting with <code>#</code>) + your CSV data</strong>.<br />
 You can usually make one by concatenating a prepared header file and your CSV body.</p>
 </blockquote>
 <hr />
@@ -1146,7 +1128,7 @@ You can usually make one by concatenating a prepared header file and your CSV bo
 - A <strong>header block</strong> of metadata lines beginning with <code># key: value</code>
 - Followed by a <strong>data table</strong> (comma-separated by default)
 - For gridded Earth models, the header declares which columns are coordinates (<code>x</code>, <code>y</code>, optional <code>z</code>) and which columns are <strong>model variables</strong> (e.g., <code>vp</code>, <code>vs</code>, <code>rho</code>).</p>
-<p>Your repository ships three header templates:</p>
+<p>This repository provides three header templates:</p>
 <ul>
 <li><code>samples/header_2D.csv</code> – 2D models (y, x + variables)</li>
 <li><code>samples/header_3D.csv</code> – 3D models (y, x, z + variables)</li>
@@ -1330,14 +1312,6 @@ python<span class="w"> </span>emc_inspector.py<span class="w">   </span><span cl
 <li><strong>Encoding/BOM</strong>: Save in UTF‑8 <strong>without BOM</strong>.</li>
 <li><strong>Sorting</strong>: Not required for GeoCSV, but <code>GeoCSV_2_netCDF.py</code> will sort when building gridded arrays.</li>
 </ul>
-<hr />
-<h2 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h2>
-<p><strong>Q: Do I need a special extension like <code>.gcsv</code>?</strong><br />
-A: No. EMC tools rely on the header lines, not the extension. <code>.csv</code> is fine.</p>
-<p><strong>Q: Can I include comments after the data starts?</strong><br />
-A: Avoid <code>#</code> lines after the CSV header row — keep comments in the GeoCSV header block only.</p>
-<p><strong>Q: How do I list the valid keys?</strong><br />
-A: Open a sample header and search for lines beginning with <code>#</code>. Copy and adapt them. For extra variables, mirror the pattern (e.g., <code>vs_column</code>, <code>vs_units</code>, <code>vs_long_name</code>, etc.).</p>
 <hr />
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
 <ul>
