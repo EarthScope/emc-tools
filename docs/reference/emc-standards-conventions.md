@@ -15,12 +15,13 @@ Contributed Earth models are available for download from the [EarthScope Data Re
 This section describes the required formats for EMC model files and the benefits of adopting the current standards.
 
 ### Required Format
-- All EMC models must use **NetCDF-4 Classic** as the required container format. Earlier versions of the standard required **NetCDF-3 Classic**.  
-- Apply **compression** for large models to reduce file size and improve data transfer efficiency.  
-- Ensure all models are **CF-compliant** (see [CF Metadata Conventions](https://cfconventions.org/)) and compatible with EMC-Tools.  
+- **File format:** All EMC models must use [NetCDF-4 Classic](https://docs.unidata.ucar.edu/netcdf-c/4.9.2/file_format_specifications.html) as the required container format.
+  Note: earlier versions of the EMC standard specified [NetCDF-3 Classic](https://docs.unidata.ucar.edu/nug/2.0-draft/nc3_file_formats.html)).  
+- **Compression:** Apply compression for large models to reduce file size and improve data transfer efficiency.  
+- **Metadata Compliance:** Ensure all models are [CF-compliant](https://cfconventions.org/) and fully compatible with EMC-Tools.  
 
 ### Format Conversion
-- Use the [**EMC-Tools**](https://github.com/EarthScope/emc-tools) utilities to convert Earth model files between [GeoCSV](https://ds.iris.edu/files/geocsv/GeoCSV.pdf) and [NetCDF-4 Classic](https://docs.unidata.ucar.edu/netcdf-c/4.9.2/file_format_specifications.html).  
+- Use the [**EMC-Tools**](https://github.com/EarthScope/emc-tools) utilities to convert Earth model files between [GeoCSV](https://ds.iris.edu/files/geocsv/GeoCSV.pdf) and **NetCDF-4 Classic**.  
 - The transition from **NetCDF-3 Classic** to **NetCDF-4 Classic** provides key benefits:  
     - Enable internal compression and chunking to reduce storage and transfer costs.  
     - Maintain backward compatibility with the NetCDF-3 data model to ensure broad software support.  
