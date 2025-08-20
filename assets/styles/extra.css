@@ -1,0 +1,26 @@
+/* Force header banner color for both light & dark schemes */
+/* Top banner (site title area) */
+.md-header {
+  background-color: #690303 !important;
+}
+
+/* Lower menu bar (tabs line) */
+.md-tabs {
+  background-color: #690303 !important;
+}
+/* Active navigation tab underline color */
+.md-tabs__link--active {
+  border-bottom-color: #690303 !important;
+}
+/* Increase the logo size in the top banner */
+.md-header__button.md-logo img {
+    height: 48px;  /* Default is ~24px */
+    width: auto;   /* Keep aspect ratio */
+}
+
+/* Make sure the logo is vertically centered */
+.md-header__button.md-logo {
+    display: flex;
+    align-items: center;
+}
+
