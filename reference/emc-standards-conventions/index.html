@@ -922,13 +922,14 @@
 <p>This section describes the required formats for EMC model files and the benefits of adopting the current standards.</p>
 <h3 id="required-format">Required Format<a class="headerlink" href="#required-format" title="Permanent link">&para;</a></h3>
 <ul>
-<li>All EMC models must use <strong>NetCDF-4 Classic</strong> as the required container format. Earlier versions of the standard required <strong>NetCDF-3 Classic</strong>.  </li>
-<li>Apply <strong>compression</strong> for large models to reduce file size and improve data transfer efficiency.  </li>
-<li>Ensure all models are <strong>CF-compliant</strong> (see <a href="https://cfconventions.org/">CF Metadata Conventions</a>) and compatible with EMC-Tools.  </li>
+<li><strong>File format:</strong> All EMC models must use <a href="https://docs.unidata.ucar.edu/netcdf-c/4.9.2/file_format_specifications.html">NetCDF-4 Classic</a> as the required container format.
+  Note: earlier versions of the EMC standard specified <a href="https://docs.unidata.ucar.edu/nug/2.0-draft/nc3_file_formats.html">NetCDF-3 Classic</a>).  </li>
+<li><strong>Compression:</strong> Apply compression for large models to reduce file size and improve data transfer efficiency.  </li>
+<li><strong>Metadata Compliance:</strong> Ensure all models are <a href="https://cfconventions.org/">CF-compliant</a> and fully compatible with EMC-Tools.  </li>
 </ul>
 <h3 id="format-conversion">Format Conversion<a class="headerlink" href="#format-conversion" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Use the <a href="https://github.com/EarthScope/emc-tools"><strong>EMC-Tools</strong></a> utilities to convert Earth model files between <a href="https://ds.iris.edu/files/geocsv/GeoCSV.pdf">GeoCSV</a> and <a href="https://docs.unidata.ucar.edu/netcdf-c/4.9.2/file_format_specifications.html">NetCDF-4 Classic</a>.  </li>
+<li>Use the <a href="https://github.com/EarthScope/emc-tools"><strong>EMC-Tools</strong></a> utilities to convert Earth model files between <a href="https://ds.iris.edu/files/geocsv/GeoCSV.pdf">GeoCSV</a> and <strong>NetCDF-4 Classic</strong>.  </li>
 <li>The transition from <strong>NetCDF-3 Classic</strong> to <strong>NetCDF-4 Classic</strong> provides key benefits:  <ul>
 <li>Enable internal compression and chunking to reduce storage and transfer costs.  </li>
 <li>Maintain backward compatibility with the NetCDF-3 data model to ensure broad software support.  </li>
