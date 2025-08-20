@@ -159,7 +159,7 @@ Actions available:
 - `save` – Save the slice
 
 Depth Slice gmap:  
-![Depth Slice](/assets/image/Fig_1_depth_slice.png)
+![Depth Slice](../assets/image/Fig_1_depth_slice.png)
 
 ---
 
@@ -173,7 +173,7 @@ Steps:
 4. Choose plotting method.
 
 xsection:  
-![Cross Section](/assets/image/Fig_2_xsection.png)
+![Cross Section](../assets/image/Fig_2_xsection.png)
 
 ---
 
