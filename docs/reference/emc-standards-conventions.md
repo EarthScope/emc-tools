@@ -78,7 +78,7 @@ grid_ref = latitude_longitude
 
 The following resources provide additional standards, guidelines, and workflows for contributing and maintaining EMC models:
 
-- [**EMC User Guide**](../emc-user-guide.md) &mdash; overview of EMC, how to access model files, and how to use EMC-Tools.  
+- [**EMC User Guide**](../index.md) &mdash; overview of EMC, how to access model files, and how to use EMC-Tools.  
 - [**Contribute Models to EMC**](emc-model-contribution-guide.md) &mdash; guidelines for contributing new models to EMC.  
 - [**Convert CSV Files to GeoCSV**](emc-csv-to-geocsv.md) &mdash; instructions for converting a plain CSV table into a valid GeoCSV file that EMC tools can ingest.  
 - [**Update an Existing Model**](emc-update-existing-model.md) &mdash; explain how to update an existing Earth model in EMC.  

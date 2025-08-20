@@ -16,7 +16,7 @@ The **EMC Explorer** is an interactive command-line tool for exploring, visualiz
 
 ```bash
 # Run the tool
-python src/emc_explorer.py -i samples/CSEM2-Africa.v2024.12.01.r0.0-n4c.ncls
+python src/emc_explorer.py -i samples/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
 ```
 
 You will see an interactive menu where you can choose tools and actions.
@@ -43,7 +43,7 @@ Choose an option
 
 ---
 
-### 2.1 Metadata Inspection
+### 2.1 Metadata Inspection (`meta`)
 Lists dataset-level attributes and variable metadata.
 
 ```
@@ -85,7 +85,7 @@ Coordinate Variables
   ...
 ```
 
-### 2.2 Range Inspection
+### 2.2 Range Inspection (`range`)
 Show min/max for coords and variables.
 
 ```
@@ -112,7 +112,7 @@ Data Variables
 
 ---
 
-## 3. Tool Reference
+## 3. Tool Reference (`subset`)
 
 ```
 [subset] select [volume, slice, xsection, surface, back, exit | h]?
@@ -177,7 +177,7 @@ xsection:
 
 ---
 
-## 4. Saving Data
+## 4. Saving Data (`save`)
 
 When using `save`, you will be prompted for:
 - Output format (NetCDF, CSV, GeoCSV)

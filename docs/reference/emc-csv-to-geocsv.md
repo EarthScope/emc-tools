@@ -2,7 +2,7 @@
 
 This guide shows how to turn a plain **CSV** table into a valid **GeoCSV** file that EMC tools can ingest — using the sample header templates in `samples/`.
 
-> TL;DR: **GeoCSV = header (lines starting with `#`) + your CSV data**.  
+> **GeoCSV = header (lines starting with `#`) + your CSV data**.  
 > You can usually make one by concatenating a prepared header file and your CSV body.
 
 ---
@@ -14,7 +14,7 @@ GeoCSV is a simple, text-based format:
 - Followed by a **data table** (comma-separated by default)
 - For gridded Earth models, the header declares which columns are coordinates (`x`, `y`, optional `z`) and which columns are **model variables** (e.g., `vp`, `vs`, `rho`).
 
-Your repository ships three header templates:
+This repository provides three header templates:
 
 - `samples/header_2D.csv` – 2D models (y, x + variables)
 - `samples/header_3D.csv` – 3D models (y, x, z + variables)
@@ -232,18 +232,6 @@ If `emc_inspector.py` flags issues (e.g., missing units), update the **GeoCSV he
 - **Encoding/BOM**: Save in UTF‑8 **without BOM**.
 - **Sorting**: Not required for GeoCSV, but `GeoCSV_2_netCDF.py` will sort when building gridded arrays.
 
----
-
-## FAQ
-
-**Q: Do I need a special extension like `.gcsv`?**  
-A: No. EMC tools rely on the header lines, not the extension. `.csv` is fine.
-
-**Q: Can I include comments after the data starts?**  
-A: Avoid `#` lines after the CSV header row — keep comments in the GeoCSV header block only.
-
-**Q: How do I list the valid keys?**  
-A: Open a sample header and search for lines beginning with `#`. Copy and adapt them. For extra variables, mirror the pattern (e.g., `vs_column`, `vs_units`, `vs_long_name`, etc.).
 
 ---
 

@@ -1269,6 +1269,7 @@ def do_xsection_flow(cfg: AppConfig, ctx: DsContext) -> None:
 
     # Units & metadata
     z_units = ds[zvar].attrs.get("units", "")
+    z_label = zvar
     positive = ds[zvar].attrs.get("positive", "down" if zvar == "depth" else "up")
     model_attrs = ds.attrs
     grid_ref = model_attrs.get("grid_ref", "latitude_longitude")
@@ -1387,12 +1388,18 @@ def do_xsection_flow(cfg: AppConfig, ctx: DsContext) -> None:
     # Convert to km if sensible
     if np.nanmax(cumdist) > 1000:
         cumdist = cumdist / 1000.0
-        dist_label = "distance (km)"
+        dist_label = "distance"
+        dist_unit = "km"
     else:
-        dist_label = "distance (m)"
+        dist_label = "distance"
+        dist_unit = "m"
 
     xsec = xsec.assign_coords(distance=("points", cumdist))
     xsec = xsec.swap_dims({"points": "distance"})
+
+    # set attributes for the distance coordinate
+    xsec["distance"].attrs["long_name"] = dist_label
+    xsec["distance"].attrs["units"] = dist_unit
 
     # ---- Plot one variable quickly, or let user choose
     plot_vars = [v for v in ctx.data_vars if v not in ("longitude", "latitude", zvar)]
@@ -1410,8 +1417,16 @@ def do_xsection_flow(cfg: AppConfig, ctx: DsContext) -> None:
             return  # back to previous menu
 
         pdata = xsec.copy()
+        pdata[zvar].attrs["long_name"] = z_label
+        pdata[zvar].attrs["units"] = z_units
+
+        pdata = xsec.copy()
+        # flip first
         if zvar in pdata.dims and zvar == "depth":
             pdata[zvar] = (-1 if positive == "down" else 1) * pdata[zvar]
+        # then set attrs
+        pdata[zvar].attrs.update({"long_name": z_label, "units": z_units})
+
         with timed(f"Plotting xsection of {plot_var}", cfg.verbose):
             pdata[plot_var].plot.contourf(cmap=cfg.cmap)
             plt.gca().set_xlabel(dist_label)
@@ -1425,7 +1440,16 @@ def do_xsection_flow(cfg: AppConfig, ctx: DsContext) -> None:
         # ---- Save option
         raw = input("[xsection] save data (y/n)? ").strip().lower()
         if raw == "y":
-            prompt_save(pdata[[plot_var]])  # only that var
+            _data = pdata.copy()
+            # Undo the depth sign change, if needed.
+            _data = pdata.copy()
+            if zvar in _data.dims and zvar == "depth":
+                _data[zvar] = (-1 if positive == "down" else 1) * _data[zvar]
+            # restore attrs again
+            _data[zvar].attrs.update(
+                {"long_name": z_label, "units": z_units, "positive": positive}
+            )
+            prompt_save(_data[[plot_var]])  # only that var
 
 
 def do_surface_flow(cfg: AppConfig, ctx: DsContext) -> None:
@@ -1543,12 +1567,20 @@ def do_surface_flow(cfg: AppConfig, ctx: DsContext) -> None:
         if action in ("back", ""):
             return
 
+        # Loop through coordinates in sub. Check for positive direction.
+        for coord_name, coord in sub.coords.items():
+            if "positive" in coord.attrs and coord.attrs["positive"].lower() == "down":
+                # Multiply by -1 and keep attributes
+                flipped = -1 * coord
+                flipped.attrs = dict(coord.attrs)  # preserve existing attrs
+                flipped.attrs["positive"] = "up"  # update to reflect the change
+                sub = sub.assign_coords({coord_name: flipped})
+
         if action == "plot2d":
             with timed(f"Plotting {var}", cfg.verbose):
                 sub[var].plot(cmap=cfg.cmap)
                 title = f"{ctx.base_title}\nSurface plot of {var}"
                 plt.title(title)
-                # fit to data coords
                 ax = plt.gca()
                 _set_axes_from_data(ax, sub[var])
                 plt.tight_layout()

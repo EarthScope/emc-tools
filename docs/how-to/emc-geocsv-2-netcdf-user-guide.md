@@ -220,7 +220,7 @@ For each variable tag (e.g., `vp`), the script uses:
 
 ## Additional Resources
 
-- [**EMC User Guide**](../emc-user-guide.md)  
+- [**EMC User Guide**](../index.md)  
 - [**EMC Model Files Standards and Conventions**](../reference/emc-standards-conventions.md)  
 - [**NetCDF to GeoCSV Converter Guide**](emc-netcdf-2-geocsv-user-guide.md)  
 - [**NetCDF to GeoJSON Converter Guide**](emc-netcdf-2-geojson-user-guide.md)  

@@ -100,7 +100,7 @@ python src/netCDF_2_GeoJSON.py -i samples/KEA20-Moho.r0.0.nc
 
 ## Additional Resources
 
-- [**EMC User Guide**](../emc-user-guide.md)  
+- [**EMC User Guide**](../index.md)  
 - [**EMC Model Files Standards and Conventions**](../reference/emc-standards-conventions.md)  
 - [**GeoCSV to NetCDF Converter Guide**](emc-geocsv-2-netcdf-user-guide.md)  
 - [**NetCDF to GeoCSV Converter Guide**](emc-netcdf-2-geocsv-user-guide.md)  
