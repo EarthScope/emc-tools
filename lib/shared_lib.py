@@ -460,41 +460,52 @@ def check_file_type(file_path):
     return file_type
 
 
-def get_logger(log_file=None, log_stream=None, config=True, log_level=0):
-    """Set up the logging.
+# lib.py (or wherever get_logger lives)
+import logging, sys
+from typing import Optional
 
-    Keyword arguments:
-    log_file -- [default None] name of the log file to write to
-    log_stream -- [default None] the log stream to log to
-    config -- [default True] should configuring the logging module
-    log_level -- [default 0] minimum priority level of messages to log (NOTSET=0, DEBUG=10,
-                INFO=20, WARN=30, ERROR=40, CRITICAL=50)
+_LOGGER_SINGLETON: Optional[logging.Logger] = None
+
+
+def get_logger(
+    name: str = "emc_tool",
+    log_file: Optional[str] = None,
+    log_stream=sys.stdout,
+    level: int = logging.INFO,
+) -> logging.Logger:
     """
-    root = logging.getLogger()
-    logging.getLogger("matplotlib.font_manager").disabled = True
-    if root.handlers:
-        for handler in root.handlers:
-            root.removeHandler(handler)
-    if config or log_file is not None or log_stream is not None:
-        if log_file is not None:
-            logging.basicConfig(
-                filename=log_file,
-                format="%(message)s",
-                encoding="utf-8",
-                level=log_level,
-            )
-        elif log_stream is not None:
-            logging.basicConfig(
-                stream=log_stream,
-                format="%(message)s",
-                encoding="utf-8",
-                level=log_level,
-            )
-        else:
-            logging.basicConfig(format="%(message)s", encoding="utf-8", level=log_level)
+    Create or return a singleton named logger.
+    - No root/basicConfig usage.
+    - No duplicate handlers.
+    - No propagation to root.
+    """
+    global _LOGGER_SINGLETON
+    if _LOGGER_SINGLETON is not None:
+        # Allow caller to bump level later if desired
+        if level is not None:
+            _LOGGER_SINGLETON.setLevel(level)
+        return _LOGGER_SINGLETON
 
-    # Retrieve the logger instance
-    logger = logging.getLogger()
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    logger.propagate = False  # keep messages from also going to the root logger
+
+    fmt = logging.Formatter("%(message)s")
+
+    if log_stream is not None:
+        sh = logging.StreamHandler(log_stream)
+        sh.setFormatter(fmt)
+        logger.addHandler(sh)
+
+    if log_file:
+        fh = logging.FileHandler(log_file, encoding="utf-8")
+        fh.setFormatter(fmt)  # or a different formatter with timestamps
+        logger.addHandler(fh)
+
+    # Quiet a noisy sublogger without disabling it globally
+    logging.getLogger("matplotlib.font_manager").setLevel(logging.WARNING)
+
+    _LOGGER_SINGLETON = logger
     return logger
 
 

@@ -1,0 +1,44 @@
+site_name:  EMC User Guide
+site_description: EarthScope Earth Model Collaboration (EMC) utilities for EMC NetCDF datasets
+repo_url: https://github.com/EarthScope/emc-tools
+theme:
+  name: material
+  logo: assets/image/ES_logo_white.png
+  palette:
+    - scheme: default
+      primary: "#690303"
+      accent: deep-orange
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+extra_css:
+  - assets/styles/extra.css
+
+
+plugins:
+  - search
+  - awesome-pages
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Tool Guides:
+      - how-to/emc-explorer-user-guide.md
+      - how-to/emc-inspector-user-guide.md
+      - how-to/emc-netcdf-2-geocsv-user-guide.md
+      - how-to/emc-netcdf-2-geojson-user-guide.md
+      - how-to/emc-geocsv-2-netcdf-user-guide.md
+  - References:
+      - reference/emc-standards-conventions.md
+      - reference/emc-model-contribution-guide.md
+      - reference/emc-csv-to-geocsv.md
+      - reference/emc-update-existing-model.md
+

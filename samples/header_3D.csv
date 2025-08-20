@@ -1,6 +1,8 @@
-# dataset: GeoCSV 2.0
+# dataset: GeoCSV2.0
+# created: 2025-08-18 12:06:01 UTC (netCDF_2_GeoCSV.py)
+# netCDF_file: CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
 # delimiter: |
-# created: 2025-08-07T19:19:37 UTC
+# global_radius_in_meters: 6371000.0
 # global_title: CSEM2 in the region Africa at a resolution of 2 points per degree and 10 km
 # global_id: CSEM2_Africa
 # global_keywords: Collaborative Seismic Earth Model, multi-scale full-waveform inversion
@@ -33,46 +35,69 @@
 # global_geospatial_vertical_max: 1200
 # global_year: 2024
 # global_model_type: 3-D Tomography Earth Model
+# global_history: 2025-08-18 12:06:01 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.237 from samples/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc; Tue Jul 15 05:19:31 2025: ncatted -a model_subtype,global,o,c,VSV,VSH,VPV,VPH,RHO netcdf/CSEM2-Africa.v2024.12.01.r0.0-n4.nc; Tue Jul 15 05:19:31 2025: ncatted -a model_type,global,o,c,3-D Tomography Earth Model netcdf/CSEM2-Africa.v2024.12.01.r0.0-n4.nc; Tue Jul  8 06:04:23 2025: ncatted -a year,global,a,c,2024 netcdf/CSEM2-Africa.v2024.12.01.r0.0-n4.nc
+# global_NCO: netCDF Operators version 4.9.9 (Homepage = http://nco.sf.net, Code = http://github.com/nco/nco)
 # global_model_subtype: VSV,VSH,VPV,VPH,RHO
-# global_history: Tue Jul 15 05:19:31 2025: ncatted -a model
-# VSV_variable: VSV
-# VSV_dimensions: 3
-# VSV_long_name: Wave speed of vertically polarized S-waves
-# VSV_units: km/s
-# VSV_display_name: VSV
-# VSH_variable: VSH
-# VSH_dimensions: 3
-# VSH_long_name: Wave speed of horizontally polarized S-waves
-# VSH_units: km/s
-# VSH_display_name: VSH
-# VPV_variable: VPV
-# VPV_dimensions: 3
-# VPV_long_name: P-wave velocity in vertical propagation direction
-# VPV_units: km/s
-# VPV_display_name: VPV
-# VPH_variable: VPH
-# VPH_dimensions: 3
-# VPH_long_name: P-wave velocity in horizontal propagation direction
-# VPH_units: km/s
-# VPH_display_name: VPH
-# RHO_variable: RHO
-# RHO_dimensions: 3
-# RHO_long_name: Material density
-# RHO_units: kg/m^3
-# RHO_display_name: RHO
+# global_grid_ref: latitude_longitude
+# global_data_layout: vertex
+# y_column: latitude
+# y_variable: latitude
+# y_dimensions: 1
+# y__FillValue: nan
+# y_long_name: Latitude
+# y_units: degrees_north
+# y_standard_name: latitude
+# x_column: longitude
+# x_variable: longitude
+# x_dimensions: 1
+# x__FillValue: nan
+# x_long_name: Longitude
+# x_units: degrees_east
+# x_standard_name: longitude
+# z_column: depth
 # z_variable: depth
 # z_dimensions: 1
 # z_long_name: Depth below surface
 # z_units: kilometers
 # z_standard_name: depth
 # z_positive: down
-# y_variable: latitude
-# y_dimensions: 1
-# y_long_name: Latitude
-# y_units: degrees_north
-# y_standard_name: latitude
-# x_variable: longitude
-# x_dimensions: 1
-# x_long_name: Longitude
-# x_units: degrees_east
-# x_standard_name: longitude
+# VSV_column: VSV
+# VSV_variable: VSV
+# VSV_dimensions: 3
+# VSV__FillValue: nan
+# VSV_long_name: Wave speed of vertically polarized S-waves
+# VSV_units: km/s
+# VSV_display_name: VSV
+# VSV_source:data-derived
+# VSH_column: VSH
+# VSH_variable: VSH
+# VSH_dimensions: 3
+# VSH__FillValue: nan
+# VSH_long_name: Wave speed of horizontally polarized S-waves
+# VSH_units: km/s
+# VSH_display_name: VSH
+# VSH_source:data-derived
+# VPV_column: VPV
+# VPV_variable: VPV
+# VPV_dimensions: 3
+# VPV__FillValue: nan
+# VPV_long_name: P-wave velocity in vertical propagation direction
+# VPV_units: km/s
+# VPV_display_name: VPV
+# VPV_source:data-derived
+# VPH_column: VPH
+# VPH_variable: VPH
+# VPH_dimensions: 3
+# VPH__FillValue: nan
+# VPH_long_name: P-wave velocity in horizontal propagation direction
+# VPH_units: km/s
+# VPH_display_name: VPH
+# VPH_source:data-derived
+# RHO_column: RHO
+# RHO_variable: RHO
+# RHO_dimensions: 3
+# RHO__FillValue: nan
+# RHO_long_name: Material density
+# RHO_units: kg/m^3
+# RHO_display_name: RHO
+# RHO_source:data-derived

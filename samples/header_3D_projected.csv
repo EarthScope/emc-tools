@@ -30,6 +30,7 @@
 # global_geospatial_vertical_units: km
 # global_geospatial_vertical_positive: down
 # global_grid_ref: projected
+# global_data_layout: vertex
 # global_history: 2022-08-23 20:55:18 UTC Converted to GeoCSV by netCDF_2_GeoCSV.py ,v2022.230 from ref-model-nzwide2p2-crust.r0.0-2D.nc; 2022-01-31 16:23:21 UTC Converted to netCDF by GeoCSV_2_netCDF_3D.py v2022.028 from ref-model-nzwide2p2-crust.r0.0.csv
 # y_column: y
 # y_variable: y
@@ -77,6 +78,7 @@
 # vp_units: km/s
 # vp_min: 3.630
 # vp_max: 9.310
+# vp_source:data-derived
 # vs_column: vs
 # vs_variable: vs
 # vs_dimensions: 3
@@ -85,6 +87,7 @@
 # vs_units: km/s
 # vs_min: 2.059
 # vs_max: 5.330
+# vs_source:data-derived
 # rho_column: rho
 # rho_variable: rho
 # rho_dimensions: 3
@@ -93,6 +96,7 @@
 # rho_units: kg/m^3
 # rho_min: 2339.100
 # rho_max: 3801.700
+# rho_source:data-derived
 # qp_column: qp
 # qp_variable: qp
 # qp_dimensions: 3
@@ -100,7 +104,7 @@
 # qp_coordinates: longitude latitude
 # qp_units: count
 # qp_min: 117.700
-# qp_max: 1675.500
+# qp_source:data-derived
 # qs_column: qs
 # qs_variable: qs
 # qs_dimensions: 3
@@ -109,3 +113,4 @@
 # qs_units: count
 # qs_min: 90.600
 # qs_max: 2227.300
+# qs_source:data-derived

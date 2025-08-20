@@ -32,6 +32,8 @@
 # global_repository_name: EMC
 # global_repository_institution: EarthScope DS
 # global_repository_pid: doi:10.17611/dp/emc.2021.kea20.1
+# global_grid_ref: latitude_longitude
+# global_data_layout: vertex
 # y_column: latitude
 # y_variable: latitude
 # y_dimensions: 1
@@ -51,3 +53,4 @@
 # moho_long_name: Moho depth relative to a mean Earth radius of 6371 km
 # moho_display_name: Moho depth (km)
 # moho_units: km
+# moho_source:data-derived

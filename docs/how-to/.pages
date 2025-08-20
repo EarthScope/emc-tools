@@ -1,0 +1,7 @@
+title: EMC Tools
+arrange:
+  - emc-geocsv-2-netcdf-user-guide.md
+  - emc-netcdf-2-geocsv-user-guide.md
+  - emc-netcdf-2-geojson-user-guide.md
+  - emc-explorer-user-guide.md
+  - emc-inspector-user-guide.md
