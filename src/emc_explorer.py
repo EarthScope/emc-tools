@@ -860,14 +860,14 @@ def handle_subset(cfg: AppConfig, ctx: DsContext) -> None:
                 and "longitude" in ctx.ds.coords
                 and "latitude" in ctx.ds.coords
             ):
-                valid = ["volume", "slice", "xsection", "surface", "back", "exit"]
+                valid = ["volume", "slice", "xsection", "back", "exit"]
             else:
-                valid = ["volume", "slice", "surface", "back", "exit"]
+                valid = ["volume", "slice", "back", "exit"]
             if cfg.verbose:
                 header("Subset Menu (2D/3D)")
                 tip("Type 'h' for hints at any prompt.")
             choice = choose_with_hints(
-                "[subset] select [volume, slice, xsection, surface, back, exit | h]? ",
+                "[subset] select [volume, slice, xsection, back, exit | h]? ",
                 valid=valid,
                 hints=SUBSET_HINTS_3D,
             )
@@ -1144,10 +1144,13 @@ def do_slice_flow(plot_var, cfg: AppConfig, ctx: DsContext) -> None:
 
             # inside the 'plot2d' branch
             if action == "plot2d":
-                while True:
+                repeat = True
+                while repeat:
                     if not data_vars:
                         err("No plottable variables.")
                         break
+                    if len(data_vars) == 1:
+                        repeat = False
                     plot_var = (
                         data_vars[0]
                         if len(data_vars) == 1
@@ -1174,10 +1177,13 @@ def do_slice_flow(plot_var, cfg: AppConfig, ctx: DsContext) -> None:
 
             # inside the 'plot3d' branch
             elif action == "plot3d":
-                while True:
+                repeat = True
+                while repeat:
                     if not data_vars:
                         err("No plottable variables.")
                         break
+                    if len(data_vars) == 1:
+                        repeat = False
                     plot_var = (
                         data_vars[0]
                         if len(data_vars) == 1
@@ -1195,10 +1201,14 @@ def do_slice_flow(plot_var, cfg: AppConfig, ctx: DsContext) -> None:
 
             # inside the 'gmap' branch
             elif action == "gmap" and gmap_option:
-                while True:
+                repeat = True
+                while repeat:
                     if not data_vars:
                         err("No plottable variables.")
                         break
+
+                    if len(data_vars) == 1:
+                        repeat = False
                     plot_var = (
                         data_vars[0]
                         if len(data_vars) == 1

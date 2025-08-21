@@ -15,8 +15,11 @@ The **EMC Explorer** is an interactive command-line tool for exploring, visualiz
 ## 1. Quick Start
 
 ```bash
+# Download a netCDF file from the EMC File Repository (for example CSEM2-Africa.v2024.12.01.r0.0-n4c.nc)
+https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
+
 # Run the tool
-python src/emc_explorer.py -i samples/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
+python src/emc_explorer.py -i CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
 ```
 
 You will see an interactive menu where you can choose tools and actions.
@@ -27,35 +30,39 @@ You will see an interactive menu where you can choose tools and actions.
 
 At each step, you will be prompted with available actions.  
 ```
+# Some tips for easier navigation.
 [TIP] Type 'h' for hints at any prompt.
 [TIP] Press Enter to accept default values (if provided)
 
-Choose an option
-----------------
-  - meta   — view file metadata
-  - range  — show variable ranges
-  - subset — volume / slice / xsection / surface
-  - map    — show coverage map
-  - help   — usage
-  - exit   — quit
+# The first meu you will see.
+[data] select option [meta, range, subset, map, help, exit | h]?
+
+# Type "h" in response to get some hints about the menu items.
+Hints
+-----
+  exit       Quit the tool
+  help       Print usage text
+  map        Show coverage map (if lat/lon available) <------ 2.1
+  meta       View global attributes, coords, and variables <------ 2.2
+  range      Show min/max for coords and variables <------ 2.3
+  subset     Enter sub-menu: volume/slice/xsection/surface <------ 3
 [data] select option [meta, range, subset, map, help, exit | h]?
 ```
 
 ---
 
-### 2.1 Metadata Inspection (`meta`)
+### 2.1 Display Map of Coverage Area (`map`)
+
+```
+[data] select option [meta, range, subset, map, help, exit | h]? map
+```
+
+![Depth Slice](../assets/image/Fig_0_map.png)
+
+---
+
+### 2.2 Metadata Inspection (`meta`)
 Lists dataset-level attributes and variable metadata.
-
-```
-[data] select option [meta, range, subset, map, help, exit | h]? 
-
-  exit       Quit the tool
-  help       Print usage text
-  map        Show coverage map (if lat/lon available)
-  meta       View global attributes, coords, and variables <------ 2.1
-  range      Show min/max for coords and variables  <------ 2.2
-  subset     Enter sub-menu: volume/slice/xsection/surface
-```
 
 ```
 [data] select option [meta, range, subset, map, help, exit | h]? meta
@@ -85,7 +92,7 @@ Coordinate Variables
   ...
 ```
 
-### 2.2 Range Inspection (`range`)
+### 2.3 Range Inspection (`range`)
 Show min/max for coords and variables.
 
 ```
@@ -115,55 +122,43 @@ Data Variables
 ## 3. Tool Reference (`subset`)
 
 ```
-[subset] select [volume, slice, xsection, surface, back, exit | h]?
+[subset] select [volume, slice, xsection, back, exit | h]?
 
   back       Return to main menu
   exit       Quit the tool
-  slice      Slice along one coordinate (e.g., depth)
-  surface    Surface plot of a 2D variable
+  slice      Slice along one coordinate (e.g., depth)  <------ 3.1
   volume     Extract a subvolume (limits for each dimension)
-  xsection   Interpolated vertical cross-section along a path
+  xsection   Interpolated vertical cross-section along a path  <------ 3.2
 ```
-
-### 3.1 Surface Plotting (`surface`)
-Generates plots of 2D model variables.
-
-**Workflow:**
-1. Select a 2D variable from the list.
-2. Enter dimension limits (blank for full range).
-3. Choose an action (`plot2d`, `gmap`, `cmap`, `save`).
-
-Example:
-```
-[surface] variable ['var1', 'var2'] (back/exit)? var1
-[surface-var1] latitude limits (back/exit)? -10,10
-[surface-var1] longitude limits (back/exit)? 100,120
-```
-
 ---
 
-### 3.2 Depth Slice (`slice-depth`)
-Plots slices at a given depth for 3D variables.
+### 3.1 Depth Slice (`slice-depth`)
+Plots slices at a given depth (here 100) for 3D variables.
 
 Example:
 ```
-[slice-depth] variable ['VSV', 'VSH', 'VS', ...] (back/exit)? VSV
-[slice-depth] value (back/exit)? 100 (See Figure 1)
+[slice-depth] value (back/exit)? 100 
+[TIP] latitude valid range = [-54, 46] (Enter 'min,max' or blank for full)
+[slice-depth] latitude limits (back/exit)? <------ press Enter fro full range
+[TIP] longitude valid range = [-28, 62] (Enter 'min,max' or blank for full)
+[slice-depth] longitude limits (back/exit)? <------ press Enter fro full range
 ```
 
 Actions available:
 - `plot2d` – Depth slice plot
 - `plot3d` – 3D rendering
-- `gmap` – Geographic overlay
+- `gmap` – Geographic overlay <------
 - `cmap` – Change colormap
 - `save` – Save the slice
+[slice-depth] Action [plot2d, plot3d, gmap, cmap, save, back, exit | h]? gmap
+[slice-depth] variable ['VSV', 'VSH', 'VS', ...] (back/exit)? VSV
 
 Depth Slice gmap:  
 ![Depth Slice](../assets/image/Fig_1_depth_slice.png)
 
 ---
 
-### 3.3 Cross-Section (`xsection`)
+### 3.2 Cross-Section (`xsection`)
 Plots data along a transect between two points.
 
 Steps:

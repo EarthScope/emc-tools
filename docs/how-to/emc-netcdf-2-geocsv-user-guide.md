@@ -12,7 +12,11 @@ This ensures EMC models can be distributed in a lightweight, tabular format whil
 ### Basic command
 
 ```bash
-python src/netCDF_2_GeoCSV.py -i samples/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc -x longitude -y latitude -z depth
+# Download a netCDF file from the EMC File Repository (for example CSEM2-Africa.v2024.12.01.r0.0-n4c.nc)
+https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
+
+# Run the code
+python src/netCDF_2_GeoCSV.py -i CSEM2-Africa.v2024.12.01.r0.0-n4c.nc -x longitude -y latitude -z depth
 ```
 
 - Coordinate variable flags must match variables in your NetCDF file:
@@ -38,31 +42,36 @@ Exit codes: `0` on success; non-zero for input or validation errors.
 
 ## Examples
 
+```bash
+# Download a netCDF file from the EMC File Repository (for example KEA20-Moho.r0.0-n4c.nc)
+https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/KEA20-Moho.r0.0-n4c.nc
+```
+
 ### 1. Single-file output (3D)
 
 ```bash
-python netCDF_2_GeoCSV.py -i samples/KEA20-Moho.r0.0.nc -x longitude -y latitude -z depth -m single
+python netCDF_2_GeoCSV.py -i KEA20-Moho.r0.0-n4c.nc -x longitude -y latitude -z depth -m single
 ```
 **Output:** `models/MODEL_3D.csv`
 
 ### 2. One file per depth (3D)
 
 ```bash
-python netCDF_2_GeoCSV.py -i samples/KEA20-Moho.r0.0.nc -x longitude -y latitude -z depth -m depth
+python netCDF_2_GeoCSV.py -i KEA20-Moho.r0.0-n4c.nc -x longitude -y latitude -z depth -m depth
 ```
 **Output:** `models/MODEL_3D_<DEPTH>_km.csv` for each depth level
 
 ### 3. 2D model
 
 ```bash
-python src/netCDF_2_GeoCSV.py -i samples/KEA20-Moho.r0.0_1.nc -x latitude -y longitude -m single
+python src/netCDF_2_GeoCSV.py -i KEA20-Moho.r0.0-n4c.nc -x latitude -y longitude -m single
 ```
 **Output:** `models/MODEL_2D.csv`
 
 ### 4. Show headers only (2D)
 
 ```bash
-python src/netCDF_2_GeoCSV.py -i samples/KEA20-Moho.r0.0.nc -x longitude -y latitude -H
+python src/netCDF_2_GeoCSV.py -i KEA20-Moho.r0.0-n4c.nc -x longitude -y latitude -H
 ```
 Prints both the NetCDF header (dimensions, variables, globals) and the GeoCSV header that would be written, then exits.  
 
