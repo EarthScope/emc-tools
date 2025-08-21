@@ -1003,7 +1003,11 @@ This ensures EMC models can be distributed in a lightweight, tabular format whil
 <hr />
 <h2 id="usage-examples">Usage Examples<a class="headerlink" href="#usage-examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-command">Basic command<a class="headerlink" href="#basic-command" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>samples/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-z<span class="w"> </span>depth
+<div class="highlight"><pre><span></span><code><span class="c1"># Download a netCDF file from the EMC File Repository (for example CSEM2-Africa.v2024.12.01.r0.0-n4c.nc)</span>
+https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/CSEM2-Africa.v2024.12.01.r0.0-n4c.nc
+
+<span class="c1"># Run the code</span>
+python<span class="w"> </span>src/netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>CSEM2-Africa.v2024.12.01.r0.0-n4c.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-z<span class="w"> </span>depth
 </code></pre></div>
 <ul>
 <li>Coordinate variable flags must match variables in your NetCDF file:</li>
@@ -1077,20 +1081,23 @@ This ensures EMC models can be distributed in a lightweight, tabular format whil
 <p>Exit codes: <code>0</code> on success; non-zero for input or validation errors.  </p>
 <hr />
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Download a netCDF file from the EMC File Repository (for example KEA20-Moho.r0.0-n4c.nc)</span>
+https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/KEA20-Moho.r0.0-n4c.nc
+</code></pre></div>
 <h3 id="1-single-file-output-3d">1. Single-file output (3D)<a class="headerlink" href="#1-single-file-output-3d" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>samples/KEA20-Moho.r0.0.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-z<span class="w"> </span>depth<span class="w"> </span>-m<span class="w"> </span>single
+<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>KEA20-Moho.r0.0-n4c.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-z<span class="w"> </span>depth<span class="w"> </span>-m<span class="w"> </span>single
 </code></pre></div>
 <strong>Output:</strong> <code>models/MODEL_3D.csv</code></p>
 <h3 id="2-one-file-per-depth-3d">2. One file per depth (3D)<a class="headerlink" href="#2-one-file-per-depth-3d" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>samples/KEA20-Moho.r0.0.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-z<span class="w"> </span>depth<span class="w"> </span>-m<span class="w"> </span>depth
+<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>KEA20-Moho.r0.0-n4c.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-z<span class="w"> </span>depth<span class="w"> </span>-m<span class="w"> </span>depth
 </code></pre></div>
 <strong>Output:</strong> <code>models/MODEL_3D_&lt;DEPTH&gt;_km.csv</code> for each depth level</p>
 <h3 id="3-2d-model">3. 2D model<a class="headerlink" href="#3-2d-model" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>samples/KEA20-Moho.r0.0_1.nc<span class="w"> </span>-x<span class="w"> </span>latitude<span class="w"> </span>-y<span class="w"> </span>longitude<span class="w"> </span>-m<span class="w"> </span>single
+<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>KEA20-Moho.r0.0-n4c.nc<span class="w"> </span>-x<span class="w"> </span>latitude<span class="w"> </span>-y<span class="w"> </span>longitude<span class="w"> </span>-m<span class="w"> </span>single
 </code></pre></div>
 <strong>Output:</strong> <code>models/MODEL_2D.csv</code></p>
 <h3 id="4-show-headers-only-2d">4. Show headers only (2D)<a class="headerlink" href="#4-show-headers-only-2d" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>samples/KEA20-Moho.r0.0.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-H
+<p><div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/netCDF_2_GeoCSV.py<span class="w"> </span>-i<span class="w"> </span>KEA20-Moho.r0.0-n4c.nc<span class="w"> </span>-x<span class="w"> </span>longitude<span class="w"> </span>-y<span class="w"> </span>latitude<span class="w"> </span>-H
 </code></pre></div>
 Prints both the NetCDF header (dimensions, variables, globals) and the GeoCSV header that would be written, then exits.  </p>
 <hr />
