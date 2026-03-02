@@ -24,3 +24,24 @@
     align-items: center;
 }
 
+/* Subtle "site-style" divider under the MkDocs header */
+.md-header {
+  border-bottom: 3px solid rgba(255,255,255,0.12); /* or a light version of your hr line */
+}
+
+/* Make the header feel closer to the EarthScope site */
+.md-header {
+  border-bottom: 3px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Optional: make the title a bit more “site-like” */
+.md-header__title {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Optional: slightly increase logo presence */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.6rem;
+}
