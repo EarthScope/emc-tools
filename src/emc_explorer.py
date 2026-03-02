@@ -1169,7 +1169,7 @@ def do_slice_flow(plot_var, cfg: AppConfig, ctx: DsContext) -> None:
                             plot_data["depth"] = -plot_data["depth"]
                     plot_data.plot(cmap=cfg.cmap)
                     title = f"{ctx.base_title}\n{direction} slice of {plot_var} at {closest} {ds[direction].attrs.get('units','')}"
-                    plt.title(title)
+                    plt.title(str(title))
                     _set_axes_from_data(plt.gca(), plot_data)
 
                     plt.tight_layout()
@@ -1195,7 +1195,7 @@ def do_slice_flow(plot_var, cfg: AppConfig, ctx: DsContext) -> None:
                         break
                     sliced[plot_var].plot.surface(cmap=cfg.cmap)
                     title = f"{ctx.base_title}\n{direction} slice (surface) of {plot_var} at {closest} {ds[direction].attrs.get('units','')}"
-                    plt.title(title)
+                    plt.title(str(title))
                     plt.tight_layout()
                     plt.show()
 
@@ -1590,7 +1590,7 @@ def do_surface_flow(cfg: AppConfig, ctx: DsContext) -> None:
             with timed(f"Plotting {var}", cfg.verbose):
                 sub[var].plot(cmap=cfg.cmap)
                 title = f"{ctx.base_title}\nSurface plot of {var}"
-                plt.title(title)
+                plt.title(str(title))
                 ax = plt.gca()
                 _set_axes_from_data(ax, sub[var])
                 plt.tight_layout()
