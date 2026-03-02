@@ -12,11 +12,9 @@ USAGE:
          
        emc_inspector.py  
 
- HISTORY:
-   2024-09-16 EarthScope DS Manoch: v2024.260 Created.
                                """
 
-version = "v2024.260"
+version = "v2025.260"
 script = os.path.basename(sys.argv[0])
 version_tag = f"""\n\n[INFO] {script} version {version}"""
 
@@ -66,16 +64,17 @@ required_global_attributes = {
     "summary": None,
     "title": None,
     "year": None,
+    "model_type": None,
+    "model_subtype": None,
+    "grid_dim": "3D",
+    "grid_ref": "latitude_longitude",
 }
 
 # Dictionary of optional global attributes and their start string
 optional_global_attributes = {
     "author_email": None,
     "author_url": None,
-    "grid_ref": None,
     "version": "v",
-    "grid_dim": "3D",
-    "grid_ref": "latitude_longitude",
 }
 
 metadata_summary = {}
