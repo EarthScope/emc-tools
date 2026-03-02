@@ -239,6 +239,8 @@ def gmap(plot_var, cmap, gmap_limits, sliced_data, vmin=None, vmax=None, title=N
                 transform=ccrs.PlateCarree(),
                 cmap=color,
                 add_colorbar=True,
+                cbar_kwargs={"orientation": "horizontal"},
+                ax=ax,
                 vmin=vmin,
                 vmax=vmax,
             )
@@ -249,6 +251,8 @@ def gmap(plot_var, cmap, gmap_limits, sliced_data, vmin=None, vmax=None, title=N
                 transform=ccrs.PlateCarree(),
                 cmap=color,
                 add_colorbar=True,
+                cbar_kwargs={"orientation": "horizontal"},
+                ax=ax,
             )
 
         # Plot lat/lon grid
