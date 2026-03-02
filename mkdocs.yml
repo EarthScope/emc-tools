@@ -1,4 +1,4 @@
-site_name:  EMC User Guide
+site_name: Earth Model Collaboration (EMC) — User Guide
 site_description: EarthScope Earth Model Collaboration (EMC) utilities for EMC NetCDF datasets
 repo_url: https://github.com/EarthScope/emc-tools
 theme:
@@ -16,6 +16,11 @@ theme:
 extra_css:
   - assets/styles/extra.css
 
+extra:
+  social:
+    - icon: material/web
+      link: https://dmnqcu4jcq58p.cloudfront.net/products/viewer.html?key=emc
+      name: EMC product page
 
 plugins:
   - search
