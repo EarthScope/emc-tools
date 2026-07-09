@@ -56,7 +56,7 @@ required_global_attributes = {
     "model": None,
     "model_type": None,
     "model_subtype": None,
-    "reference_pid": "doi",
+    "reference_pid": "doi:",
     "reference": None,
     "repository_institution": "EarthScope DS",
     "repository_name": "EMC",
@@ -66,9 +66,72 @@ required_global_attributes = {
     "year": None,
     "model_type": None,
     "model_subtype": None,
-    "grid_dim": "3D",
+    "grid_dim": ["2D", "3D"],
     "grid_ref": "latitude_longitude",
 }
+
+
+def check_grid_dimensionality(dataset):
+    try:
+        if "grid_dim" not in dataset.ncattrs():
+            return
+
+        grid_dim = str(dataset.getncattr("grid_dim")).strip()
+
+        if grid_dim not in ["2D", "3D"]:
+            return
+
+        expected_ndim = 3 if grid_dim == "3D" else 2
+
+        coordinate_names = set(dataset.dimensions.keys())
+        auxiliary_coordinates = set()
+
+        # Identify auxiliary coordinates from variables' coordinates attributes
+        for var_name, variable in dataset.variables.items():
+            if "coordinates" in variable.ncattrs():
+                auxiliary_coordinates.update(variable.getncattr("coordinates").split())
+
+        bad_variables = []
+        checked_variables = []
+
+        for var_name, variable in dataset.variables.items():
+            # Skip coordinate and auxiliary-coordinate variables
+            if var_name in coordinate_names or var_name in auxiliary_coordinates:
+                continue
+
+            actual_ndim = len(variable.dimensions)
+
+            if actual_ndim != expected_ndim:
+                bad_variables.append(
+                    f"{var_name} has {actual_ndim} dimensions: {', '.join(variable.dimensions)}"
+                )
+            else:
+                checked_variables.append(var_name)
+
+        if bad_variables:
+            output(
+                f"Grid dimensionality check: grid_dim is {grid_dim}, so model variables should be {expected_ndim}D. {FAIL}",
+                indent=True,
+            )
+            for item in bad_variables:
+                output(f"- {item}", indent=True, level=2)
+
+            metadata_summary["Grid dimensionality mismatch"] = bad_variables
+        else:
+            output(
+                f"Grid dimensionality check: grid_dim is {grid_dim}, and model variables are {expected_ndim}D. {CHECK}",
+                indent=True,
+            )
+            metadata_summary["Grid dimensionality check"] = (
+                f"grid_dim is {grid_dim}; model variables are {expected_ndim}D {CHECK}"
+            )
+
+    except Exception as e:
+        output(f"Error checking grid dimensionality: {e} {FAIL}", indent=True)
+        metadata_summary["Grid dimensionality check"] = (
+            f"Error checking grid dimensionality: {e} {FAIL}"
+        )
+
 
 # Dictionary of optional global attributes and their start string
 optional_global_attributes = {
@@ -136,6 +199,10 @@ def check_netcdf_file(file_name):
             # Check for required and optional global attributes
             output_header("Global Attributes Check")
             check_global_attributes(dataset)
+
+            # Check that grid_dim matches model variable dimensionality
+            output_header("Grid Dimensionality Check")
+            check_grid_dimensionality(dataset)
 
             # Perform CF compliance check
             output_header("CF Compliance Check")
@@ -338,10 +405,16 @@ def check_geospatial_attributes(dataset, lat_min, lat_max, lon_min, lon_max):
         required_geospatial_attrs = [
             "geospatial_lat_min",
             "geospatial_lat_max",
+            "geospatial_lat_units",
+            "geospatial_lat_resolution",
             "geospatial_lon_min",
             "geospatial_lon_max",
+            "geospatial_lon_units",
+            "geospatial_lon_resolution",
             "geospatial_vertical_min",
             "geospatial_vertical_max",
+            "geospatial_vertical_units",
+            "geospatial_vertical_positive",
         ]
 
         missing_attrs = [
@@ -471,14 +544,19 @@ def check_global_attributes(dataset):
             elif not str(dataset.getncattr(attribute)).strip():
                 empty_required_attributes.append(attribute)
             elif required_global_attributes[attribute]:
-                if (
-                    not str(dataset.getncattr(attribute))
-                    .strip()
-                    .startswith(required_global_attributes[attribute])
-                ):
-                    empty_required_attributes.append(attribute)
+                value = str(dataset.getncattr(attribute)).strip()
+                expected = required_global_attributes[attribute]
+
+                if isinstance(expected, (list, tuple, set)):
+                    if value not in expected:
+                        empty_required_attributes.append(attribute)
+                    else:
+                        checked_required_attributes.append(attribute)
                 else:
-                    checked_required_attributes.append(attribute)
+                    if not value.startswith(expected):
+                        empty_required_attributes.append(attribute)
+                    else:
+                        checked_required_attributes.append(attribute)
             else:
                 checked_required_attributes.append(attribute)
 
@@ -556,6 +634,33 @@ def check_global_attributes(dataset):
         metadata_summary["Optional global attributes included (values not checked)"] = (
             checked_optional_attributes
         )
+        # Type check for 'year' — must be a string so downstream tools can
+        # detect a year *range* via the presence of '-' (e.g. "2010-2020").
+        # A numeric year can never encode a range, so it silently breaks that logic.
+        if "year" in dataset.ncattrs():
+            year_value = dataset.getncattr("year")
+            if not isinstance(year_value, str):
+                output(
+                    f"Global attribute 'year' must be a string but is "
+                    f"{type(year_value).__name__}: {year_value}. ",
+                    indent=True,
+                )
+                metadata_summary["year type check"] = (
+                    f"'year' must be a string but is {type(year_value).__name__}; "
+                    f"range detection will fail {FAIL}"
+                )
+            else:
+                interpretation = (
+                    "range of years" if "-" in year_value.strip() else "single year"
+                )
+                output(
+                    f"Global attribute 'year' is a string and will be read as a "
+                    f"{interpretation}: \"{year_value.strip()}\". {CHECK}",
+                    indent=True,
+                )
+                metadata_summary["year type check"] = (
+                    f"string, reads as {interpretation}: \"{year_value.strip()}\" {CHECK}"
+                )
     except Exception as e:
         output(f"Error checking global attributes: {e} {FAIL}")
         metadata_summary["Global Attributes"] = (
