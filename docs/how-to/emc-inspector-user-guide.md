@@ -231,4 +231,4 @@ detected third dimension.
 
 ## 4. Contact / Feedback
 
-For questions, comments, or feedback, please email: 📧 **data-help@earthscope.org**
+For questions, comments, or feedback, please email: 📧 **es-help@earthscope.org**
