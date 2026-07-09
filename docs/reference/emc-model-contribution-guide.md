@@ -23,4 +23,4 @@ Before submitting your model to EMC, review the [EMC Standards and Conventions](
 3. Validate metadata compliance using the [EMC Metadata Inspector](../how-to/emc-inspector-user-guide.md).  
 4. Preview and verify model data integrity with the [EMC Model Explorer](../how-to/emc-explorer-user-guide.md).  
 5. Submit your final model file and publication reference to:  
-   📧 [data-help@earthscope.org](mailto:data-help@earthscope.org).  
+   📧 [es-help@earthscope.org](mailto:es-help@earthscope.org).  
