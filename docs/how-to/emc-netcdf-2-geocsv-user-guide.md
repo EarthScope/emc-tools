@@ -129,4 +129,4 @@ The script writes a full header that includes:
 
 **Comments or Questions?**  
 For any questions or feedback about EMC Earth models or EMC-Tools,  
-please email: **[data-help@earthscope.org](mailto:data-help@earthscope.org)**  
+please email: **[es-help@earthscope.org](mailto:es-help@earthscope.org)**  
