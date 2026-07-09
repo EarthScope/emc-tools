@@ -6,7 +6,7 @@ IRIS Earth Model Collaboration (EMC) - Tools, Release 2.1
 
 COMMENTS/QUESTIONS:
 
-    Please contact data-help@earthscope.org
+    Please contact es-help@earthscope.org
 
 ---------------------------------------------------------
 =========================================================
