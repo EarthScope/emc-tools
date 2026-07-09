@@ -56,10 +56,10 @@ Once validated:
 1. Attach the **updated NetCDF file**.
 2. Include your **change description** paragraph.
 3. State the **new version/revision number**.
-4. Send everything to: **data-help@earthscope.org**
+4. Send everything to: **es-help@earthscope.org**
 
 **Important:**  
-If you have already communicated about this model via `data-help@earthscope.org`, **always reply to one of the existing email threads** instead of starting a new one. This ensures your update is tracked under the same ticket.
+If you have already communicated about this model via `es-help@earthscope.org`, **always reply to one of the existing email threads** instead of starting a new one. This ensures your update is tracked under the same ticket.
 
 ---
 
