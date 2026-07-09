@@ -229,4 +229,4 @@ For each variable tag (e.g., `vp`), the script uses:
 
 **Comments or Questions?**  
 For any questions or feedback about EMC Earth models or EMC-Tools,  
-please email: **[data-help@earthscope.org](mailto:data-help@earthscope.org)**  
+please email: **[es-help@earthscope.org](mailto:es-help@earthscope.org)**  
