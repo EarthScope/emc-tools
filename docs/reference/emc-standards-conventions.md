@@ -6,7 +6,7 @@ The **EMC Standards and Conventions** define the supported file formats, metadat
 
 This guide highlights the critical role of metadata, specifying the required attributes, their formats, and guidelines for coordinate system usage. Following these practices helps minimize distortion, improve accuracy, and maintain the overall integrity and usability of EMC data and tools.  
 
-Contributed Earth models are available for download from the [EarthScope Data Repository](https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/). For interactive filtering and selection of models, visit the [EMC Model Filtering & Access API](https://data.dev.earthscope.org/archive/seismology/products/emc/README.html).  
+Contributed Earth models are available for download from the [EarthScope Data Repository](https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/). For interactive filtering and selection of models, visit the [EMC Model Filtering & Access API](https://data.earthscope.org/app/products/portal/emc/).  
 
 ---
 
@@ -87,4 +87,4 @@ The following resources provide additional standards, guidelines, and workflows 
 
 **Comments or Questions?**  
 For any questions or feedback about EMC Earth models or EMC-Tools,  
-please email: **[data-help@earthscope.org](mailto:data-help@earthscope.org)**  
+please email: **[es-help@earthscope.org](mailto:es-help@earthscope.org)**  

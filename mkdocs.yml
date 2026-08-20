@@ -19,7 +19,7 @@ extra_css:
 extra:
   social:
     - icon: material/web
-      link: https://dmnqcu4jcq58p.cloudfront.net/products/viewer.html?key=emc
+      link: https://data.earthscope.org/app/products/portal/viewer.html?key=emc
       name: EMC product page
 
 plugins:

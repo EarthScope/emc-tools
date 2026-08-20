@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The [Earth Model Collaboration (EMC)](https://ds.iris.edu/ds/products/emc/) is a **community-supported repository of Earth models** that enables researchers to share, preview, and access diverse geophysical Earth models. To support this effort, we provide [EMC-Tools](https://github.com/EarthScope/emc-tools), a suite of **Python 3 utilities**, that streamline the **storage**, **extraction**, and **visualization** of these models. By adopting a **uniform, self-contained data format**, the tools ensure consistency across contributions and promote the long-term usability of Earth models within the community.  
+The [Earth Model Collaboration (EMC)](https://data.earthscope.org/app/products/portal/viewer.html?key=emc) is a **community-supported repository of Earth models** that enables researchers to share, preview, and access diverse geophysical Earth models. To support this effort, we provide [EMC-Tools](https://github.com/EarthScope/emc-tools), a suite of **Python 3 utilities**, that streamline the **storage**, **extraction**, and **visualization** of these models. By adopting a **uniform, self-contained data format**, the tools ensure consistency across contributions and promote the long-term usability of Earth models within the community.  
 
 ---
 
@@ -19,7 +19,7 @@ All EMC models follow a set of **metadata and format standards** to ensure compa
 EMC model files are available through both direct downloads and interactive tools. The resources below make it easy to obtain NetCDF files from the EarthScope data archive and to explore models dynamically with a filtering and access API.
 
 - [**EMC Model File Server**](https://data.dev.earthscope.org/archive/seismology/products/emc/netcdf/) &mdash; access NetCDF model files directly from the EarthScope data archive.  
-- [**EMC Model Filtering & Access API**](https://data.dev.earthscope.org/archive/seismology/products/emc/README.html) &mdash; interactively filter, explore, visualize, and download Earth model files.  
+- [**EMC Model Filtering & Access API**](https://data.earthscope.org/app/products/portal/viewer.html?key=emc) &mdash; interactively filter, explore, visualize, and download Earth model files.  
 
 ---
 
@@ -69,4 +69,4 @@ The following resources provide standards, guidelines, and workflows for contrib
 
 **Comments or Questions?**  
 For any questions or feedback about EMC Earth models or EMC-Tools,  
-please email: **[data-help@earthscope.org](mailto:data-help@earthscope.org)**  
+please email: **[es-help@earthscope.org](mailto:es-help@earthscope.org)**  
