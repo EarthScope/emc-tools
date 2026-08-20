@@ -11,7 +11,7 @@ Please contact [es-help@earthscope.org](mailto:es-help@earthscope.org)
 
 ## Release Notes
 
-- **2025-08-20 (Release 3.0):**  
+- **2026-08-20 (Release 3.0):**  
   - All netCDF output now uses **NetCDF4 Classic** format for compatibility and long-term support.  
   - Introduces **emc_explorer.py**, a tool for interactive browsing and visualization of EMC models.  
   - Enhanced **metadata validation** in `emc_inspector.py`, ensuring stricter compliance with EMC and CF standards.  
