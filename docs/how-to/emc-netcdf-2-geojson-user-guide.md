@@ -109,4 +109,4 @@ python src/netCDF_2_GeoJSON.py -i samples/KEA20-Moho.r0.0.nc
 
 **Comments or Questions?**  
 For any questions or feedback about EMC Earth models or EMC-Tools,  
-please email: **[es-help@earthscope.org](mailto:es-help@earthscope.org)**  
+please email: **[help@earthscope.org](mailto:help@earthscope.org)**  

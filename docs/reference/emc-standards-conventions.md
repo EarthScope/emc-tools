@@ -87,4 +87,4 @@ The following resources provide additional standards, guidelines, and workflows 
 
 **Comments or Questions?**  
 For any questions or feedback about EMC Earth models or EMC-Tools,  
-please email: **[es-help@earthscope.org](mailto:es-help@earthscope.org)**  
+please email: **[help@earthscope.org](mailto:help@earthscope.org)**  

@@ -5,7 +5,7 @@ Data Products Unit
 EarthScope Earth Model Collaboration (EMC) - Release 3.0
 
 ### COMMENTS/QUESTIONS:
-Please contact [es-help@earthscope.org](mailto:es-help@earthscope.org)
+Please contact [help@earthscope.org](mailto:help@earthscope.org)
 
 ---
 
