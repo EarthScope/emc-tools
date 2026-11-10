@@ -944,13 +944,13 @@ This enables quick visualization of model coverage and inspection of metadata in
 </ul>
 <h3 id="example-abridged">Example (abridged)<a class="headerlink" href="#example-abridged" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FeatureCollection&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;features&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;geometry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Polygon&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;coordinates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[[</span>
 <span class="w">          </span><span class="p">[</span><span class="err">lo</span><span class="kc">n</span><span class="err">_mi</span><span class="kc">n</span><span class="p">,</span><span class="w"> </span><span class="err">la</span><span class="kc">t</span><span class="err">_mi</span><span class="kc">n</span><span class="p">],</span>
 <span class="w">          </span><span class="p">[</span><span class="err">lo</span><span class="kc">n</span><span class="err">_max</span><span class="p">,</span><span class="w"> </span><span class="err">la</span><span class="kc">t</span><span class="err">_mi</span><span class="kc">n</span><span class="p">],</span>
 <span class="w">          </span><span class="p">[</span><span class="err">lo</span><span class="kc">n</span><span class="err">_max</span><span class="p">,</span><span class="w"> </span><span class="err">la</span><span class="kc">t</span><span class="err">_max</span><span class="p">],</span>
@@ -958,38 +958,38 @@ This enables quick visualization of model coverage and inspection of metadata in
 <span class="w">          </span><span class="p">[</span><span class="err">lo</span><span class="kc">n</span><span class="err">_mi</span><span class="kc">n</span><span class="p">,</span><span class="w"> </span><span class="err">la</span><span class="kc">t</span><span class="err">_mi</span><span class="kc">n</span><span class="p">]</span>
 <span class="w">        </span><span class="p">]]</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;reference_pid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;repository_doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;data_revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;r0.0&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v0.0&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;model_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Tomography Earth Model&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;model_subtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Radially anisotropic S velocities (km/s) and Moho depth (km)&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;filename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KEA20-Moho.r0.0.nc&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;size_mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.19</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NETCDF4_CLASSIC&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;grid_ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latitude_longitude&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;projection_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;geographic_wgs84&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;projection_notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unprojected geographic coordinates, WGS 84 datum&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;grid_dim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2D&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lat_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">15.0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lat_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">51.0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lat_resolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lat_units&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;degrees_north&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lon_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">70.0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lon_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">150.0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lon_resolution&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_lon_units&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;degrees_east&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_vertical_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_vertical_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;geospatial_vertical_units&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;moho&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Moho depth relative to a mean Earth radius of 6371 km&quot;</span>
+<span class="w">      </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"model"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"reference_pid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"repository_doi"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"year"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"data_revision"</span><span class="p">:</span><span class="w"> </span><span class="s2">"r0.0"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v0.0"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"model_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tomography Earth Model"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"model_subtype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Radially anisotropic S velocities (km/s) and Moho depth (km)"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KEA20-Moho.r0.0.nc"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"size_mb"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.19</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NETCDF4_CLASSIC"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"grid_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"latitude_longitude"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"projection_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geographic_wgs84"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"projection_notes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unprojected geographic coordinates, WGS 84 datum"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"grid_dim"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2D"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lat_min"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lat_max"</span><span class="p">:</span><span class="w"> </span><span class="mf">51.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lat_resolution"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lat_units"</span><span class="p">:</span><span class="w"> </span><span class="s2">"degrees_north"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lon_min"</span><span class="p">:</span><span class="w"> </span><span class="mf">70.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lon_max"</span><span class="p">:</span><span class="w"> </span><span class="mf">150.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lon_resolution"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_lon_units"</span><span class="p">:</span><span class="w"> </span><span class="s2">"degrees_east"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_vertical_min"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_vertical_max"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"geospatial_vertical_units"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"variables"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"moho"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Moho depth relative to a mean Earth radius of 6371 km"</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>

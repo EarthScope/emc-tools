@@ -1161,7 +1161,7 @@ latitude,longitude,depth,vp,vs,rho    &lt;-- FIRST non-# line is the CSV header 
 <p>Pick the right header and concatenate with your data:</p>
 <h3 id="2d-model">2D model<a class="headerlink" href="#2d-model" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Inspect the header template</span>
-sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;1,80p&#39;</span><span class="w"> </span>samples/header_2D.csv
+sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'1,80p'</span><span class="w"> </span>samples/header_2D.csv
 
 <span class="c1"># Ensure your CSV header row matches the template’s *_column names</span>
 head<span class="w"> </span>-1<span class="w"> </span>my_data.csv
@@ -1170,12 +1170,12 @@ head<span class="w"> </span>-1<span class="w"> </span>my_data.csv
 cat<span class="w"> </span>samples/header_2D.csv<span class="w"> </span>my_data.csv<span class="w"> </span>&gt;<span class="w"> </span>out_2D.geocsv.csv
 </code></pre></div>
 <h3 id="3d-model-geographic-latlondepth">3D model (geographic lat/lon/depth)<a class="headerlink" href="#3d-model-geographic-latlondepth" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;1,80p&#39;</span><span class="w"> </span>samples/header_3D.csv
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'1,80p'</span><span class="w"> </span>samples/header_3D.csv
 head<span class="w"> </span>-1<span class="w"> </span>my_data.csv
 cat<span class="w"> </span>samples/header_3D.csv<span class="w"> </span>my_data.csv<span class="w"> </span>&gt;<span class="w"> </span>out_3D.geocsv.csv
 </code></pre></div>
 <h3 id="3d-model-projected-crs-latlon">3D model (projected CRS + lat/lon)<a class="headerlink" href="#3d-model-projected-crs-latlon" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;1,120p&#39;</span><span class="w"> </span>samples/header_3D_projected.csv
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'1,120p'</span><span class="w"> </span>samples/header_3D_projected.csv
 head<span class="w"> </span>-1<span class="w"> </span>my_data.csv
 cat<span class="w"> </span>samples/header_3D_projected.csv<span class="w"> </span>my_data.csv<span class="w"> </span>&gt;<span class="w"> </span>out_3D_proj.geocsv.csv
 </code></pre></div>
@@ -1231,7 +1231,7 @@ ncdump<span class="w"> </span>-h<span class="w"> </span>out_2D.geocsv.nc
 
 <span class="c1"># EMC inspector (checks EMC/CF requirements)</span>
 python<span class="w"> </span>emc_inspector.py
-<span class="c1"># (You&#39;ll be prompted for the file name: enter: out_2D.geocsv.nc)</span>
+<span class="c1"># (You'll be prompted for the file name: enter: out_2D.geocsv.nc)</span>
 </code></pre></div>
 <p>If <code>emc_inspector.py</code> flags issues (e.g., missing units), update the <strong>GeoCSV header</strong> and re-run the conversion.</p>
 <hr />

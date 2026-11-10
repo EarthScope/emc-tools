@@ -637,6 +637,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#model-page-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Page Template
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -743,6 +752,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#model-page-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      Model Page Template
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -771,17 +789,40 @@
 <p><strong>All contributed models must be described in a peer-reviewed publication.</strong><br />
 Please include DOI of the associated peer-reviewed article.  </p>
 <p>Before submitting your model to EMC, review the <a href="../emc-standards-conventions/">EMC Standards and Conventions</a> and confirm that your submission meets the following requirements:</p>
+<div class="admonition tip">
+<p class="admonition-title">Using EMC-Tools to create your netCDF file</p>
+<p>Model netCDF files created with the EMC-Tools <a href="../../how-to/emc-geocsv-2-netcdf-user-guide/">GeoCSV to netCDF converter</a> automatically follow the required EMC data and metadata format (items 1–5 below). If you use the converter, you can skip directly to validating and previewing your file (items 6–7).</p>
+</div>
 <ol>
 <li>Save model data in <strong>NetCDF-4 Classic</strong> format (use compression for large files).  </li>
 <li>Ensure that metadata is <strong>CF-compliant</strong>.  </li>
-<li>Include all <strong>required global attributes</strong> (Note: See the header templates under <strong>samples/</strong> for the required attributes). </li>
+<li>Include all <strong>required global attributes</strong> (Note: See the header templates under <strong>samples/</strong> for the required attributes).  </li>
 <li>Document the <strong>coordinate system</strong> (geographic or projected).  </li>
 <li>Verify that <strong>geospatial bounds</strong> are correctly defined in metadata.  </li>
 <li>Validate metadata compliance using the <a href="../../how-to/emc-inspector-user-guide/">EMC Metadata Inspector</a>.  </li>
 <li>Preview and verify model data integrity with the <a href="../../how-to/emc-explorer-user-guide/">EMC Model Explorer</a>.  </li>
-<li>Submit your final model file and publication reference to:<br />
+<li>Complete the <strong>EMC Model Page Template</strong> (<a href="../../samples/EMC-ModelPageTemplate.toml">EMC-ModelPageTemplate.toml</a>) describing your model. EMC uses this file to build your model's page in the catalog. Instructions are included as comments in the template. See <a href="#model-page-template">Model Page Template</a> below.  </li>
+<li>Submit your final model file(s), completed model page template, figure files, and publication reference to:<br />
    📧 <a href="mailto:help@earthscope.org">help@earthscope.org</a>.  </li>
 </ol>
+<hr />
+<h2 id="model-page-template">Model Page Template<a class="headerlink" href="#model-page-template" title="Permanent link">&para;</a></h2>
+<p>Every model in EMC has its own page in the catalog showing the model description, authors, coverage, figures, download links, and citation. To create this page, EMC needs a completed <strong>model page template</strong> from you.</p>
+<p>📥 <strong><a href="../../samples/EMC-ModelPageTemplate.toml">Download EMC-ModelPageTemplate.toml</a></strong></p>
+<p>The template is a plain-text <a href="https://toml.io/">TOML</a> file that you can edit in any text editor. It is pre-filled with example values for a fictional model; replace them with your own information. Every field is labeled in the file:</p>
+<ul>
+<li><strong>[REQUIRED]</strong>: you must fill this in.</li>
+<li><strong>[OPTIONAL]</strong>: leave as <code>""</code> if it does not apply.</li>
+<li><strong>[EMC STAFF]</strong>: completed by EMC; leave unchanged.</li>
+</ul>
+<p>When completing the template:</p>
+<ul>
+<li>Save your copy using your model name, for example <code>Doe2024-Vs.toml</code>.</li>
+<li>Do not rename, delete, or reorder section headers (<code>[model]</code>, <code>[[authors]]</code>, etc.) or field names.</li>
+<li>Name your figure files to match the <code>file</code> entries in the <code>[[figures]]</code> blocks (for example, <code>Doe2024-Vs_1.png</code>) and include them with your submission. PNG or JPG, roughly 1000–2000 pixels wide, is preferred.</li>
+<li>Give DOIs without the <code>https://doi.org/</code> prefix and without a trailing period.</li>
+</ul>
+<p>If anything in the template is unclear, add a comment (a line starting with <code>#</code>) next to the field and EMC staff will follow up.</p>
 
 
 
