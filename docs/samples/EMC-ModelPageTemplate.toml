@@ -1,0 +1,300 @@
+# =============================================================================
+#  EarthScope EMC (Earth Model Collaboration) - MODEL PAGE SUBMISSION TEMPLATE
+# =============================================================================
+#
+#  WHAT THIS FILE IS
+#    This file describes your Earth model. EMC staff parse it to generate your 
+#    model's web page in the EMC catalog. Please fill it in, save it with your model name
+#    (for example: Doe2024-Vs.toml), and return it with your data files and figures.
+#
+#  HOW TO FILL IT IN
+#    * Replace every example value below with your own information.
+#    * Every field is labelled with one of these tags:
+#        [REQUIRED]  You must fill this in.
+#        [OPTIONAL]  Leave as "" (empty quotes) if it does not apply. Empty
+#                    fields show "None" on the page or the row is hidden.
+#        [EMC STAFF] EMC staff complete this. Leave it as it is.
+#    * Do NOT rename, delete, or reorder the [section] headers or the field
+#      names (the words to the left of "="). The parser depends on them.
+#    * Lines starting with "#" are comments and are ignored. You may delete
+#      the comments in your copy, but you don't have to.
+#
+#  TOML SYNTAX QUICK GUIDE (the file format used here)
+#    key = "text"            Plain text. Must be on one line, in double quotes.
+#    key = '''text'''        Multi-line text. Use this for long paragraphs and
+#                            for anything containing quotes, backslashes or HTML.
+#                            A blank line inside it starts a new paragraph.
+#    key = 2024              A number (no quotes).
+#    key = 2024-05-17        A date, written YYYY-MM-DD (no quotes).
+#    key = ["a", "b"]        A list. Use [] for an empty list.
+#    [section]               A section that appears once.
+#    [[section]]             A block that can be REPEATED. Copy the whole block
+#                            (header line plus its fields) once per item, e.g.
+#                            one [[authors]] block per author.
+#
+#  PLAIN TEXT vs HTML FIELDS
+#    (HTML)  The text is inserted into the page exactly as written, so you may
+#            use simple HTML: <a href="...">link</a>, <i>italic</i>,
+#            <strong>bold</strong>, <sub>/<sup>. Use '''...''' for these fields.
+#    other   Plain text. Write characters normally ("&", "<", ">"); the script
+#            escapes them for you. Do NOT write "&amp;" or HTML tags here.
+#
+#  TIPS
+#    * Do not put a trailing period on DOIs ("10.1234/abcd", not "10.1234/abcd.").
+#    * Write DOIs without the "https://doi.org/" prefix; the link is built for you.
+#    * Check your text for doubled punctuation ("..") and stray characters.
+#    * If unsure about anything, leave a comment (# like this) and EMC staff will
+#      follow up. Questions: help@earthscope.org
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+#  [model]  Basic identification of the model
+# -----------------------------------------------------------------------------
+[model]
+
+# [REQUIRED] Short model name, no spaces.
+name          = "Doe2024-Vs"
+
+# [EMC STAFF] Prefix added to "name" to form the EMC model ID.
+id_prefix     = "EMC-"
+
+# [REQUIRED] Full descriptive title shown at the top of the page.
+title         = "Shear-wave velocity model of the Example Region from ambient noise and earthquake tomography (Doe et al., 2024)"
+
+# [OPTIONAL] One-line overview. If left commented out, the title is used.
+# overview    = ""
+
+# [REQUIRED] General model category.
+#            Examples: "3-D Tomography Earth Model", "2-D Tomography Earth Model", "Tomography Earth Model", "Crustal Model",
+#             "Receiver Function Model", "Attenuation Model", "Anisotropy Model", "Discontinuity Model".
+type          = "Tomography Earth Model"
+
+# [REQUIRED] Model subcategory, often quantity the model contains, with units.
+#            Examples: "Vs (km/s)", "Vp and Vs (km/s)", "Isotropic Pn velocity (km/s)",
+#            "Moho depth (km)", "Qs (dimensionless)".
+subtype       = "Vs (km/s)"
+
+# [REQUIRED] Publication year of the model (number, no quotes).
+year          = 2024
+
+# [EMC STAFF] Data revision. New submissions start at "r0.0".
+data_revision = "r0.0"
+
+# [OPTIONAL] Model version. 
+version = "v0.0"
+
+# [REQUIRED] (HTML) One-paragraph summary of the model. Wrapped in <p> for you.
+#            Say what the model is, how it was built, the main data used, and any
+#            important usage caveats. Link to the citation section with
+#            <a href="#citation">YEAR</a> or references section with <a href="#references">YEAR</a>.
+summary = '''Three-dimensional shear-wave velocity model of the Example Region constructed by joint inversion of ambient-noise Rayleigh-wave dispersion (8-40 s) and earthquake surface-wave dispersion (25-100 s), as described in Doe et al. (<a href="#citation">2024</a>). The model extends from the surface to 150 km depth on a 0.25 degree horizontal grid. Values outside the resolution mask are poorly constrained and should not be used for interpretation.'''
+
+# [REQUIRED] (HTML) A short description used in catalog listings.
+short_description = '''A 3-D shear-wave velocity model of the Example Region crust and upper mantle from joint surface-wave tomography.'''
+
+
+# -----------------------------------------------------------------------------
+#  [[authors]]  One block per author, in publication order.
+#               Copy the whole block (including the [[authors]] line) to add more.
+# -----------------------------------------------------------------------------
+[[authors]]
+# [REQUIRED] Full name as it should appear on the page.
+name        = "Jane A. Doe"
+# [REQUIRED] Institution, city/country. You may add a contact email for the
+#            corresponding author ("; Contact: name@example.edu").
+affiliation = "Department of Earth Sciences, Example University, Example City, USA; Contact: jane.doe@example.edu"
+
+[[authors]]
+name        = "John B. Smith"
+affiliation = "Institute of Geophysics, Sample Institute, Sample City, Country"
+
+
+# -----------------------------------------------------------------------------
+#  [models]  Reference / starting models used in your inversion
+# -----------------------------------------------------------------------------
+[models]
+# [OPTIONAL] (HTML) Reference model(s) the results are relative to, if any.
+#            Leave "" to show "None".
+reference_model = '''AK135 (Kennett et al., 1995)'''
+
+# [OPTIONAL] (HTML) Starting / prior model used in the inversion. "" -> "None".
+#            You may link to another EMC model, e.g.
+#            <a href="https://ds.iris.edu/ds/products/emc-.../">EMC-Name</a>
+prior_model     = '''CRUST1.0 (Laske et al., 2013) on top of AK135'''
+
+
+# -----------------------------------------------------------------------------
+#  [[download]]  One block per data file you are providing.
+#                Copy the whole block for each additional file.
+#
+#  File naming convention (please follow):
+#     <shortname>.<revision>-<format>.nc     e.g. doe2024-vs.r0.0-n4c.nc
+#        n4c = netCDF-4 Classic with compression
+#  EMC staff can convert your files to netCDF if needed; tell us in a comment.
+# -----------------------------------------------------------------------------
+[[download]]
+# [REQUIRED] Name of the netCDF data file.
+netcdf_file  = "doe2024-vs.r0.0-n4c.nc"
+
+# [EMC STAFF] Name of the matching GeoJSON coverage file. Leave "" and the name
+#             will be derived from netcdf_file (EMC staff create this file).
+geojson_file = ""
+
+# [REQUIRED] (HTML) Short phrase completing the sentence
+#            "<file> is <description> in <format> format."
+description  = "the above shear-wave velocity model"
+
+# [EMC STAFF] File format name and link. Change only if not netCDF-4 Classic.
+format_name  = "netCDF 4 Classic with compression"
+format_url   = "https://www.unidata.ucar.edu/software/netcdf/"
+
+# Example of a second file (e.g. a masked version). Delete if not needed.
+[[download]]
+netcdf_file  = "doe2024-vs-masked.r0.0-n4c.nc"
+geojson_file = ""
+description  = "the above shear-wave velocity model restricted to the well-resolved region"
+format_name  = "netCDF 4 Classic with compression"
+format_url   = "https://www.unidata.ucar.edu/software/netcdf/"
+
+
+# -----------------------------------------------------------------------------
+#  [coverage]  Model web page and spatial extent and dataset details
+# -----------------------------------------------------------------------------
+[coverage]
+# [OPTIONAL] URL of your own project/model web page. "" -> "None".
+home_page      = "https://www.example.edu/doe-lab/models/"
+
+# [REQUIRED for 3-D models; OPTIONAL for 2-D] Depth range with units.
+#            Leave "" for maps that have no depth axis (e.g. Pn, Moho depth).
+depth_coverage = "0 to 150 km"
+
+# [REQUIRED] Human-readable geographic extent.
+area           = "latitude: 30° to 45°, longitude: -125° to -105°"
+
+# [REQUIRED] Bounding box as numbers: [lon_min, lat_min, lon_max, lat_max]
+#            Decimal degrees; west and south are negative. Must match "area".
+bbox           = [-125, 30, -105, 45]
+
+# [REQUIRED] (HTML) Detailed description of the data files. Row hidden if "".
+#            Good things to include: grid spacing and dimensions, variables and
+#            units, fill/missing value, any masks, what processing (if any) was
+#            done to the values, and which file users should use first.
+#            Blank lines start new paragraphs.
+dataset_description = '''The model is provided on a regular grid with 0.25 degree horizontal spacing (81 longitudes by 61 latitudes) and 2 km vertical spacing from 0 to 150 km depth (76 depths).'''
+
+
+# [OPTIONAL] (HTML) Notes on model resolution (checkerboard tests, resolution
+#            length, uncertainty, etc.). Row hidden if "".
+model_resolution = '''Checkerboard tests recover 1 degree anomalies to about 80 km depth and 2 degree anomalies to 150 km depth in the central part of the model. See Figure S3 of Doe et al. (2024).'''
+
+
+# -----------------------------------------------------------------------------
+#  [[figures]]  One block per figure. Send the image files along with this file.
+#               PNG or JPG preferred, roughly 1000-2000 pixels wide.
+#               EMC staff place them in /catalog/emc/model_pages/images/<EMC-id>/
+#               Name files <name>_1.png, <name>_2.png, ...
+# -----------------------------------------------------------------------------
+[[figures]]
+# [OPTIONAL] Short title shown above the figure.
+title   = "Figure 1"
+# [REQUIRED if a figure is provided] Image file name.
+file    = "Doe2024-Vs_1.png"
+# [REQUIRED if a figure is provided] (HTML) Figure caption.
+caption = '''Horizontal slices of shear-wave velocity at 10, 40, 80 and 120 km depth. Colors show absolute Vs in km/s. Gray areas lie outside the resolution mask.'''
+
+[[figures]]
+title   = "Figure 2"
+file    = "Doe2024-Vs_2.png"
+caption = '''Vertical cross-section of shear-wave velocity along profile A-A' (location shown in Figure 1).'''
+
+
+# -----------------------------------------------------------------------------
+#  [credits]  Acknowledgements shown on the page   [EMC STAFF]
+# -----------------------------------------------------------------------------
+[credits]
+# [[EMC STAFF]] List of short credit lines. Usually who provided the model.
+#            Add funding or other acknowledgements as extra items if desired.
+items = ["r0.0 model provided by Jane A. Doe.", "This work was supported by Example Foundation grant ABC-123456."]
+
+
+# -----------------------------------------------------------------------------
+#  [[revisions]]  Revision history  [EMC STAFF]
+# -----------------------------------------------------------------------------
+[[revisions]]
+# [EMC STAFF]
+revision = "r0.0"
+note     = "uploaded Month DD, YYYY."
+
+
+# -----------------------------------------------------------------------------
+#  [citation]  How users should cite the model. Plain text (no HTML).
+#              DOI links are built for you; give the bare DOI only.
+# -----------------------------------------------------------------------------
+[citation]
+# [EMC STAFF] DOI assigned to this model page by EMC.
+webpage_doi = ""
+
+# [REQUIRED] The publication(s) describing the model. One block per publication.
+[[citation.original_work]]
+text = "Doe, J. A., and Smith, J. B. (2024). Crust and upper mantle structure of the Example Region from joint surface-wave tomography. Journal of Geophysical Research: Solid Earth, 129(5), e2024JB000000."
+doi  = "10.1029/2024JB000000"
+
+# [EMC STAFF] Standard EMC data-products citation. Leave unchanged.
+[[citation.data_products]]
+text = "Trabant, C., A. R. Hutko, M. Bahavar, R. Karstens, T. Ahern, and R. Aster (2012), Data Products at the IRIS DMC: Stepping Stones for Research and Other Applications, Seismological Research Letters, 83(5), 846–854."
+doi  = "10.1785/0220120032"
+
+
+# -----------------------------------------------------------------------------
+#  [[references]]  Other works cited in the text above (e.g. reference or prior
+#                  models). Shown under #references. One block per reference.
+#                  [OPTIONAL] If none, leave a single block with text = "".
+# -----------------------------------------------------------------------------
+[[references]]
+text = "Kennett, B. L. N., Engdahl, E. R., and Buland, R. (1995). Constraints on seismic velocities in the Earth from traveltimes. Geophysical Journal International, 122(1), 108-124."
+doi  = "10.1111/j.1365-246X.1995.tb03540.x"
+
+[[references]]
+text = "Laske, G., Masters, G., Ma, Z., and Pasyanos, M. (2013). Update on CRUST1.0 - A 1-degree global model of Earth's crust. Geophysical Research Abstracts, 15, EGU2013-2658."
+doi  = ""
+
+
+# =============================================================================
+#  EVERYTHING BELOW THIS LINE IS COMPLETED BY EMC STAFF.
+#  Model providers: please leave these sections unchanged.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+#  [metadata]  Catalog metadata  [EMC STAFF]
+# -----------------------------------------------------------------------------
+[metadata]
+created_date      = 2026-01-01      # date page was created (YYYY-MM-DD)
+modified_date     = 2026-01-01      # date page was last modified
+contact           = "help@earthscope.org"
+categories        = ["Contributed"]
+leaddev           = "data-help"
+external_leaddevs = []
+tags              = []
+doi               = ""      # "" -> null
+external_url      = ""      # "" -> null
+spud_url          = ""      # "" -> null
+contributors      = ""
+changelog         = ""
+# slug            = ""      # optional; defaults to lowercase EMC id
+
+[[timeline]]
+date  = 2026-01-01
+event = "Online"
+
+# -----------------------------------------------------------------------------
+#  Optional overrides  [EMC STAFF]
+# -----------------------------------------------------------------------------
+# Row labels in the description table (defaults shown in the script):
+# [labels]
+# reference_model = "Prior Model"
+
+# Quick links (defaults to the standard EMC list if omitted):
+# [[quicklinks]]
+# text = "EMC home"
+# url  = "../emc"
