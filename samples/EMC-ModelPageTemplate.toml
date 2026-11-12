@@ -23,7 +23,9 @@
 #    key = "text"            Plain text. Must be on one line, in double quotes.
 #    key = '''text'''        Multi-line text. Use this for long paragraphs and
 #                            for anything containing quotes, backslashes or HTML.
-#                            A blank line inside it starts a new paragraph.
+#                            In multi-line (HTML) fields, a blank line starts a
+#                            new paragraph and a single line break is kept as a
+#                            line break (handy for one-item-per-line lists).
 #    key = 2024              A number (no quotes).
 #    key = 2024-05-17        A date, written YYYY-MM-DD (no quotes).
 #    key = ["a", "b"]        A list. Use [] for an empty list.
@@ -31,6 +33,19 @@
 #    [[section]]             A block that can be REPEATED. Copy the whole block
 #                            (header line plus its fields) once per item, e.g.
 #                            one [[authors]] block per author.
+#
+#  WHERE A FIELD BELONGS (important)
+#    A field belongs to the nearest [section] or [[section]] header ABOVE it.
+#    A field typed below the wrong header is ignored. For example, a line placed
+#    after the last [[download]] block belongs to that download, not to the page.
+#
+#  ADDING YOUR OWN FIELDS
+#    If your model needs information that has no field here, you may add a new
+#    field inside [model] or [coverage]. It appears on the page as its own row,
+#    in the position where you put it, labelled from the field name
+#    (e.g. processing_notes -> "Processing Notes"). Use lowercase words joined
+#    by underscores, and use '''...''' for the value. Nested tables are not
+#    supported. EMC staff will review any added fields.
 #
 #  PLAIN TEXT vs HTML FIELDS
 #    (HTML)  The text is inserted into the page exactly as written, so you may
@@ -81,7 +96,8 @@ year          = 2024
 # [EMC STAFF] Data revision. New submissions start at "r0.0".
 data_revision = "r0.0"
 
-# [OPTIONAL] Model version. 
+# [OPTIONAL] Model version as named by the authors (separate from the EMC
+#            data_revision). Shown as a "Version" row. Leave "" to hide the row.
 version = "v0.0"
 
 # [REQUIRED] (HTML) One-paragraph summary of the model. Wrapped in <p> for you.
@@ -132,7 +148,24 @@ prior_model     = '''CRUST1.0 (Laske et al., 2013) on top of AK135'''
 #     <shortname>.<revision>-<format>.nc     e.g. doe2024-vs.r0.0-n4c.nc
 #        n4c = netCDF-4 Classic with compression
 #  EMC staff can convert your files to netCDF if needed; tell us in a comment.
+#
+#  DATA FIELDS (variables in your files) can be listed in either or both places:
+#    * [download_common] data_fields: listed ONCE below all download files.
+#      Use this when all files share the same variables.
+#    * data_fields inside a [[download]] block: listed under that file only.
+#      Use this when files contain different variables.
+#  Write one variable per line: name: description, units.
 # -----------------------------------------------------------------------------
+
+# [OPTIONAL] Settings shared by all download files. This section must come
+#            BEFORE the first [[download]] block. Delete it if not needed.
+[download_common]
+# [OPTIONAL] (HTML) Variables common to all files, one per line. "" -> hidden.
+data_fields = '''
+vs: shear-wave velocity, km/s.
+resolution_mask: 1 = well resolved, 0 = poorly resolved.
+'''
+
 [[download]]
 # [REQUIRED] Name of the netCDF data file.
 netcdf_file  = "doe2024-vs.r0.0-n4c.nc"
@@ -145,6 +178,11 @@ geojson_file = ""
 #            "<file> is <description> in <format> format."
 description  = "the above shear-wave velocity model"
 
+# [OPTIONAL] (HTML) Variables in THIS file only, one per line. Listed under
+#            this file on the page. Leave "" if the [download_common] list
+#            above already covers this file.
+data_fields  = ""
+
 # [EMC STAFF] File format name and link. Change only if not netCDF-4 Classic.
 format_name  = "netCDF 4 Classic with compression"
 format_url   = "https://www.unidata.ucar.edu/software/netcdf/"
@@ -154,6 +192,7 @@ format_url   = "https://www.unidata.ucar.edu/software/netcdf/"
 netcdf_file  = "doe2024-vs-masked.r0.0-n4c.nc"
 geojson_file = ""
 description  = "the above shear-wave velocity model restricted to the well-resolved region"
+data_fields  = ""
 format_name  = "netCDF 4 Classic with compression"
 format_url   = "https://www.unidata.ucar.edu/software/netcdf/"
 
@@ -180,7 +219,8 @@ bbox           = [-125, 30, -105, 45]
 #            Good things to include: grid spacing and dimensions, variables and
 #            units, fill/missing value, any masks, what processing (if any) was
 #            done to the values, and which file users should use first.
-#            Blank lines start new paragraphs.
+#            Blank lines start new paragraphs. (Variable lists are better
+#            placed in data_fields; see the [[download]] section.)
 dataset_description = '''The model is provided on a regular grid with 0.25 degree horizontal spacing (81 longitudes by 61 latitudes) and 2 km vertical spacing from 0 to 150 km depth (76 depths).'''
 
 
@@ -213,7 +253,7 @@ caption = '''Vertical cross-section of shear-wave velocity along profile A-A' (l
 #  [credits]  Acknowledgements shown on the page   [EMC STAFF]
 # -----------------------------------------------------------------------------
 [credits]
-# [[EMC STAFF]] List of short credit lines. Usually who provided the model.
+# [EMC STAFF] List of short credit lines. Usually who provided the model.
 #            Add funding or other acknowledgements as extra items if desired.
 items = ["r0.0 model provided by Jane A. Doe.", "This work was supported by Example Foundation grant ABC-123456."]
 
