@@ -91,7 +91,7 @@ type          = "Tomography Earth Model"
 subtype       = "Vs (km/s)"
 
 # [REQUIRED] Publication year of the model (number, no quotes).
-year          = 2024
+year          = YYYY
 
 # [EMC STAFF] Data revision. New submissions start at "r0.0".
 data_revision = "r0.0"
@@ -309,8 +309,8 @@ doi  = ""
 #  [metadata]  Catalog metadata  [EMC STAFF]
 # -----------------------------------------------------------------------------
 [metadata]
-created_date      = 2026-01-01      # date page was created (YYYY-MM-DD)
-modified_date     = 2026-01-01      # date page was last modified
+created_date      = YYYY-MM-DD      # date page was created (YYYY-MM-DD)
+modified_date     = YYYY-MM-DD      # date page was last modified
 contact           = "help@earthscope.org"
 categories        = ["Contributed"]
 leaddev           = "data-help"
@@ -324,7 +324,7 @@ changelog         = ""
 # slug            = ""      # optional; defaults to lowercase EMC id
 
 [[timeline]]
-date  = 2026-01-01
+date  = YYYY-MM-DD
 event = "Online"
 
 # -----------------------------------------------------------------------------
